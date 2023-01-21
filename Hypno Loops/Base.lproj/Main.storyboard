@@ -6,6 +6,7 @@
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -353,14 +354,82 @@
                     <view key="view" contentMode="scaleToFill" id="YOQ-Bh-Wxg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ImU-NG-dlf">
+                                <rect key="frame" x="0.0" y="91" width="375" height="721"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="UxM-y4-uZC">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LoopCollecttionsCell" id="FJH-tY-W9j" customClass="LoopCollecttionsCell" customModule="Hypno_Loops" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="57.333333333333343" height="36.333333333333336"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="dKQ-lk-zHG">
+                                            <rect key="frame" x="0.0" y="0.0" width="57.333333333333343" height="36.333333333333336"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2l5-5b-3KV">
+                                                    <rect key="frame" x="8" y="7.9999999999999982" width="41.333333333333336" height="20.333333333333329"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="2l5-5b-3KV" firstAttribute="top" secondItem="dKQ-lk-zHG" secondAttribute="top" constant="8" id="Vks-wq-Hs4"/>
+                                                <constraint firstAttribute="bottom" secondItem="2l5-5b-3KV" secondAttribute="bottom" constant="8" id="Yoy-0Y-bor"/>
+                                                <constraint firstAttribute="trailing" secondItem="2l5-5b-3KV" secondAttribute="trailing" constant="8" id="h3I-v4-mVk"/>
+                                                <constraint firstItem="2l5-5b-3KV" firstAttribute="leading" secondItem="dKQ-lk-zHG" secondAttribute="leading" constant="8" id="lSd-ZB-eoI"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="cellLabel" destination="2l5-5b-3KV" id="gNd-hy-12e"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="delegate" destination="V7n-Qs-3PC" id="T5h-Gr-RNT"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="LWv-uM-ybv"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="indigo"/>
+                        <constraints>
+                            <constraint firstItem="ImU-NG-dlf" firstAttribute="centerX" secondItem="YOQ-Bh-Wxg" secondAttribute="centerX" id="3Rr-xR-5dg"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="ImU-NG-dlf" secondAttribute="bottom" constant="-34" id="KgK-Hp-Tb8"/>
+                            <constraint firstItem="ImU-NG-dlf" firstAttribute="top" secondItem="LWv-uM-ybv" secondAttribute="top" id="QAL-Fz-7xa"/>
+                            <constraint firstItem="ImU-NG-dlf" firstAttribute="leading" secondItem="LWv-uM-ybv" secondAttribute="leading" id="zNq-6Z-Rkt"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="asN-dT-dyM"/>
+                    <connections>
+                        <outlet property="loopCollectionsCV" destination="ImU-NG-dlf" id="U0A-d4-tCX"/>
+                        <segue destination="jUd-8a-r3l" kind="show" identifier="gotoRecord" id="LYe-yV-Ojc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j66-C6-gsr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2241" y="3"/>
+            <point key="canvasLocation" x="2240.8000000000002" y="2.9556650246305418"/>
+        </scene>
+        <!--Loop Record View Controller-->
+        <scene sceneID="EeB-EB-3cd">
+            <objects>
+                <viewController id="jUd-8a-r3l" customClass="LoopRecordViewController" customModule="Hypno_Loops" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BsC-Ss-skX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="KSX-zE-4I2"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="iOJ-9c-fkh"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VgZ-f8-mg2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2956" y="3"/>
         </scene>
     </scenes>
     <resources>

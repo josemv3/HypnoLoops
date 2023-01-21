@@ -16,6 +16,7 @@
 		E0E5A731297B0F7500B7B29D /* LoopCollectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E5A730297B0F7500B7B29D /* LoopCollectionsViewController.swift */; };
 		E0E5A733297B130E00B7B29D /* LoopRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E5A732297B130E00B7B29D /* LoopRecordViewController.swift */; };
 		E0E5A735297B142100B7B29D /* LoopPlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E5A734297B142100B7B29D /* LoopPlayViewController.swift */; };
+		E0E5A738297B770100B7B29D /* LoopCollecttionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E5A737297B770100B7B29D /* LoopCollecttionsCell.swift */; };
 		E0F2A9AE29766B7B0066263F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F2A9AD29766B7B0066263F /* AppDelegate.swift */; };
 		E0F2A9B029766B7B0066263F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F2A9AF29766B7B0066263F /* SceneDelegate.swift */; };
 		E0F2A9B229766B7B0066263F /* CreateAccountController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F2A9B129766B7B0066263F /* CreateAccountController.swift */; };
@@ -34,6 +35,7 @@
 		E0E5A730297B0F7500B7B29D /* LoopCollectionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopCollectionsViewController.swift; sourceTree = "<group>"; };
 		E0E5A732297B130E00B7B29D /* LoopRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopRecordViewController.swift; sourceTree = "<group>"; };
 		E0E5A734297B142100B7B29D /* LoopPlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopPlayViewController.swift; sourceTree = "<group>"; };
+		E0E5A737297B770100B7B29D /* LoopCollecttionsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopCollecttionsCell.swift; sourceTree = "<group>"; };
 		E0F2A9AA29766B7A0066263F /* Hypno Loops.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hypno Loops.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0F2A9AD29766B7B0066263F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E0F2A9AF29766B7B0066263F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 				E0F2A9B129766B7B0066263F /* CreateAccountController.swift */,
 				E0E5A72A2979BCBE00B7B29D /* UserProfileController.swift */,
 				E0E5A730297B0F7500B7B29D /* LoopCollectionsViewController.swift */,
+				E0E5A737297B770100B7B29D /* LoopCollecttionsCell.swift */,
 				E0E5A732297B130E00B7B29D /* LoopRecordViewController.swift */,
 				E0E5A734297B142100B7B29D /* LoopPlayViewController.swift */,
 			);
@@ -201,6 +204,7 @@
 				E0E5A72B2979BCBE00B7B29D /* UserProfileController.swift in Sources */,
 				E0E5A735297B142100B7B29D /* LoopPlayViewController.swift in Sources */,
 				E0F2A9B029766B7B0066263F /* SceneDelegate.swift in Sources */,
+				E0E5A738297B770100B7B29D /* LoopCollecttionsCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,6 +359,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -383,6 +388,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
