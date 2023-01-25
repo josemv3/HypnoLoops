@@ -499,13 +499,13 @@
                                 <rect key="frame" x="16" y="368" width="343" height="320"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="fnM-MC-vpQ">
-                                        <rect key="frame" x="-27" y="28.333333333333314" width="397" height="263.66666666666669"/>
+                                        <rect key="frame" x="-33" y="28.333333333333314" width="409" height="263.66666666666669"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="49" translatesAutoresizingMaskIntoConstraints="NO" id="fML-bw-s7d">
-                                                <rect key="frame" x="0.0" y="0.0" width="397" height="100"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="409" height="100"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="quU-1W-D7G">
-                                                        <rect key="frame" x="0.0" y="0.0" width="174" height="100"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="180" height="100"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="ZfZ-4J-hki"/>
                                                             <constraint firstAttribute="height" constant="100" id="bgF-wU-9zg"/>
@@ -519,7 +519,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iso-Go-647">
-                                                        <rect key="frame" x="223" y="0.0" width="174" height="100"/>
+                                                        <rect key="frame" x="229" y="0.0" width="180" height="100"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="0Jv-7Y-xpB"/>
                                                             <constraint firstAttribute="height" constant="100" id="9PW-aN-Rae"/>
@@ -535,7 +535,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="KTg-HD-JHK">
-                                                <rect key="frame" x="0.0" y="130.00000000000006" width="397" height="133.66666666666669"/>
+                                                <rect key="frame" x="0.0" y="130.00000000000006" width="409" height="133.66666666666669"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reverb" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="86a-6d-UqO">
                                                         <rect key="frame" x="0.0" y="0.0" width="53.333333333333336" height="20.333333333333332"/>
@@ -544,7 +544,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="aH7-N6-XOw">
-                                                        <rect key="frame" x="-2" y="31.333333333333258" width="401" height="31"/>
+                                                        <rect key="frame" x="-2" y="31.333333333333258" width="413" height="31"/>
                                                     </slider>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Compression" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nLI-JZ-zpz">
                                                         <rect key="frame" x="0.0" y="72.333333333333258" width="100.66666666666667" height="20.333333333333329"/>
@@ -553,7 +553,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="yyP-pz-bwi">
-                                                        <rect key="frame" x="-2" y="103.66666666666663" width="401" height="31"/>
+                                                        <rect key="frame" x="-2" y="103.66666666666663" width="413" height="31"/>
                                                     </slider>
                                                 </subviews>
                                             </stackView>
