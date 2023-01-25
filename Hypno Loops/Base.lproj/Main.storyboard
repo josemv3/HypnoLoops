@@ -228,7 +228,10 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QJN-3y-TXd">
                                         <rect key="frame" x="0.0" y="223" width="295" height="34.333333333333314"/>
                                         <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Change profile image"/>
+                                        <connections>
+                                            <action selector="changeProfileImageButtonPushed:" destination="jCa-un-fOy" eventType="touchUpInside" id="an3-0M-KvW"/>
+                                        </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="FhB-Y2-KEg">
                                         <rect key="frame" x="0.0" y="280.33333333333331" width="295" height="213"/>
@@ -444,7 +447,7 @@
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Ks-UM-iYB">
                                                 <rect key="frame" x="0.0" y="43" width="171" height="43"/>
-                                                <color key="backgroundColor" name="Darker Grey"/>
+                                                <color key="backgroundColor" name="Super Dark Grey"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -457,7 +460,7 @@
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7hc-TT-zpS">
                                                 <rect key="frame" x="0.0" y="129" width="171" height="43"/>
-                                                <color key="backgroundColor" name="Darker Grey"/>
+                                                <color key="backgroundColor" name="Super Dark Grey"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -479,9 +482,10 @@
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mic.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="D7n-u1-DWn">
                                                 <rect key="frame" x="5" y="4.6666666666666714" width="160" height="204.66666666666663"/>
+                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </imageView>
                                         </subviews>
-                                        <color key="backgroundColor" name="Darker Grey"/>
+                                        <color key="backgroundColor" name="Super Dark Grey"/>
                                         <constraints>
                                             <constraint firstItem="D7n-u1-DWn" firstAttribute="leading" secondItem="AiU-Qd-ccM" secondAttribute="leading" constant="5" id="49M-UA-dP0"/>
                                             <constraint firstAttribute="trailing" secondItem="D7n-u1-DWn" secondAttribute="trailing" constant="5" id="9FO-Q8-G6Z"/>
@@ -495,13 +499,13 @@
                                 <rect key="frame" x="16" y="368" width="343" height="320"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="fnM-MC-vpQ">
-                                        <rect key="frame" x="-1" y="28.333333333333314" width="345" height="263.66666666666669"/>
+                                        <rect key="frame" x="-27" y="28.333333333333314" width="397" height="263.66666666666669"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="49" translatesAutoresizingMaskIntoConstraints="NO" id="fML-bw-s7d">
-                                                <rect key="frame" x="0.0" y="0.0" width="345" height="100"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="397" height="100"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="quU-1W-D7G">
-                                                        <rect key="frame" x="0.0" y="0.0" width="148" height="100"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="174" height="100"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="ZfZ-4J-hki"/>
                                                             <constraint firstAttribute="height" constant="100" id="bgF-wU-9zg"/>
@@ -515,7 +519,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Iso-Go-647">
-                                                        <rect key="frame" x="197" y="0.0" width="148" height="100"/>
+                                                        <rect key="frame" x="223" y="0.0" width="174" height="100"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="0Jv-7Y-xpB"/>
                                                             <constraint firstAttribute="height" constant="100" id="9PW-aN-Rae"/>
@@ -531,7 +535,7 @@
                                                 </subviews>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="11" translatesAutoresizingMaskIntoConstraints="NO" id="KTg-HD-JHK">
-                                                <rect key="frame" x="0.0" y="130.00000000000006" width="345" height="133.66666666666669"/>
+                                                <rect key="frame" x="0.0" y="130.00000000000006" width="397" height="133.66666666666669"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reverb" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="86a-6d-UqO">
                                                         <rect key="frame" x="0.0" y="0.0" width="53.333333333333336" height="20.333333333333332"/>
@@ -540,7 +544,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="aH7-N6-XOw">
-                                                        <rect key="frame" x="-2" y="31.333333333333258" width="349" height="31"/>
+                                                        <rect key="frame" x="-2" y="31.333333333333258" width="401" height="31"/>
                                                     </slider>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Compression" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nLI-JZ-zpz">
                                                         <rect key="frame" x="0.0" y="72.333333333333258" width="100.66666666666667" height="20.333333333333329"/>
@@ -549,14 +553,14 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="yyP-pz-bwi">
-                                                        <rect key="frame" x="-2" y="103.66666666666663" width="349" height="31"/>
+                                                        <rect key="frame" x="-2" y="103.66666666666663" width="401" height="31"/>
                                                     </slider>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" name="Darker Grey"/>
+                                <color key="backgroundColor" name="Super Dark Grey"/>
                                 <constraints>
                                     <constraint firstItem="fnM-MC-vpQ" firstAttribute="centerX" secondItem="J8B-2e-U1w" secondAttribute="centerX" id="5RK-Dm-Mla"/>
                                     <constraint firstItem="fnM-MC-vpQ" firstAttribute="centerY" secondItem="J8B-2e-U1w" secondAttribute="centerY" id="MHz-iT-kAZ"/>
@@ -617,14 +621,14 @@
         <image name="person.circle.fill" catalog="system" width="128" height="123"/>
         <image name="play.fill" catalog="system" width="117" height="128"/>
         <image name="record.circle" catalog="system" width="128" height="123"/>
-        <namedColor name="Darker Grey">
-            <color red="0.19607843137254902" green="0.19607843137254902" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <namedColor name="Main Blues">
             <color red="0.22400000691413879" green="0.54100000858306885" blue="0.72500002384185791" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="New Blue">
             <color red="0.27099999785423279" green="0.68599998950958252" blue="0.89399999380111694" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Super Dark Grey">
+            <color red="0.14509803921568629" green="0.15686274509803921" blue="0.15294117647058825" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="dark purple">
             <color red="0.51800000667572021" green="0.22699999809265137" blue="0.43500000238418579" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
