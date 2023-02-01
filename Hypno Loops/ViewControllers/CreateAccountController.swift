@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class CreateAccountController: UIViewController {
 
@@ -19,28 +20,98 @@ class CreateAccountController: UIViewController {
     
     @IBOutlet weak var submitButtton: UIButton!
     @IBOutlet weak var skipButton: UIButton!
+
+    enum ErrorMessage {
+        case invalidUsername, invalidEmail, invalidPassword_Count,
+             invalidPassword_NeedDigit, invalidPassword_NeedUppercase,
+             invalidPassword_NeedLowercase
+        
+        var displayError: String {
+            switch self {
+            case .invalidUsername:
+                return "Username must have at least 3 characters"
+            case .invalidEmail:
+                return "Invalid Email Address"
+            case .invalidPassword_Count:
+                return "Password must be at least 8 characters"
+            case .invalidPassword_NeedDigit:
+                return "Password must conttain at least 1 digit"
+            case .invalidPassword_NeedUppercase:
+                return "Password must contain at least 1 uppercase letter"
+            case .invalidPassword_NeedLowercase:
+                return "Password must contain at least 1 lowercase letter"
+            }
+        }
+    }
+    
+    enum requiredText: String {
+        case Required, Success
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         resetForm()
+        
+        usernameTextField.isHidden = true
+        usernameErrorLabel.isHidden = true
+        passwordTextField.isSecureTextEntry = true
     }
     
     func resetForm() {
-        usernameErrorLabel.isHidden = false
-        emailErrorLabel.isHidden = false
-        passwordErrorLabel.isHidden = false
+        //usernameErrorLabel.isHidden = false
+        //emailErrorLabel.isHidden = false
+        //passwordErrorLabel.isHidden = false
        
-        usernameErrorLabel.text = "Required"
-        emailErrorLabel.text = "Required"
-        passwordErrorLabel.text = "Required"
+        usernameErrorLabel.text = requiredText.Required.rawValue
+        emailErrorLabel.text = requiredText.Required.rawValue
+        passwordErrorLabel.text = requiredText.Required.rawValue
         
         usernameTextField.text = ""
         emailTextField.text = ""
         passwordTextField.text = ""
+        
+        submitButtton.isEnabled = false
     }
 
     @IBAction func submitButtonPressed(_ sender: UIButton) {
-        resetForm()
+        
+        guard let email = emailTextField.text,
+              let password = passwordTextField.text else { return }
+                    
+        FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password, completion: { [weak self] result, error in
+            guard let strongSelf = self else {
+                return
+            }
+            guard error == nil else {
+                strongSelf.showCreateAccount(email: email, password: password)
+                return
+            }
+            print("You have signed in")
+        })
+        //resetForm()
+    }
+    
+    func showCreateAccount(email: String, password: String) {
+        let alert = UIAlertController(title: "Create Account", message: "Would you like to create an account?", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Continue", style: .default, handler: {_ in
+            
+            FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password) { [weak self] result, error in
+                guard let strongSelf = self else {
+                    return
+                }
+                
+                guard error == nil else {
+                    print("Account created")
+                    return
+                }
+                print("You have signed in")
+                //strongSelf.label
+            }
+        }))
+        alert.addAction(UIAlertAction(title: "Canel", style: .cancel))
+        
+        present(alert, animated: true)
+        
     }
     
     @IBAction func skipButtonPressed(_ sender: UIButton) {
@@ -63,7 +134,7 @@ class CreateAccountController: UIViewController {
     
     func invalidUsername(_ value: String) -> String? {
         if value.count < 3 {
-            return "Username must have at least 3 characters"
+            return ErrorMessage.invalidUsername.displayError
         }
         return nil
     }
@@ -87,9 +158,11 @@ class CreateAccountController: UIViewController {
         let regularExpression = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let predicate = NSPredicate(format: "SELF MATCHES %@", regularExpression)
         if !predicate.evaluate(with: value) {
-            return "Invalid Email Address"
+            emailErrorLabel.textColor = UIColor.systemRed
+            return ErrorMessage.invalidEmail.displayError
         }
-        return nil
+        emailErrorLabel.textColor = UIColor.systemGreen
+        return requiredText.Success.rawValue
     }
     
     //MARK: - Check Password
@@ -108,18 +181,23 @@ class CreateAccountController: UIViewController {
     
     func invalidPassword(_ value: String) -> String? {
         if value.count < 8 {
-            return "Password must be at least 8 characters"
+            passwordErrorLabel.textColor = UIColor.systemRed
+            return ErrorMessage.invalidPassword_Count.displayError
         }
         if containsDigit(value) {
-            return "Password must conttain at least 1 digit"
+            passwordErrorLabel.textColor = UIColor.systemRed
+            return ErrorMessage.invalidPassword_NeedDigit.displayError
         }
         if containsLowercase(value) {
-            return "Password must contain at least 1 lowercase letter"
+            passwordErrorLabel.textColor = UIColor.systemRed
+            return ErrorMessage.invalidPassword_NeedLowercase.displayError
         }
         if containsUppercase(value) {
-            return "Password must contain at least 1 uppercase letter"
+            passwordErrorLabel.textColor = UIColor.systemRed
+            return ErrorMessage.invalidPassword_NeedUppercase.displayError
         }
-        return nil
+        passwordErrorLabel.textColor = UIColor.systemGreen
+        return requiredText.Success.rawValue
     }
     
     func containsDigit(_ value: String) -> Bool {
@@ -141,14 +219,14 @@ class CreateAccountController: UIViewController {
     }
     
     func checkForValidForm() {
-        if usernameErrorLabel.isHidden && emailErrorLabel.isHidden && passwordErrorLabel.isHidden {
+        if  emailErrorLabel.text == requiredText.Success.rawValue && passwordErrorLabel.text == requiredText.Success.rawValue {
             submitButtton.isEnabled =  true
         } else {
             submitButtton.isEnabled = false
         }
     }
     
-    //MARK: - Seque
+    //MARK: - Segue
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "gotoProfile" {

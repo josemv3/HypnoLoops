@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E0259D3E298A1E730018DB30 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E0259D3D298A1E730018DB30 /* FirebaseAnalytics */; };
+		E0259D40298A1E730018DB30 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E0259D3F298A1E730018DB30 /* FirebaseAnalyticsSwift */; };
+		E0259D42298A1E730018DB30 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = E0259D41298A1E730018DB30 /* FirebaseAuth */; };
+		E0259D44298A1E9B0018DB30 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E0259D43298A1E9A0018DB30 /* GoogleService-Info.plist */; };
 		E0E2986B2977334F00902727 /* loopLogo2.png in Resources */ = {isa = PBXBuildFile; fileRef = E0E298692977334E00902727 /* loopLogo2.png */; };
 		E0E2986C2977334F00902727 /* loopLogo3.png in Resources */ = {isa = PBXBuildFile; fileRef = E0E2986A2977334F00902727 /* loopLogo3.png */; };
 		E0E5A7282979ADD800B7B29D /* thoughtsLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = E0E5A7262979ADD800B7B29D /* thoughtsLogo.png */; };
@@ -26,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E0259D43298A1E9A0018DB30 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E0E298692977334E00902727 /* loopLogo2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loopLogo2.png; sourceTree = "<group>"; };
 		E0E2986A2977334F00902727 /* loopLogo3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loopLogo3.png; sourceTree = "<group>"; };
 		E0E5A7262979ADD800B7B29D /* thoughtsLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thoughtsLogo.png; sourceTree = "<group>"; };
@@ -51,6 +56,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E0259D40298A1E730018DB30 /* FirebaseAnalyticsSwift in Frameworks */,
+				E0259D42298A1E730018DB30 /* FirebaseAuth in Frameworks */,
+				E0259D3E298A1E730018DB30 /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,6 +132,7 @@
 				E0F2A9B629766B7D0066263F /* Assets.xcassets */,
 				E0F2A9B829766B7D0066263F /* LaunchScreen.storyboard */,
 				E0F2A9BB29766B7D0066263F /* Info.plist */,
+				E0259D43298A1E9A0018DB30 /* GoogleService-Info.plist */,
 				E0E5A736297B145300B7B29D /* Loop Images */,
 			);
 			path = "Hypno Loops";
@@ -145,6 +154,11 @@
 			dependencies = (
 			);
 			name = "Hypno Loops";
+			packageProductDependencies = (
+				E0259D3D298A1E730018DB30 /* FirebaseAnalytics */,
+				E0259D3F298A1E730018DB30 /* FirebaseAnalyticsSwift */,
+				E0259D41298A1E730018DB30 /* FirebaseAuth */,
+			);
 			productName = "Hypno Loops";
 			productReference = E0F2A9AA29766B7A0066263F /* Hypno Loops.app */;
 			productType = "com.apple.product-type.application";
@@ -173,6 +187,9 @@
 				Base,
 			);
 			mainGroup = E0F2A9A129766B7A0066263F;
+			packageReferences = (
+				E0259D3C298A1E730018DB30 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = E0F2A9AB29766B7A0066263F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -188,6 +205,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E0E5A7292979ADD800B7B29D /* mindLogo.png in Resources */,
+				E0259D44298A1E9B0018DB30 /* GoogleService-Info.plist in Resources */,
 				E0E2986C2977334F00902727 /* loopLogo3.png in Resources */,
 				E0F2A9BA29766B7D0066263F /* LaunchScreen.storyboard in Resources */,
 				E0E5A7282979ADD800B7B29D /* thoughtsLogo.png in Resources */,
@@ -362,6 +380,8 @@
 				DEVELOPMENT_TEAM = QDDDA27M89;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Hypno Loops/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Hypno Loops";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -391,6 +411,8 @@
 				DEVELOPMENT_TEAM = QDDDA27M89;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Hypno Loops/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Hypno Loops";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.healthcare-fitness";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -432,6 +454,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E0259D3C298A1E730018DB30 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E0259D3D298A1E730018DB30 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E0259D3C298A1E730018DB30 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		E0259D3F298A1E730018DB30 /* FirebaseAnalyticsSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E0259D3C298A1E730018DB30 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsSwift;
+		};
+		E0259D41298A1E730018DB30 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E0259D3C298A1E730018DB30 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E0F2A9A229766B7A0066263F /* Project object */;
 }

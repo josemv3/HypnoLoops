@@ -17,20 +17,23 @@ class LoopRecordViewController: UIViewController {
     @IBOutlet weak var micBackgroundView: UIView!
     @IBOutlet weak var micImageView: UIImageView!
     
-    @IBOutlet weak var controlsBackgroundView: UIView!
+    @IBOutlet weak var recordButtonView: UIView!
     @IBOutlet weak var recordButton: UIButton!
     @IBOutlet weak var playButton: UIButton!
+    
+    @IBOutlet weak var reverbButtonView: UIView!
     @IBOutlet weak var reverbSlider: UISlider!
     @IBOutlet weak var compressionSlider: UISlider!
     
     @IBOutlet weak var saveButtton: UIButton!
+    
+    var cornerRadiusModifier: CGFloat = 10
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        micBackgroundView.layer.cornerRadius = 10
-        controlsBackgroundView.layer.cornerRadius = 10
-        //recordButton.layer.cornerRadius = 0.5 * recordButton.bounds.size.width
-        //playButton.layer.cornerRadius = 0.5 * playButton.bounds.size.width
-        
+        micBackgroundView.layer.cornerRadius = cornerRadiusModifier
+        recordButtonView.layer.cornerRadius = cornerRadiusModifier
+        reverbButtonView.layer.cornerRadius = cornerRadiusModifier
     }
     
     @IBAction func recordButtonPressed(_ sender: UIButton) {
