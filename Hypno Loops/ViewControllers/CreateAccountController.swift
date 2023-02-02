@@ -52,8 +52,8 @@ class CreateAccountController: UIViewController {
         super.viewDidLoad()
         resetForm()
         
-        usernameTextField.isHidden = true
-        usernameErrorLabel.isHidden = true
+        //usernameTextField.isHidden = true
+        //usernameErrorLabel.isHidden = true
         passwordTextField.isSecureTextEntry = true
     }
     
@@ -86,6 +86,7 @@ class CreateAccountController: UIViewController {
                 strongSelf.showCreateAccount(email: email, password: password)
                 return
             }
+            //segue to profile page
             print("You have signed in")
         })
         //resetForm()
@@ -133,10 +134,13 @@ class CreateAccountController: UIViewController {
     }
     
     func invalidUsername(_ value: String) -> String? {
-        if value.count < 3 {
+        if value.count < 1 {
+            usernameErrorLabel.textColor = UIColor.systemRed
             return ErrorMessage.invalidUsername.displayError
         }
-        return nil
+        usernameErrorLabel.textColor = UIColor.systemGreen
+        return requiredText.Success.rawValue
+        //return nil
     }
     
     //MARK: - Check Email
@@ -219,7 +223,8 @@ class CreateAccountController: UIViewController {
     }
     
     func checkForValidForm() {
-        if  emailErrorLabel.text == requiredText.Success.rawValue && passwordErrorLabel.text == requiredText.Success.rawValue {
+        if  emailErrorLabel.text == requiredText.Success.rawValue &&
+                passwordErrorLabel.text == requiredText.Success.rawValue && usernameErrorLabel.text == requiredText.Success.rawValue {
             submitButtton.isEnabled =  true
         } else {
             submitButtton.isEnabled = false
