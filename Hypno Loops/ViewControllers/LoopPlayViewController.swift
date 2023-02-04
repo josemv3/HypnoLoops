@@ -6,13 +6,32 @@
 //
 
 import UIKit
+import AVFoundation
 
 class LoopPlayViewController: UIViewController {
+    let reverb = AVAudioUnitReverb()
+    let audioEngine = AVAudioEngine()
+    let playerNode = AVAudioPlayerNode()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+    }
+    
+    func setupAudio() {
+        audioEngine.attach(reverb)
+        audioEngine.connect(playerNode, to: reverb, format: nil)
+        audioEngine.connect(reverb, to: audioEngine.outputNode, format: nil)
+        
+        do {
+            try audioEngine.start()
+            playerNode.play()
+        } catch {
+            
+        }
     }
 
 }
+
+
+
