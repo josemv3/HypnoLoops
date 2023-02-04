@@ -38,22 +38,35 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LJa-BG-rrY">
-                                <rect key="frame" x="156.66666666666666" y="388.66666666666669" width="62" height="35"/>
+                                <rect key="frame" x="132.33333333333334" y="388.66666666666669" width="110.33333333333334" height="35"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Start"/>
+                                <buttonConfiguration key="configuration" style="filled" title="User Log in"/>
                                 <connections>
                                     <segue destination="BYZ-38-t0r" kind="show" id="Q0i-wk-ccH"/>
                                 </connections>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mindLogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="wzS-qV-ZFW">
+                                <rect key="frame" x="0.0" y="91" width="375" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="375" id="LU0-77-BYe"/>
+                                    <constraint firstAttribute="height" constant="150" id="a3E-eT-Qdq"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="qBU-Sa-XRQ"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="indigo"/>
                         <constraints>
+                            <constraint firstItem="wzS-qV-ZFW" firstAttribute="top" secondItem="qBU-Sa-XRQ" secondAttribute="top" id="Dcw-gW-uxF"/>
                             <constraint firstItem="LJa-BG-rrY" firstAttribute="centerY" secondItem="oXJ-37-7cG" secondAttribute="centerY" id="NtA-Us-Oe8"/>
                             <constraint firstItem="LJa-BG-rrY" firstAttribute="centerX" secondItem="oXJ-37-7cG" secondAttribute="centerX" id="TeL-Dx-B36"/>
+                            <constraint firstItem="wzS-qV-ZFW" firstAttribute="centerX" secondItem="LJa-BG-rrY" secondAttribute="centerX" id="w43-NT-EeK"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="O9j-sa-EO8"/>
+                    <connections>
+                        <outlet property="TopLogoView" destination="wzS-qV-ZFW" id="KCO-e1-4g7"/>
+                        <outlet property="userLoginButton" destination="LJa-BG-rrY" id="VVi-c7-ncA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vby-y3-rJL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -631,11 +644,28 @@
                         <outlet property="reverbButtonView" destination="xIj-t9-4XJ" id="cHU-BG-8aO"/>
                         <outlet property="reverbSlider" destination="aH7-N6-XOw" id="71M-lQ-6p8"/>
                         <outlet property="saveButtton" destination="gdt-vK-4H8" id="8yG-xt-Upb"/>
+                        <segue destination="1Q0-i3-Q8k" kind="show" id="0JU-B5-xMo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VgZ-f8-mg2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2956" y="2.9556650246305418"/>
+        </scene>
+        <!--Loop Play View Controller-->
+        <scene sceneID="hZL-77-0AY">
+            <objects>
+                <viewController id="1Q0-i3-Q8k" customClass="LoopPlayViewController" customModule="Hypno_Loops" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9YJ-Ux-Uwq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Kcy-CQ-z8P"/>
+                        <color key="backgroundColor" name="indigo"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="qWP-hj-clh"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ECN-VX-179" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3684" y="3"/>
         </scene>
     </scenes>
     <resources>
@@ -659,9 +689,6 @@
         <namedColor name="indigo">
             <color red="0.054999999701976776" green="0.075000002980232239" blue="0.15700000524520874" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

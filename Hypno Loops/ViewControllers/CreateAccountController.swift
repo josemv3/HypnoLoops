@@ -35,7 +35,7 @@ class CreateAccountController: UIViewController {
             case .invalidPassword_Count:
                 return "Password must be at least 8 characters"
             case .invalidPassword_NeedDigit:
-                return "Password must conttain at least 1 digit"
+                return "Password must contain at least 1 digit"
             case .invalidPassword_NeedUppercase:
                 return "Password must contain at least 1 uppercase letter"
             case .invalidPassword_NeedLowercase:
@@ -78,15 +78,25 @@ class CreateAccountController: UIViewController {
         guard let email = emailTextField.text,
               let password = passwordTextField.text else { return }
                     
+        //Get authorization Instance
+        //Attempt signin
+        //If failure alert popup to create account
+        //Alert continue = create account
+ 
         FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password, completion: { [weak self] result, error in
             guard let strongSelf = self else {
+                //strongSelf used in error to call func.show
                 return
             }
             guard error == nil else {
+                //Create user alert when guard error fails with .show
                 strongSelf.showCreateAccount(email: email, password: password)
                 return
             }
-            //segue to profile page
+            //You are signed in here.. now what?
+            //No reason to go to profile screen. Go to collections?
+            //HideLabels in tutorial
+            strongSelf.performSegue(withIdentifier: "gotoLoopCollections", sender: self)
             print("You have signed in")
         })
         //resetForm()
@@ -96,17 +106,19 @@ class CreateAccountController: UIViewController {
         let alert = UIAlertController(title: "Create Account", message: "Would you like to create an account?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Continue", style: .default, handler: {_ in
             
-            FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password) { [weak self] result, error in
+            FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password) {
+                [weak self] result, error in
                 guard let strongSelf = self else {
                     return
                 }
-                
                 guard error == nil else {
-                    print("Account created")
+                    print("Account creation failed")
                     return
                 }
-                print("You have signed in")
-                //strongSelf.label
+                print("You have created an account and signed in")
+                //in video he hides labels with Strong self, use for segue
+                //Segue to profile screen so user ca customize profile the first time.
+                strongSelf.performSegue(withIdentifier: "gotoProfile", sender: self)
             }
         }))
         alert.addAction(UIAlertAction(title: "Canel", style: .cancel))
