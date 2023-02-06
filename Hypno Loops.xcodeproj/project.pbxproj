@@ -67,12 +67,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		E00E4631299059F6006F6562 /* HelpFiles */ = {
+		E00E4631299059F6006F6562 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
 				E00E462F299059D9006F6562 /* SegueID.swift */,
 			);
-			path = HelpFiles;
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		E04FB383297D9CE400EA7411 /* ReusableViews */ = {
@@ -136,7 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				E0E5A72C2979BCCD00B7B29D /* AppDelegate */,
-				E00E4631299059F6006F6562 /* HelpFiles */,
+				E00E4631299059F6006F6562 /* Utilities */,
 				E0E5A72D2979BCFD00B7B29D /* ViewControllers */,
 				E04FB383297D9CE400EA7411 /* ReusableViews */,
 				E0F2A9B329766B7B0066263F /* Main.storyboard */,

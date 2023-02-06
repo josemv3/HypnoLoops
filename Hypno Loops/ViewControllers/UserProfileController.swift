@@ -25,7 +25,6 @@ class UserProfileController: UIViewController {
     @IBOutlet weak var editProfileButton: UIButton!
     @IBOutlet weak var doneButton: UIButton!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
