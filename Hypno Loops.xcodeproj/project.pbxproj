@@ -10,6 +10,7 @@
 		E00E4630299059D9006F6562 /* SegueID.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00E462F299059D9006F6562 /* SegueID.swift */; };
 		E00E46332990EFE6006F6562 /* CornerRadiusModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00E46322990EFE6006F6562 /* CornerRadiusModifiers.swift */; };
 		E00E46352990F701006F6562 /* ErrorMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00E46342990F701006F6562 /* ErrorMessages.swift */; };
+		E00E46372990F914006F6562 /* LoopCollectionViewSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00E46362990F914006F6562 /* LoopCollectionViewSectionHeader.swift */; };
 		E0259D3E298A1E730018DB30 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E0259D3D298A1E730018DB30 /* FirebaseAnalytics */; };
 		E0259D40298A1E730018DB30 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E0259D3F298A1E730018DB30 /* FirebaseAnalyticsSwift */; };
 		E0259D42298A1E730018DB30 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = E0259D41298A1E730018DB30 /* FirebaseAuth */; };
@@ -36,6 +37,7 @@
 		E00E462F299059D9006F6562 /* SegueID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueID.swift; sourceTree = "<group>"; };
 		E00E46322990EFE6006F6562 /* CornerRadiusModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerRadiusModifiers.swift; sourceTree = "<group>"; };
 		E00E46342990F701006F6562 /* ErrorMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessages.swift; sourceTree = "<group>"; };
+		E00E46362990F914006F6562 /* LoopCollectionViewSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopCollectionViewSectionHeader.swift; sourceTree = "<group>"; };
 		E0259D43298A1E9A0018DB30 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E0E298692977334E00902727 /* loopLogo2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loopLogo2.png; sourceTree = "<group>"; };
 		E0E2986A2977334F00902727 /* loopLogo3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loopLogo3.png; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				E0E5A737297B770100B7B29D /* LoopCollecttionsCell.swift */,
+				E00E46362990F914006F6562 /* LoopCollectionViewSectionHeader.swift */,
 			);
 			path = ReusableViews;
 			sourceTree = "<group>";
@@ -244,6 +247,7 @@
 				E0E5A72F2979BE9800B7B29D /* WelcomeController.swift in Sources */,
 				E0E5A733297B130E00B7B29D /* LoopRecordViewController.swift in Sources */,
 				E0E5A731297B0F7500B7B29D /* LoopCollectionsViewController.swift in Sources */,
+				E00E46372990F914006F6562 /* LoopCollectionViewSectionHeader.swift in Sources */,
 				E00E4630299059D9006F6562 /* SegueID.swift in Sources */,
 				E0F2A9AE29766B7B0066263F /* AppDelegate.swift in Sources */,
 				E0E5A72B2979BCBE00B7B29D /* UserProfileController.swift in Sources */,

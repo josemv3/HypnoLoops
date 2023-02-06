@@ -14,23 +14,31 @@ private var setA = [
     "juice", "ketchup", "lightning",
     "moon", "nuts","oven"]
 
+
 class LoopCollectionsViewController: UIViewController, UICollectionViewDelegate {
 
     @IBOutlet weak var loopCollectionsCV: UICollectionView!
     @IBOutlet weak var TopProfileImage: UIImageView!
     
-    var dataSource: UICollectionViewDiffableDataSource<Section, String>!//SOURCE1
+    static let sectionHeaderElementKind = "section-header-element-kind"
+    var dataSource: UICollectionViewDiffableDataSource<String, String>!//SOURCE1
     private var currentSet = setA
+    var headerSetA = ["Money", "Health", "Love", "Goals", "Mental Stability"]
+    var itemsBySectionAndName: [String: [String]] = ["Money": ["airplane", "ball", "car"], "Health": ["drum", "earphones", "flower"], "Love": ["ghost", "home", "icecream"], "Goals": ["juice", "ketchup", "lightning"], "Mental Stability": ["moon", "nuts","oven"]]
     
-    enum Section {
-        case main
-    }
+//    enum Section {
+//        case main
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         TopProfileImage.layer.cornerRadius = CornerRadiusModifiers.normal.size
         TopProfileImage.layer.borderWidth = 2
         TopProfileImage.layer.borderColor = UIColor.darkGray.cgColor
+        
+        loopCollectionsCV.register(
+            LoopCollectionViewSectionHeader.self, forSupplementaryViewOfKind: LoopCollectionsViewController.sectionHeaderElementKind, withReuseIdentifier: "Header")
+            
         loopCollectionsCV.collectionViewLayout = configureLayout()
         configureDataSource()
     }
@@ -57,13 +65,23 @@ class LoopCollectionsViewController: UIViewController, UICollectionViewDelegate 
         section.contentInsets = NSDirectionalEdgeInsets(
             top: spacing, leading: spacing, bottom: spacing, trailing: spacing)
         
+        let headerSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .estimated(44)
+        )
+        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize,
+            elementKind: LoopCollectionsViewController.sectionHeaderElementKind,
+            alignment: .top)
+        section.boundarySupplementaryItems = [sectionHeader]
+        
         return UICollectionViewCompositionalLayout(section: section)
     }
     
     //MARK: - Data Source (Cell)
     
     func configureDataSource() {//SOURCE2
-        dataSource = UICollectionViewDiffableDataSource<Section, String>(collectionView: loopCollectionsCV) { (collectionView, indexPath, item) -> LoopCollecttionsCell? in
+        dataSource = UICollectionViewDiffableDataSource<String, String>(collectionView: loopCollectionsCV) { (collectionView, indexPath, item) -> LoopCollecttionsCell? in
             
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LoopCollecttionsCell.reuseidentifier, for: indexPath) as? LoopCollecttionsCell else {
                 fatalError("Cannot create new cell")
@@ -72,11 +90,24 @@ class LoopCollectionsViewController: UIViewController, UICollectionViewDelegate 
             cell.backgroundColor = .systemGray
             return cell
         }
+        dataSource.supplementaryViewProvider = { collectionView, kind, indexPath -> UICollectionReusableView? in
+            let header = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind, withReuseIdentifier: "Header", for: indexPath) as! LoopCollectionViewSectionHeader
+            
+            header.label.text = String(self.headerSetA[indexPath.section])
+            //header.label.font = UIFont(name: "Chalkduster", size: 18)
+            header.label.textColor = UIColor.white
+            
+            return header
+        }
         
-        var initialSnapshot = NSDiffableDataSourceSnapshot<Section, String>()//SOURCE3
+        var initialSnapshot = NSDiffableDataSourceSnapshot<String, String>()//SOURCE3
         
-        initialSnapshot.appendSections([.main])
-        initialSnapshot.appendItems(currentSet)
+        for section in headerSetA {
+            initialSnapshot.appendSections([section])
+            initialSnapshot.appendItems(itemsBySectionAndName[section]!)
+        }
+       
         
         dataSource.apply(initialSnapshot, animatingDifferences: false)
     }
