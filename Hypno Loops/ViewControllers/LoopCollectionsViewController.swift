@@ -80,7 +80,7 @@ class LoopCollectionsViewController: UIViewController, UICollectionViewDelegate 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
         print(item)
-        performSegue(withIdentifier: "gotoRecord", sender: self)
+        performSegue(withIdentifier: SegueID.gotoRecord.rawValue, sender: self)
     }
 
 }
