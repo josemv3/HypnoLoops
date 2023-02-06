@@ -17,7 +17,8 @@ private var setA = [
 class LoopCollectionsViewController: UIViewController, UICollectionViewDelegate {
 
     @IBOutlet weak var loopCollectionsCV: UICollectionView!
-
+    @IBOutlet weak var TopProfileImage: UIImageView!
+    
     var dataSource: UICollectionViewDiffableDataSource<Section, String>!//SOURCE1
     private var currentSet = setA
     
@@ -27,6 +28,9 @@ class LoopCollectionsViewController: UIViewController, UICollectionViewDelegate 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        TopProfileImage.layer.cornerRadius = CornerRadiusModifiers.normal.size
+        TopProfileImage.layer.borderWidth = 2
+        TopProfileImage.layer.borderColor = UIColor.darkGray.cgColor
         loopCollectionsCV.collectionViewLayout = configureLayout()
         configureDataSource()
     }
@@ -82,5 +86,4 @@ class LoopCollectionsViewController: UIViewController, UICollectionViewDelegate 
         print(item)
         performSegue(withIdentifier: SegueID.gotoRecord.rawValue, sender: self)
     }
-
 }

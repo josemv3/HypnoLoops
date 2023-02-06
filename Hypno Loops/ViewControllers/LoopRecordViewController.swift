@@ -32,13 +32,13 @@ class LoopRecordViewController: UIViewController, AVAudioRecorderDelegate {
     var recordingSession: AVAudioSession?
     var audioPlayer: AVAudioPlayer?
     
-    var cornerRadiusModifier: CGFloat = 10
+     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        micBackgroundView.layer.cornerRadius = cornerRadiusModifier
-        recordButtonView.layer.cornerRadius = cornerRadiusModifier
-        reverbButtonView.layer.cornerRadius = cornerRadiusModifier
+        micBackgroundView.layer.cornerRadius = CornerRadiusModifiers.normal.size
+        recordButtonView.layer.cornerRadius = CornerRadiusModifiers.normal.size
+        reverbButtonView.layer.cornerRadius = CornerRadiusModifiers.normal.size
     }
     
     @IBAction func recordButtonPressed(_ sender: UIButton) {

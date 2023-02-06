@@ -31,6 +31,7 @@ class UserProfileController: UIViewController {
         getUserInfo()
         profileImageView.layer.masksToBounds = true
         profileImageView.layer.borderWidth = 2
+        profileImageView.layer.cornerRadius = CornerRadiusModifiers.normal.size
         profileImageView.layer.borderColor = UIColor.darkGray.cgColor
         //profileImageView.layer.cornerRadius = 0.5 * profileImageView.bounds.size.width
     }

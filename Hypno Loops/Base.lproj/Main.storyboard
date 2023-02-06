@@ -400,7 +400,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ImU-NG-dlf">
-                                <rect key="frame" x="0.0" y="91" width="375" height="721"/>
+                                <rect key="frame" x="0.0" y="251" width="375" height="561"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="UxM-y4-uZC">
                                     <size key="itemSize" width="128" height="128"/>
@@ -439,18 +439,26 @@
                                     <outlet property="delegate" destination="V7n-Qs-3PC" id="T5h-Gr-RNT"/>
                                 </connections>
                             </collectionView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="nLD-AJ-TCQ">
+                                <rect key="frame" x="115" y="91.999999999999986" width="150" height="148.66666666666669"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="LWv-uM-ybv"/>
                         <color key="backgroundColor" name="indigo"/>
                         <constraints>
                             <constraint firstItem="ImU-NG-dlf" firstAttribute="centerX" secondItem="YOQ-Bh-Wxg" secondAttribute="centerX" id="3Rr-xR-5dg"/>
+                            <constraint firstItem="ImU-NG-dlf" firstAttribute="top" secondItem="nLD-AJ-TCQ" secondAttribute="bottom" constant="10" id="HJh-eH-S1R"/>
                             <constraint firstAttribute="bottomMargin" secondItem="ImU-NG-dlf" secondAttribute="bottom" constant="-34" id="KgK-Hp-Tb8"/>
-                            <constraint firstItem="ImU-NG-dlf" firstAttribute="top" secondItem="LWv-uM-ybv" secondAttribute="top" id="QAL-Fz-7xa"/>
+                            <constraint firstItem="LWv-uM-ybv" firstAttribute="trailing" secondItem="nLD-AJ-TCQ" secondAttribute="trailing" constant="110" id="N91-Bl-Qty"/>
+                            <constraint firstItem="nLD-AJ-TCQ" firstAttribute="top" secondItem="LWv-uM-ybv" secondAttribute="top" id="hRs-h2-vQe"/>
+                            <constraint firstItem="ImU-NG-dlf" firstAttribute="top" secondItem="LWv-uM-ybv" secondAttribute="top" constant="160" id="iaG-mZ-4vU"/>
+                            <constraint firstItem="nLD-AJ-TCQ" firstAttribute="leading" secondItem="LWv-uM-ybv" secondAttribute="leading" constant="115" id="zDn-Rf-BjV"/>
                             <constraint firstItem="ImU-NG-dlf" firstAttribute="leading" secondItem="LWv-uM-ybv" secondAttribute="leading" id="zNq-6Z-Rkt"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="asN-dT-dyM"/>
                     <connections>
+                        <outlet property="TopProfileImage" destination="nLD-AJ-TCQ" id="EYl-cz-gX6"/>
                         <outlet property="loopCollectionsCV" destination="ImU-NG-dlf" id="U0A-d4-tCX"/>
                         <segue destination="jUd-8a-r3l" kind="show" identifier="gotoRecord" id="LYe-yV-Ojc"/>
                     </connections>
