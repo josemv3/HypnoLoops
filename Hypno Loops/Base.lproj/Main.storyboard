@@ -224,6 +224,7 @@
                         <outlet property="usernameErrorLabel" destination="r8u-dI-FJT" id="Jrh-ET-0Jw"/>
                         <outlet property="usernameTextField" destination="T3Y-ZP-SbH" id="uUr-Sp-Jbl"/>
                         <segue destination="jCa-un-fOy" kind="show" identifier="gotoProfile" id="nWX-Pm-hut"/>
+                        <segue destination="V7n-Qs-3PC" kind="show" identifier="gotoLoopCollectionsExisting" id="iSG-ay-RT5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -644,7 +645,7 @@
                         <outlet property="reverbButtonView" destination="xIj-t9-4XJ" id="cHU-BG-8aO"/>
                         <outlet property="reverbSlider" destination="aH7-N6-XOw" id="71M-lQ-6p8"/>
                         <outlet property="saveButtton" destination="gdt-vK-4H8" id="8yG-xt-Upb"/>
-                        <segue destination="1Q0-i3-Q8k" kind="show" id="0JU-B5-xMo"/>
+                        <segue destination="1Q0-i3-Q8k" kind="show" identifier="gotoPlay" id="0JU-B5-xMo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VgZ-f8-mg2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -668,6 +669,9 @@
             <point key="canvasLocation" x="3684" y="3"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="iSG-ay-RT5"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="mic.fill" catalog="system" width="110" height="128"/>
         <image name="mindLogo.png" width="768" height="384"/>

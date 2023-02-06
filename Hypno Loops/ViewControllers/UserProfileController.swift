@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class UserProfileController: UIViewController {
 
@@ -28,6 +29,7 @@ class UserProfileController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        getUserInfo()
         profileImageView.layer.masksToBounds = true
         profileImageView.layer.borderWidth = 2
         profileImageView.layer.borderColor = UIColor.darkGray.cgColor
@@ -39,9 +41,8 @@ class UserProfileController: UIViewController {
     }
     
     @IBAction func doneButtonPushed(_ sender: UIButton) {
-        performSegue(withIdentifier: "gotoLoopCollections", sender: self)
+        performSegue(withIdentifier: SegueID.gotoLoopCollections.rawValue, sender: self)
     }
-    
 }
 
 extension UserProfileController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -85,5 +86,9 @@ extension UserProfileController: UIImagePickerControllerDelegate, UINavigationCo
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true)
+    }
+    
+    func getUserInfo() {
+        emailTextField.text = FirebaseAuth.Auth.auth().currentUser?.email
     }
 }

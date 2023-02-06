@@ -90,13 +90,15 @@ class CreateAccountController: UIViewController {
             }
             guard error == nil else {
                 //Create user alert when guard error fails with .show
+                //This means the info doesnt match an existing user so it cant sign in.
+                //Instead, we create a user
                 strongSelf.showCreateAccount(email: email, password: password)
                 return
             }
             //You are signed in here.. now what?
             //No reason to go to profile screen. Go to collections?
             //HideLabels in tutorial
-            strongSelf.performSegue(withIdentifier: "gotoLoopCollections", sender: self)
+            strongSelf.performSegue(withIdentifier: SegueID.gotoLoopCollectionsExisting.rawValue, sender: self)
             print("You have signed in")
         })
         //resetForm()
@@ -118,7 +120,7 @@ class CreateAccountController: UIViewController {
                 print("You have created an account and signed in")
                 //in video he hides labels with Strong self, use for segue
                 //Segue to profile screen so user ca customize profile the first time.
-                strongSelf.performSegue(withIdentifier: "gotoProfile", sender: self)
+                strongSelf.performSegue(withIdentifier: SegueID.gotoProfile.rawValue, sender: self)
             }
         }))
         alert.addAction(UIAlertAction(title: "Canel", style: .cancel))
@@ -128,7 +130,7 @@ class CreateAccountController: UIViewController {
     }
     
     @IBAction func skipButtonPressed(_ sender: UIButton) {
-        performSegue(withIdentifier: "gotoProfile", sender: self)
+        performSegue(withIdentifier: SegueID.gotoProfile.rawValue, sender: self)
     }
     
     //MARK: - Check Username
