@@ -23,8 +23,8 @@ class LoopCollectionsViewController: UIViewController, UICollectionViewDelegate 
     static let sectionHeaderElementKind = "section-header-element-kind"
     var dataSource: UICollectionViewDiffableDataSource<String, String>!//SOURCE1
     private var currentSet = setA
-    var headerSetA = ["Money", "Health", "Love", "Goals", "Mental Stability"]
-    var itemsBySectionAndName: [String: [String]] = ["Money": ["airplane", "ball", "car"], "Health": ["drum", "earphones", "flower"], "Love": ["ghost", "home", "icecream"], "Goals": ["juice", "ketchup", "lightning"], "Mental Stability": ["moon", "nuts","oven"]]
+    var headerSetA = ["Likes", "Health", "Love", "Goals", "Mental Stability"]
+    var itemsBySectionAndName: [String: [String]] = ["Likes": ["airplane"], "Health": ["drum", "earphones", "flower", "test", "another"], "Love": ["ghost", "home", "icecream"], "Goals": ["juice", "ketchup", "lightning"], "Mental Stability": ["moon", "nuts","oven"]]
     
 //    enum Section {
 //        case main
@@ -57,13 +57,16 @@ class LoopCollectionsViewController: UIViewController, UICollectionViewDelegate 
         
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalWidth(0.3))
+            heightDimension: .fractionalHeight(0.25))
+
         let group = NSCollectionLayoutGroup.horizontal(
             layoutSize: groupSize, subitem: item, count: grouItemCount)
         
         let section = NSCollectionLayoutSection(group: group)
         section.contentInsets = NSDirectionalEdgeInsets(
             top: spacing, leading: spacing, bottom: spacing, trailing: spacing)
+        //for scrolling horizontal after the 3rd cell shows. 
+        section.orthogonalScrollingBehavior = .continuous
         
         let headerSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),

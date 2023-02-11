@@ -89,6 +89,7 @@ extension UserProfileController: UIImagePickerControllerDelegate, UINavigationCo
     }
     
     func getUserInfo() {
+        //usernameTextField.placeholder = 
         emailTextField.text = FirebaseAuth.Auth.auth().currentUser?.email
     }
 }

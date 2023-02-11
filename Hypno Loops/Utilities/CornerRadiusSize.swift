@@ -1,23 +1,23 @@
 //
-//  CornerRadiusModifiers.swift
+//  CornerRadiusSize.swift
 //  Hypno Loops
 //
-//  Created by Joey Rubin on 2/6/23.
+//  Created by Joey Rubin on 2/11/23.
 //
 
 import Foundation
 
-enum CornerRadiusModifiers: CGFloat {
+enum CornerRadiusSize: CGFloat {
     case small, normal, large
     
     var size: CGFloat {
         switch(self) {
         case .small:
-            return 5
+            return 2
         case .normal:
-            return 10
+            return 4
         case .large:
-            return 15
+            return 6
         }
     }
 }

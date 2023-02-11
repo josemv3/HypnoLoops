@@ -11,8 +11,12 @@ class WelcomeController: UIViewController {
 
     @IBOutlet weak var TopLogoView: UIImageView!
     @IBOutlet weak var userLoginButton: UIButton!
+    @IBOutlet weak var userLoginImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        userLoginImage.layer.borderWidth = CornerRadiusSize.small.size
+        userLoginImage.layer.cornerRadius = CornerRadiusModifiers.normal.size
+        userLoginImage.layer.borderColor = UIColor.darkGray.cgColor
     }
 }

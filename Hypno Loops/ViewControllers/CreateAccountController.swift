@@ -7,6 +7,10 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseDatabase
+import FirebaseDatabaseSwift
+
+
 
 class CreateAccountController: UIViewController {
 
@@ -24,6 +28,11 @@ class CreateAccountController: UIViewController {
     enum requiredText: String {
         case Required, Success
     }
+    
+//    private var userNameAdded: String? {
+//    }
+    
+    //private var userNameAdded: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,6 +98,24 @@ class CreateAccountController: UIViewController {
                     print("Account creation failed")
                     return
                 }
+                
+                guard result != nil else { return }
+                            guard let uid = result?.user.uid else { return }
+                
+                let reference = FirebaseDatabase.Database.database().reference(
+                    fromURL: Storage.referenceURLString.rawValue)
+                let usersReference = reference.child("users").child(uid)
+                
+                let values = ["email": email, "username": strongSelf.usernameTextField.text!]
+                usersReference.updateChildValues(values) { databaseError, databaseReference in
+                                if databaseError != nil {
+                                    print("THERE WAS AN ERROR \(String(describing: databaseError))")
+                                    return
+                                }
+                            
+                                print("User Saved Successfully")
+                            }
+                
                 print("You have created an account and signed in")
                 //in video he hides labels with Strong self, use for segue
                 //Segue to profile screen so user ca customize profile the first time.
@@ -109,6 +136,7 @@ class CreateAccountController: UIViewController {
     
     @IBAction func usernameChanged(_ sender: UITextField) {
         if let username =  usernameTextField.text {
+            //userNameAdded = username
             if let errorMessage = invalidUsername(username) {
                 usernameErrorLabel.text = errorMessage
                 usernameErrorLabel.isHidden = false
