@@ -106,7 +106,7 @@ class CreateAccountController: UIViewController {
                     fromURL: Storage.referenceURLString.rawValue)
                 let usersReference = reference.child("users").child(uid)
                 
-                let values = ["email": email, "username": strongSelf.usernameTextField.text!]
+                let values = ["email": email, "username": strongSelf.usernameTextField.text ?? "Empty"]
                 usersReference.updateChildValues(values) { databaseError, databaseReference in
                                 if databaseError != nil {
                                     print("THERE WAS AN ERROR \(String(describing: databaseError))")

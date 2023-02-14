@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum CornerRadiusSize: CGFloat {
+enum BorderSize: CGFloat {
     case small, normal, large
     
     var size: CGFloat {

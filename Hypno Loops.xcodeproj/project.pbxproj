@@ -19,7 +19,8 @@
 		E0A413372995738800077302 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A413362995738800077302 /* Storage.swift */; };
 		E0A4133A299578E900077302 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = E0A41339299578E900077302 /* FirebaseDatabase */; };
 		E0A4133C299578E900077302 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E0A4133B299578E900077302 /* FirebaseDatabaseSwift */; };
-		E0AE5257299850D90012C068 /* CornerRadiusSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AE5256299850D90012C068 /* CornerRadiusSize.swift */; };
+		E0AE5257299850D90012C068 /* BorderSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AE5256299850D90012C068 /* BorderSize.swift */; };
+		E0AE525F299C01B70012C068 /* CategoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AE525E299C01B70012C068 /* CategoryItem.swift */; };
 		E0E2986B2977334F00902727 /* loopLogo2.png in Resources */ = {isa = PBXBuildFile; fileRef = E0E298692977334E00902727 /* loopLogo2.png */; };
 		E0E2986C2977334F00902727 /* loopLogo3.png in Resources */ = {isa = PBXBuildFile; fileRef = E0E2986A2977334F00902727 /* loopLogo3.png */; };
 		E0E5A7282979ADD800B7B29D /* thoughtsLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = E0E5A7262979ADD800B7B29D /* thoughtsLogo.png */; };
@@ -46,7 +47,8 @@
 		E0259D43298A1E9A0018DB30 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E09704B429984C1E0024A0F2 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		E0A413362995738800077302 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
-		E0AE5256299850D90012C068 /* CornerRadiusSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerRadiusSize.swift; sourceTree = "<group>"; };
+		E0AE5256299850D90012C068 /* BorderSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderSize.swift; sourceTree = "<group>"; };
+		E0AE525E299C01B70012C068 /* CategoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryItem.swift; sourceTree = "<group>"; };
 		E0E298692977334E00902727 /* loopLogo2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loopLogo2.png; sourceTree = "<group>"; };
 		E0E2986A2977334F00902727 /* loopLogo3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loopLogo3.png; sourceTree = "<group>"; };
 		E0E5A7262979ADD800B7B29D /* thoughtsLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thoughtsLogo.png; sourceTree = "<group>"; };
@@ -89,7 +91,7 @@
 				E00E462F299059D9006F6562 /* SegueID.swift */,
 				E00E46342990F701006F6562 /* ErrorMessages.swift */,
 				E00E46322990EFE6006F6562 /* CornerRadiusModifiers.swift */,
-				E0AE5256299850D90012C068 /* CornerRadiusSize.swift */,
+				E0AE5256299850D90012C068 /* BorderSize.swift */,
 				E0A413362995738800077302 /* Storage.swift */,
 			);
 			path = Utilities;
@@ -108,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				E09704B429984C1E0024A0F2 /* User.swift */,
+				E0AE525E299C01B70012C068 /* CategoryItem.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -285,8 +288,9 @@
 				E0F2A9AE29766B7B0066263F /* AppDelegate.swift in Sources */,
 				E0E5A72B2979BCBE00B7B29D /* UserProfileController.swift in Sources */,
 				E00E46352990F701006F6562 /* ErrorMessages.swift in Sources */,
+				E0AE525F299C01B70012C068 /* CategoryItem.swift in Sources */,
 				E0E5A735297B142100B7B29D /* LoopPlayViewController.swift in Sources */,
-				E0AE5257299850D90012C068 /* CornerRadiusSize.swift in Sources */,
+				E0AE5257299850D90012C068 /* BorderSize.swift in Sources */,
 				E0F2A9B029766B7B0066263F /* SceneDelegate.swift in Sources */,
 				E0E5A738297B770100B7B29D /* LoopCollecttionsCell.swift in Sources */,
 			);

@@ -15,7 +15,7 @@ class WelcomeController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        userLoginImage.layer.borderWidth = CornerRadiusSize.small.size
+        userLoginImage.layer.borderWidth = BorderSize.small.size
         userLoginImage.layer.cornerRadius = CornerRadiusModifiers.normal.size
         userLoginImage.layer.borderColor = UIColor.darkGray.cgColor
     }

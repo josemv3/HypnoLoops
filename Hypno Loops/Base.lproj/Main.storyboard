@@ -414,35 +414,53 @@
                                 <rect key="frame" x="0.0" y="251" width="375" height="561"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="UxM-y4-uZC">
-                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="itemSize" width="65" height="55"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="LoopCollecttionsCell" id="FJH-tY-W9j" customClass="LoopCollecttionsCell" customModule="Hypno_Loops" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="57.333333333333343" height="36.333333333333336"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="65" height="55"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="dKQ-lk-zHG">
-                                            <rect key="frame" x="0.0" y="0.0" width="57.333333333333343" height="36.333333333333336"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="65" height="55"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2l5-5b-3KV">
-                                                    <rect key="frame" x="8" y="7.9999999999999982" width="41.333333333333336" height="20.333333333333329"/>
+                                                    <rect key="frame" x="8" y="8" width="49" height="39"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cjX-aW-RE6">
+                                                    <rect key="frame" x="14.333333333333332" y="15" width="50.666666666666671" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="QZi-6d-PW2"/>
+                                                        <constraint firstAttribute="height" constant="40" id="ir1-3E-1pD"/>
+                                                    </constraints>
+                                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="plain" image="heart" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="likeButtonPushed:" destination="FJH-tY-W9j" eventType="touchUpInside" id="PlD-Ed-rrJ"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="2l5-5b-3KV" firstAttribute="top" secondItem="dKQ-lk-zHG" secondAttribute="top" constant="8" id="Vks-wq-Hs4"/>
                                                 <constraint firstAttribute="bottom" secondItem="2l5-5b-3KV" secondAttribute="bottom" constant="8" id="Yoy-0Y-bor"/>
                                                 <constraint firstAttribute="trailing" secondItem="2l5-5b-3KV" secondAttribute="trailing" constant="8" id="h3I-v4-mVk"/>
                                                 <constraint firstItem="2l5-5b-3KV" firstAttribute="leading" secondItem="dKQ-lk-zHG" secondAttribute="leading" constant="8" id="lSd-ZB-eoI"/>
+                                                <constraint firstAttribute="trailing" secondItem="cjX-aW-RE6" secondAttribute="trailing" id="nec-qr-m6t"/>
+                                                <constraint firstItem="cjX-aW-RE6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="dKQ-lk-zHG" secondAttribute="leading" constant="14.333333333333332" id="oYl-s5-eMf"/>
+                                                <constraint firstAttribute="bottom" secondItem="cjX-aW-RE6" secondAttribute="bottom" id="xsB-LK-yZp"/>
                                             </constraints>
                                         </collectionViewCellContentView>
+                                        <size key="customSize" width="65" height="55"/>
                                         <connections>
                                             <outlet property="cellLabel" destination="2l5-5b-3KV" id="gNd-hy-12e"/>
+                                            <outlet property="likeButton" destination="cjX-aW-RE6" id="QWK-dL-K00"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -703,6 +721,7 @@
         <segue reference="wA0-XR-ddo"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="heart" catalog="system" width="128" height="107"/>
         <image name="mic.fill" catalog="system" width="110" height="128"/>
         <image name="mindLogo.png" width="768" height="384"/>
         <image name="person.circle.fill" catalog="system" width="128" height="123"/>

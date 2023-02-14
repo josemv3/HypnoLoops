@@ -24,11 +24,21 @@ class LoopCollectionsViewController: UIViewController, UICollectionViewDelegate 
     var dataSource: UICollectionViewDiffableDataSource<String, String>!//SOURCE1
     private var currentSet = setA
     var headerSetA = ["Likes", "Health", "Love", "Goals", "Mental Stability"]
-    var itemsBySectionAndName: [String: [String]] = ["Likes": ["airplane"], "Health": ["drum", "earphones", "flower", "test", "another"], "Love": ["ghost", "home", "icecream"], "Goals": ["juice", "ketchup", "lightning"], "Mental Stability": ["moon", "nuts","oven"]]
-    
+    var itemsBySectionAndName: [String: [String]] = ["Likes": [], "Health": ["drum", "earphones", "flower", "test", "another"], "Love": ["ghost", "home", "icecream"], "Goals": ["juice", "ketchup", "lightning"], "Mental Stability": ["moon", "nuts","oven"]]
+    var cellStringReceived = ""
 //    enum Section {
 //        case main
 //    }
+    
+    var filteredItemsSnapshot: NSDiffableDataSourceSnapshot<String, String> {
+        var snapshot = NSDiffableDataSourceSnapshot<String, String>()
+        
+        for section in headerSetA {
+            snapshot.appendSections([section])
+            snapshot.appendItems(itemsBySectionAndName[section]!) // new data
+        }
+        return snapshot
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,7 +100,11 @@ class LoopCollectionsViewController: UIViewController, UICollectionViewDelegate 
                 fatalError("Cannot create new cell")
             }
             cell.cellLabel.text = item.description
-            cell.backgroundColor = .systemGray
+            cell.backgroundColor = UIColor(named: "New Blue")
+            cell.layer.cornerRadius = BorderSize.normal.size
+            cell.likeButton.setImage(UIImage(named: "heart"), for: .normal)
+            
+            cell.delegate = self
             return cell
         }
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath -> UICollectionReusableView? in
@@ -110,7 +124,7 @@ class LoopCollectionsViewController: UIViewController, UICollectionViewDelegate 
             initialSnapshot.appendSections([section])
             initialSnapshot.appendItems(itemsBySectionAndName[section]!)
         }
-       
+       print(itemsBySectionAndName)
         
         dataSource.apply(initialSnapshot, animatingDifferences: false)
     }
@@ -118,6 +132,42 @@ class LoopCollectionsViewController: UIViewController, UICollectionViewDelegate 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
         print(item)
+        
         performSegue(withIdentifier: SegueID.gotoRecord.rawValue, sender: self)
     }
 }
+
+extension LoopCollectionsViewController: LoopCellDelegate {
+    func didLikeItem(_ item: String) {
+        cellStringReceived = item
+      
+        for (key, var value) in itemsBySectionAndName {
+            if let index = value.firstIndex(of: item) {
+                // Remove the item if it exists in the value array
+                value.remove(at: index)
+                itemsBySectionAndName[key] = value
+                print("Removed '\(item)' from value for key '\(key)'")
+            }
+        }
+        
+        itemsBySectionAndName["Likes"]?.append(item)
+        self.dataSource.apply(self.filteredItemsSnapshot)
+        
+        print(itemsBySectionAndName)
+    }
+}
+
+//category type
+//name
+//origin - so unlikes go back to category
+//array with be category objects instead of stings.
+
+
+
+
+
+
+
+//print(cellStringReceived)
+//        if let key = itemsBySectionAndName.first(where: { $0.value.contains(cellStringReceived) })?.key {
+//        }
