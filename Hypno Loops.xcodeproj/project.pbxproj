@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4CD13B6B29A18D750024910A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4CD13B6A29A18D750024910A /* GoogleService-Info.plist */; };
 		E00E4630299059D9006F6562 /* SegueID.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00E462F299059D9006F6562 /* SegueID.swift */; };
 		E0259D3E298A1E730018DB30 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E0259D3D298A1E730018DB30 /* FirebaseAnalytics */; };
 		E0259D40298A1E730018DB30 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E0259D3F298A1E730018DB30 /* FirebaseAnalyticsSwift */; };
 		E0259D42298A1E730018DB30 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = E0259D41298A1E730018DB30 /* FirebaseAuth */; };
-		E0259D44298A1E9B0018DB30 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E0259D43298A1E9A0018DB30 /* GoogleService-Info.plist */; };
 		E0E2986B2977334F00902727 /* loopLogo2.png in Resources */ = {isa = PBXBuildFile; fileRef = E0E298692977334E00902727 /* loopLogo2.png */; };
 		E0E2986C2977334F00902727 /* loopLogo3.png in Resources */ = {isa = PBXBuildFile; fileRef = E0E2986A2977334F00902727 /* loopLogo3.png */; };
 		E0E5A7282979ADD800B7B29D /* thoughtsLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = E0E5A7262979ADD800B7B29D /* thoughtsLogo.png */; };
@@ -31,8 +31,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4CD13B6A29A18D750024910A /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = "GoogleService-Info.plist"; path = "Hypno Loops/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		E00E462F299059D9006F6562 /* SegueID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueID.swift; sourceTree = "<group>"; };
-		E0259D43298A1E9A0018DB30 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E0E298692977334E00902727 /* loopLogo2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loopLogo2.png; sourceTree = "<group>"; };
 		E0E2986A2977334F00902727 /* loopLogo3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loopLogo3.png; sourceTree = "<group>"; };
 		E0E5A7262979ADD800B7B29D /* thoughtsLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thoughtsLogo.png; sourceTree = "<group>"; };
@@ -135,6 +135,7 @@
 		E0F2A9AC29766B7B0066263F /* Hypno Loops */ = {
 			isa = PBXGroup;
 			children = (
+				4CD13B6A29A18D750024910A /* GoogleService-Info.plist */,
 				E0E5A72C2979BCCD00B7B29D /* AppDelegate */,
 				E00E4631299059F6006F6562 /* Utilities */,
 				E0E5A72D2979BCFD00B7B29D /* ViewControllers */,
@@ -143,7 +144,6 @@
 				E0F2A9B629766B7D0066263F /* Assets.xcassets */,
 				E0F2A9B829766B7D0066263F /* LaunchScreen.storyboard */,
 				E0F2A9BB29766B7D0066263F /* Info.plist */,
-				E0259D43298A1E9A0018DB30 /* GoogleService-Info.plist */,
 				E0E5A736297B145300B7B29D /* Loop Images */,
 			);
 			path = "Hypno Loops";
@@ -216,7 +216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E0E5A7292979ADD800B7B29D /* mindLogo.png in Resources */,
-				E0259D44298A1E9B0018DB30 /* GoogleService-Info.plist in Resources */,
+				4CD13B6B29A18D750024910A /* GoogleService-Info.plist in Resources */,
 				E0E2986C2977334F00902727 /* loopLogo3.png in Resources */,
 				E0F2A9BA29766B7D0066263F /* LaunchScreen.storyboard in Resources */,
 				E0E5A7282979ADD800B7B29D /* thoughtsLogo.png in Resources */,
