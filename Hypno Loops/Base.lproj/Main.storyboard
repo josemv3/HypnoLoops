@@ -19,6 +19,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="b6A-s9-Vzt">
                         <rect key="frame" x="0.0" y="47" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" name="New Blue"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -40,36 +41,58 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mindLogo.png" translatesAutoresizingMaskIntoConstraints="NO" id="wzS-qV-ZFW">
                                 <rect key="frame" x="0.0" y="91" width="375" height="150"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="375" id="LU0-77-BYe"/>
-                                    <constraint firstAttribute="height" constant="150" id="a3E-eT-Qdq"/>
+                                    <constraint firstAttribute="height" constant="150" id="GHa-bh-9Fw"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LJa-BG-rrY">
-                                <rect key="frame" x="132.33333333333334" y="468" width="110.33333333333334" height="35"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="User Log in"/>
-                                <connections>
-                                    <segue destination="BYZ-38-t0r" kind="show" id="Q0i-wk-ccH"/>
-                                </connections>
-                            </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Wld-Jd-OTZ">
-                                <rect key="frame" x="112.66666666666669" y="319" width="150" height="148.66666666666669"/>
+                                <rect key="frame" x="112.66666666666667" y="319" width="149.66666666666663" height="148.66666666666669"/>
+                                <color key="tintColor" name="New Blue"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="MNC-dK-D4C"/>
-                                    <constraint firstAttribute="height" constant="150" id="yx6-It-WIs"/>
+                                    <constraint firstAttribute="height" constant="150" id="iXv-l5-uLq"/>
                                 </constraints>
                             </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="pQK-aL-qlk">
+                                <rect key="frame" x="132.33333333333334" y="495" width="110.33333333333334" height="137"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LJa-BG-rrY">
+                                        <rect key="frame" x="0.0" y="0.0" width="110.33333333333333" height="54.333333333333336"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="User Log in">
+                                            <color key="baseBackgroundColor" name="New Blue"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <segue destination="BYZ-38-t0r" kind="show" id="Q0i-wk-ccH"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mnk-gv-Pqz">
+                                        <rect key="frame" x="0.0" y="61.333333333333371" width="110.33333333333333" height="34.333333333333343"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Recording">
+                                            <color key="baseBackgroundColor" name="New Blue"/>
+                                        </buttonConfiguration>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0av-Lc-PV5">
+                                        <rect key="frame" x="0.0" y="102.66666666666663" width="110.33333333333333" height="34.333333333333343"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" title="Play Loop">
+                                            <color key="baseBackgroundColor" name="New Blue"/>
+                                        </buttonConfiguration>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="qBU-Sa-XRQ"/>
                         <color key="backgroundColor" name="indigo"/>
                         <constraints>
-                            <constraint firstItem="LJa-BG-rrY" firstAttribute="width" relation="greaterThanOrEqual" secondItem="Wld-Jd-OTZ" secondAttribute="width" multiplier="0.735556" id="2uZ-ve-cjO"/>
-                            <constraint firstItem="wzS-qV-ZFW" firstAttribute="centerX" secondItem="LJa-BG-rrY" secondAttribute="centerX" id="CYt-sh-drr"/>
-                            <constraint firstItem="wzS-qV-ZFW" firstAttribute="top" secondItem="qBU-Sa-XRQ" secondAttribute="top" id="Dcw-gW-uxF"/>
-                            <constraint firstItem="LJa-BG-rrY" firstAttribute="centerY" secondItem="oXJ-37-7cG" secondAttribute="centerY" constant="79.5" id="NtA-Us-Oe8"/>
-                            <constraint firstItem="LJa-BG-rrY" firstAttribute="centerX" secondItem="oXJ-37-7cG" secondAttribute="centerX" id="TeL-Dx-B36"/>
-                            <constraint firstItem="Wld-Jd-OTZ" firstAttribute="centerX" secondItem="LJa-BG-rrY" secondAttribute="centerX" id="ja4-ps-FV1"/>
-                            <constraint firstItem="LJa-BG-rrY" firstAttribute="top" secondItem="Wld-Jd-OTZ" secondAttribute="bottom" id="nRx-gh-Fpf"/>
+                            <constraint firstItem="pQK-aL-qlk" firstAttribute="centerX" secondItem="oXJ-37-7cG" secondAttribute="centerX" id="DWa-ar-qb6"/>
+                            <constraint firstItem="Wld-Jd-OTZ" firstAttribute="leading" secondItem="qBU-Sa-XRQ" secondAttribute="leading" constant="112.66666666666669" id="Mwx-CE-60u"/>
+                            <constraint firstItem="wzS-qV-ZFW" firstAttribute="leading" secondItem="oXJ-37-7cG" secondAttribute="leading" id="QBa-Hz-fm8"/>
+                            <constraint firstItem="pQK-aL-qlk" firstAttribute="width" secondItem="Wld-Jd-OTZ" secondAttribute="width" multiplier="0.735556" id="U3j-Hl-Wth"/>
+                            <constraint firstItem="pQK-aL-qlk" firstAttribute="top" secondItem="Wld-Jd-OTZ" secondAttribute="bottom" constant="27" id="Xjd-0g-z3o"/>
+                            <constraint firstItem="Wld-Jd-OTZ" firstAttribute="top" secondItem="wzS-qV-ZFW" secondAttribute="bottom" constant="77" id="eev-IT-vPO"/>
+                            <constraint firstItem="wzS-qV-ZFW" firstAttribute="top" secondItem="qBU-Sa-XRQ" secondAttribute="top" id="hjz-89-5Eo"/>
+                            <constraint firstItem="wzS-qV-ZFW" firstAttribute="centerX" secondItem="Wld-Jd-OTZ" secondAttribute="centerX" id="vDn-SN-6tP"/>
+                            <constraint firstAttribute="trailing" secondItem="wzS-qV-ZFW" secondAttribute="trailing" id="vqL-mE-ueb"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="O9j-sa-EO8"/>
@@ -252,6 +275,7 @@
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="rNI-Xf-qAn">
                                 <rect key="frame" x="100" y="91.999999999999986" width="175" height="173.66666666666669"/>
+                                <color key="tintColor" name="New Blue"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="175" id="Ja5-9i-oLt"/>
                                     <constraint firstAttribute="width" constant="175" id="upr-DC-O8b"/>
@@ -340,15 +364,21 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="5Xm-ba-yK3">
                                         <rect key="frame" x="0.0" y="408.66666666666663" width="335" height="34.333333333333314"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RB1-Nc-moN">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RB1-Nc-moN">
                                                 <rect key="frame" x="0.0" y="0.0" width="156" height="34.333333333333336"/>
+                                                <color key="tintColor" name="New Blue"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="filled" title="Edit Profile"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="Edit Profile" cornerStyle="medium">
+                                                    <color key="baseBackgroundColor" name="New Blue"/>
+                                                </buttonConfiguration>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bsC-D6-Yib">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bsC-D6-Yib">
                                                 <rect key="frame" x="179" y="0.0" width="156" height="34.333333333333336"/>
+                                                <color key="tintColor" name="New Blue"/>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="filled" title="Done"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="Done">
+                                                    <color key="baseBackgroundColor" name="New Blue"/>
+                                                </buttonConfiguration>
                                                 <connections>
                                                     <action selector="doneButtonPushed:" destination="jCa-un-fOy" eventType="touchUpInside" id="Q3X-yX-eCn"/>
                                                 </connections>
@@ -359,6 +389,7 @@
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QJN-3y-TXd">
                                 <rect key="frame" x="69" y="274" width="237" height="34.333333333333314"/>
+                                <color key="tintColor" name="New Blue"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Change profile image"/>
                                 <connections>
@@ -470,6 +501,7 @@
                             </collectionView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="nLD-AJ-TCQ">
                                 <rect key="frame" x="115" y="91.999999999999986" width="150" height="148.66666666666669"/>
+                                <color key="tintColor" name="New Blue"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="LWv-uM-ybv"/>

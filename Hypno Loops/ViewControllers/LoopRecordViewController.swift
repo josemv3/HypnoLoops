@@ -37,8 +37,18 @@ class LoopRecordViewController: UIViewController, AVAudioRecorderDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         micBackgroundView.layer.cornerRadius = CornerRadiusModifiers.normal.size
+        micBackgroundView.layer.borderWidth = BorderSize.small.size
+        micBackgroundView.layer.borderColor = UIColor(named: "New Blue")?.cgColor
+        
         recordButtonView.layer.cornerRadius = CornerRadiusModifiers.normal.size
+        recordButtonView.layer.borderWidth = BorderSize.small.size
+        recordButtonView.layer.borderColor = UIColor(named: "New Blue")?.cgColor
+        
         reverbButtonView.layer.cornerRadius = CornerRadiusModifiers.normal.size
+        reverbButtonView.layer.borderWidth = BorderSize.small.size
+        reverbButtonView.layer.borderColor = UIColor(named: "New Blue")?.cgColor
+        
+        saveButtton.tintColor = UIColor(named: "New Blue")
     }
     
     @IBAction func recordButtonPressed(_ sender: UIButton) {
@@ -111,7 +121,6 @@ class LoopRecordViewController: UIViewController, AVAudioRecorderDelegate {
         } else {
             recordButton.setTitle("Start Recording", for: .normal)
         }
-        
     }
     
     func getDocumentsDirectory() -> URL {

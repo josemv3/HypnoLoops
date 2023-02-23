@@ -44,7 +44,7 @@ class LoopCollectionsViewController: UIViewController, UICollectionViewDelegate 
         super.viewDidLoad()
         TopProfileImage.layer.cornerRadius = CornerRadiusModifiers.normal.size
         TopProfileImage.layer.borderWidth = 2
-        TopProfileImage.layer.borderColor = UIColor.darkGray.cgColor
+        TopProfileImage.layer.borderColor = UIColor(named: "New Blue")?.cgColor
         
         loopCollectionsCV.register(
             LoopCollectionViewSectionHeader.self, forSupplementaryViewOfKind: LoopCollectionsViewController.sectionHeaderElementKind, withReuseIdentifier: "Header")
@@ -100,8 +100,10 @@ class LoopCollectionsViewController: UIViewController, UICollectionViewDelegate 
                 fatalError("Cannot create new cell")
             }
             cell.cellLabel.text = item.description
-            cell.backgroundColor = UIColor(named: "New Blue")
-            cell.layer.cornerRadius = BorderSize.normal.size
+            cell.backgroundColor = .black
+            cell.layer.cornerRadius = CornerRadiusModifiers.small.size
+            cell.layer.borderWidth = BorderSize.small.size
+            cell.layer.borderColor = UIColor(named: "New Blue")?.cgColor
             cell.likeButton.setImage(UIImage(named: "heart"), for: .normal)
             
             cell.delegate = self
