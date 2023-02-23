@@ -60,8 +60,22 @@ class LoopRecordViewController: UIViewController, AVAudioRecorderDelegate {
         
         do {
             
-            audioPlayer = try AVAudioPlayer(contentsOf: audioFileName)
-            audioPlayer?.play()
+            let audioEngine = AVAudioEngine()
+            let audioPlayerNode = AVAudioPlayerNode()
+            let reverb = AVAudioUnitReverb()
+            reverb.loadFactoryPreset(.cathedral)
+            reverb.wetDryMix = 50
+            audioEngine.attach(audioPlayerNode)
+            audioEngine.attach(reverb)
+            audioEngine.connect(audioPlayerNode, to: reverb, format: nil)
+            audioEngine.connect(reverb, to: audioEngine.mainMixerNode, format: nil)
+            audioEngine.prepare()
+            try! audioEngine.start()
+            audioPlayerNode.play()
+            
+//            audioPlayer = try AVAudioPlayer(contentsOf: audioFileName)
+//            audioPlayer?.play()
+            
             
         } catch {
 //            handle failure to play recording
