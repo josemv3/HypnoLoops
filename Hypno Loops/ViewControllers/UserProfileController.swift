@@ -31,7 +31,10 @@ class UserProfileController: UIViewController {
         getUserInfo()
         profileImageView.layer.masksToBounds = true
         profileImageView.layer.borderWidth = 2
-        profileImageView.layer.borderColor = UIColor.darkGray.cgColor
+        profileImageView.layer.cornerRadius = CornerRadiusModifiers.normal.size
+        profileImageView.layer.borderColor = UIColor(named: "New Blue")?.cgColor
+        editProfileButton.tintColor = UIColor(named: "New Blue")
+        doneButton.tintColor = .red
         //profileImageView.layer.cornerRadius = 0.5 * profileImageView.bounds.size.width
     }
     
@@ -88,6 +91,7 @@ extension UserProfileController: UIImagePickerControllerDelegate, UINavigationCo
     }
     
     func getUserInfo() {
+        //usernameTextField.placeholder = 
         emailTextField.text = FirebaseAuth.Auth.auth().currentUser?.email
     }
 }

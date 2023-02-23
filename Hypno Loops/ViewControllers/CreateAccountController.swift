@@ -7,6 +7,10 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseDatabase
+import FirebaseDatabaseSwift
+
+
 
 class CreateAccountController: UIViewController {
 
@@ -21,47 +25,24 @@ class CreateAccountController: UIViewController {
     @IBOutlet weak var submitButtton: UIButton!
     @IBOutlet weak var skipButton: UIButton!
 
-    enum ErrorMessage {
-        case invalidUsername, invalidEmail, invalidPassword_Count,
-             invalidPassword_NeedDigit, invalidPassword_NeedUppercase,
-             invalidPassword_NeedLowercase
-        
-        var displayError: String {
-            switch self {
-            case .invalidUsername:
-                return "Username must have at least 3 characters"
-            case .invalidEmail:
-                return "Invalid Email Address"
-            case .invalidPassword_Count:
-                return "Password must be at least 8 characters"
-            case .invalidPassword_NeedDigit:
-                return "Password must contain at least 1 digit"
-            case .invalidPassword_NeedUppercase:
-                return "Password must contain at least 1 uppercase letter"
-            case .invalidPassword_NeedLowercase:
-                return "Password must contain at least 1 lowercase letter"
-            }
-        }
-    }
-    
     enum requiredText: String {
         case Required, Success
     }
     
+//    private var userNameAdded: String? {
+//    }
+    
+    //private var userNameAdded: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         resetForm()
-        
-        //usernameTextField.isHidden = true
-        //usernameErrorLabel.isHidden = true
+ 
         passwordTextField.isSecureTextEntry = true
     }
     
     func resetForm() {
-        //usernameErrorLabel.isHidden = false
-        //emailErrorLabel.isHidden = false
-        //passwordErrorLabel.isHidden = false
-       
+     
         usernameErrorLabel.text = requiredText.Required.rawValue
         emailErrorLabel.text = requiredText.Required.rawValue
         passwordErrorLabel.text = requiredText.Required.rawValue
@@ -117,6 +98,24 @@ class CreateAccountController: UIViewController {
                     print("Account creation failed")
                     return
                 }
+                
+                guard result != nil else { return }
+                            guard let uid = result?.user.uid else { return }
+                
+                let reference = FirebaseDatabase.Database.database().reference(
+                    fromURL: Storage.referenceURLString.rawValue)
+                let usersReference = reference.child("users").child(uid)
+                
+                let values = ["email": email, "username": strongSelf.usernameTextField.text ?? "Empty"]
+                usersReference.updateChildValues(values) { databaseError, databaseReference in
+                                if databaseError != nil {
+                                    print("THERE WAS AN ERROR \(String(describing: databaseError))")
+                                    return
+                                }
+                            
+                                print("User Saved Successfully")
+                            }
+                
                 print("You have created an account and signed in")
                 //in video he hides labels with Strong self, use for segue
                 //Segue to profile screen so user ca customize profile the first time.
@@ -137,6 +136,7 @@ class CreateAccountController: UIViewController {
     
     @IBAction func usernameChanged(_ sender: UITextField) {
         if let username =  usernameTextField.text {
+            //userNameAdded = username
             if let errorMessage = invalidUsername(username) {
                 usernameErrorLabel.text = errorMessage
                 usernameErrorLabel.isHidden = false
@@ -248,7 +248,7 @@ class CreateAccountController: UIViewController {
     //MARK: - Segue
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "gotoProfile" {
+        if segue.identifier == SegueID.gotoProfile.rawValue {
             let destinationVC = segue.destination as! UserProfileController
         }
     }
