@@ -38,17 +38,17 @@ class LoopRecordViewController: UIViewController, AVAudioRecorderDelegate {
         super.viewDidLoad()
         micBackgroundView.layer.cornerRadius = CornerRadiusModifiers.normal.size
         micBackgroundView.layer.borderWidth = BorderSize.small.size
-        micBackgroundView.layer.borderColor = UIColor(named: "New Blue")?.cgColor
+        micBackgroundView.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
         
         recordButtonView.layer.cornerRadius = CornerRadiusModifiers.normal.size
         recordButtonView.layer.borderWidth = BorderSize.small.size
-        recordButtonView.layer.borderColor = UIColor(named: "New Blue")?.cgColor
+        recordButtonView.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
         
         reverbButtonView.layer.cornerRadius = CornerRadiusModifiers.normal.size
         reverbButtonView.layer.borderWidth = BorderSize.small.size
-        reverbButtonView.layer.borderColor = UIColor(named: "New Blue")?.cgColor
+        reverbButtonView.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
         
-        saveButtton.tintColor = UIColor(named: "New Blue")
+        saveButtton.tintColor = UIColor(named: Color.hlBlue.rawValue)
     }
     
     @IBAction func recordButtonPressed(_ sender: UIButton) {

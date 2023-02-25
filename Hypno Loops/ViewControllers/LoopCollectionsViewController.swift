@@ -23,8 +23,8 @@ class LoopCollectionsViewController: UIViewController, UICollectionViewDelegate 
     static let sectionHeaderElementKind = "section-header-element-kind"
     var dataSource: UICollectionViewDiffableDataSource<String, String>!//SOURCE1
     private var currentSet = setA
-    var headerSetA = ["Likes", "Health", "Love", "Goals", "Mental Stability"]
-    var itemsBySectionAndName: [String: [String]] = ["Likes": [], "Health": ["drum", "earphones", "flower", "test", "another"], "Love": ["ghost", "home", "icecream"], "Goals": ["juice", "ketchup", "lightning"], "Mental Stability": ["moon", "nuts","oven"]]
+    var headerSetA = ["Likes", "Health and Healing", "Love", "Goals", "Mental Stability"]
+    var itemsBySectionAndName: [String: [String]] = ["Likes": [], "Health and Healing": ["drum players", "earphones and loops", "flower", "test", "another"], "Love": ["ghost", "home", "icecream"], "Goals": ["juice", "ketchup", "lightning"], "Mental Stability": ["moon", "nuts","oven"]]
     var cellStringReceived = ""
 //    enum Section {
 //        case main
@@ -44,7 +44,7 @@ class LoopCollectionsViewController: UIViewController, UICollectionViewDelegate 
         super.viewDidLoad()
         TopProfileImage.layer.cornerRadius = CornerRadiusModifiers.normal.size
         TopProfileImage.layer.borderWidth = 2
-        TopProfileImage.layer.borderColor = UIColor(named: "New Blue")?.cgColor
+        TopProfileImage.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
         
         loopCollectionsCV.register(
             LoopCollectionViewSectionHeader.self, forSupplementaryViewOfKind: LoopCollectionsViewController.sectionHeaderElementKind, withReuseIdentifier: "Header")
@@ -100,10 +100,12 @@ class LoopCollectionsViewController: UIViewController, UICollectionViewDelegate 
                 fatalError("Cannot create new cell")
             }
             cell.cellLabel.text = item.description
+            cell.cellLabel.lineBreakMode = .byWordWrapping
+            cell.cellLabel.numberOfLines = 3
             cell.backgroundColor = .black
             cell.layer.cornerRadius = CornerRadiusModifiers.small.size
             cell.layer.borderWidth = BorderSize.small.size
-            cell.layer.borderColor = UIColor(named: "New Blue")?.cgColor
+            cell.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
             cell.likeButton.setImage(UIImage(named: "heart"), for: .normal)
             
             cell.delegate = self

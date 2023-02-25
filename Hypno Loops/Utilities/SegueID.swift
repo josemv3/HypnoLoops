@@ -12,5 +12,6 @@ enum SegueID: String {
          gotoLoopCollections,
          gotoLoopCollectionsExisting,
          gotoRecord,
-         gotoPlay
+         gotoPlay,
+         gotoAffirmationsView
 }

@@ -17,6 +17,6 @@ class WelcomeController: UIViewController {
         super.viewDidLoad()
         userLoginImage.layer.borderWidth = BorderSize.small.size
         userLoginImage.layer.cornerRadius = CornerRadiusModifiers.normal.size
-        userLoginImage.layer.borderColor = UIColor(named: "New Blue")?.cgColor
+        userLoginImage.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
     }
 }

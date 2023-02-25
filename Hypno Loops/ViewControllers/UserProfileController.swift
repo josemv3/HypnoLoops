@@ -32,8 +32,8 @@ class UserProfileController: UIViewController {
         profileImageView.layer.masksToBounds = true
         profileImageView.layer.borderWidth = 2
         profileImageView.layer.cornerRadius = CornerRadiusModifiers.normal.size
-        profileImageView.layer.borderColor = UIColor(named: "New Blue")?.cgColor
-        editProfileButton.tintColor = UIColor(named: "New Blue")
+        profileImageView.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
+        editProfileButton.tintColor = UIColor(named: Color.hlBlue.rawValue)
         doneButton.tintColor = .red
         //profileImageView.layer.cornerRadius = 0.5 * profileImageView.bounds.size.width
     }

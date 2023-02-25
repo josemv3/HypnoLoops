@@ -10,4 +10,6 @@ import Foundation
 struct CategoryItem {
     let origin: String
     let name: String
+    var affirmation: [String]
 }
+

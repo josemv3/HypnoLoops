@@ -15,15 +15,15 @@
 		E0259D3E298A1E730018DB30 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = E0259D3D298A1E730018DB30 /* FirebaseAnalytics */; };
 		E0259D40298A1E730018DB30 /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E0259D3F298A1E730018DB30 /* FirebaseAnalyticsSwift */; };
 		E0259D42298A1E730018DB30 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = E0259D41298A1E730018DB30 /* FirebaseAuth */; };
-
-		E0259D44298A1E9B0018DB30 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E0259D43298A1E9A0018DB30 /* GoogleService-Info.plist */; };
+		E0408A7229A72C8800228E8A /* CategoryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0408A7129A72C8800228E8A /* CategoryData.swift */; };
+		E0408A7A29AAA6EE00228E8A /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0408A7929AAA6EE00228E8A /* Color.swift */; };
+		E0408A7C29AAAC7300228E8A /* AffirmationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0408A7B29AAAC7300228E8A /* AffirmationsView.swift */; };
 		E09704B529984C1E0024A0F2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09704B429984C1E0024A0F2 /* User.swift */; };
 		E0A413372995738800077302 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A413362995738800077302 /* Storage.swift */; };
 		E0A4133A299578E900077302 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = E0A41339299578E900077302 /* FirebaseDatabase */; };
 		E0A4133C299578E900077302 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E0A4133B299578E900077302 /* FirebaseDatabaseSwift */; };
 		E0AE5257299850D90012C068 /* BorderSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AE5256299850D90012C068 /* BorderSize.swift */; };
 		E0AE525F299C01B70012C068 /* CategoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AE525E299C01B70012C068 /* CategoryItem.swift */; };
-
 		E0E2986B2977334F00902727 /* loopLogo2.png in Resources */ = {isa = PBXBuildFile; fileRef = E0E298692977334E00902727 /* loopLogo2.png */; };
 		E0E2986C2977334F00902727 /* loopLogo3.png in Resources */ = {isa = PBXBuildFile; fileRef = E0E2986A2977334F00902727 /* loopLogo3.png */; };
 		E0E5A7282979ADD800B7B29D /* thoughtsLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = E0E5A7262979ADD800B7B29D /* thoughtsLogo.png */; };
@@ -45,16 +45,16 @@
 /* Begin PBXFileReference section */
 		4CD13B6A29A18D750024910A /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; name = "GoogleService-Info.plist"; path = "Hypno Loops/GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		E00E462F299059D9006F6562 /* SegueID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueID.swift; sourceTree = "<group>"; };
-
 		E00E46322990EFE6006F6562 /* CornerRadiusModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CornerRadiusModifiers.swift; sourceTree = "<group>"; };
 		E00E46342990F701006F6562 /* ErrorMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessages.swift; sourceTree = "<group>"; };
 		E00E46362990F914006F6562 /* LoopCollectionViewSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopCollectionViewSectionHeader.swift; sourceTree = "<group>"; };
-		E0259D43298A1E9A0018DB30 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E0408A7129A72C8800228E8A /* CategoryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryData.swift; sourceTree = "<group>"; };
+		E0408A7929AAA6EE00228E8A /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		E0408A7B29AAAC7300228E8A /* AffirmationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffirmationsView.swift; sourceTree = "<group>"; };
 		E09704B429984C1E0024A0F2 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		E0A413362995738800077302 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		E0AE5256299850D90012C068 /* BorderSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderSize.swift; sourceTree = "<group>"; };
 		E0AE525E299C01B70012C068 /* CategoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryItem.swift; sourceTree = "<group>"; };
-
 		E0E298692977334E00902727 /* loopLogo2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loopLogo2.png; sourceTree = "<group>"; };
 		E0E2986A2977334F00902727 /* loopLogo3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = loopLogo3.png; sourceTree = "<group>"; };
 		E0E5A7262979ADD800B7B29D /* thoughtsLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thoughtsLogo.png; sourceTree = "<group>"; };
@@ -99,6 +99,7 @@
 				E00E46322990EFE6006F6562 /* CornerRadiusModifiers.swift */,
 				E0AE5256299850D90012C068 /* BorderSize.swift */,
 				E0A413362995738800077302 /* Storage.swift */,
+				E0408A7929AAA6EE00228E8A /* Color.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -117,6 +118,7 @@
 			children = (
 				E09704B429984C1E0024A0F2 /* User.swift */,
 				E0AE525E299C01B70012C068 /* CategoryItem.swift */,
+				E0408A7129A72C8800228E8A /* CategoryData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -145,6 +147,7 @@
 				E0E5A72A2979BCBE00B7B29D /* UserProfileController.swift */,
 				E0E5A730297B0F7500B7B29D /* LoopCollectionsViewController.swift */,
 				E0E5A732297B130E00B7B29D /* LoopRecordViewController.swift */,
+				E0408A7B29AAAC7300228E8A /* AffirmationsView.swift */,
 				E0E5A734297B142100B7B29D /* LoopPlayViewController.swift */,
 			);
 			path = ViewControllers;
@@ -283,7 +286,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E0F2A9B229766B7B0066263F /* CreateAccountController.swift in Sources */,
+				E0408A7229A72C8800228E8A /* CategoryData.swift in Sources */,
 				E0A413372995738800077302 /* Storage.swift in Sources */,
+				E0408A7C29AAAC7300228E8A /* AffirmationsView.swift in Sources */,
 				E00E46332990EFE6006F6562 /* CornerRadiusModifiers.swift in Sources */,
 				E0E5A72F2979BE9800B7B29D /* WelcomeController.swift in Sources */,
 				E0E5A733297B130E00B7B29D /* LoopRecordViewController.swift in Sources */,
@@ -292,6 +297,7 @@
 				E00E4630299059D9006F6562 /* SegueID.swift in Sources */,
 				E09704B529984C1E0024A0F2 /* User.swift in Sources */,
 				E0F2A9AE29766B7B0066263F /* AppDelegate.swift in Sources */,
+				E0408A7A29AAA6EE00228E8A /* Color.swift in Sources */,
 				E0E5A72B2979BCBE00B7B29D /* UserProfileController.swift in Sources */,
 				E00E46352990F701006F6562 /* ErrorMessages.swift in Sources */,
 				E0AE525F299C01B70012C068 /* CategoryItem.swift in Sources */,
