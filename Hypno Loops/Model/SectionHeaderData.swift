@@ -9,10 +9,17 @@ import Foundation
 
 struct SectionHeaderData {
     
+    var sectionHeaders: [String] = [String]()
+    
+    mutating func makeSectionHeaders() {
+        sectionHeaders = SectionHeaders.allCases.map { $0.rawValue }
+    }
+    
     enum SectionHeaders: String, CaseIterable {
         case Health_and_Healing, Love, Finance,
              Mental_Health, Self_Grounding, Entrepreneur,
              Sports_Competitive, Weight_Loss
+        
         
         var categories: [String] {
             switch self {
@@ -51,7 +58,7 @@ struct SectionHeaderData {
             }
         }
     }
-    
+    //Makes subcategores - Cell Items:
     var nestedStringArrays: [[String]] {
         var nestedStringArrays = [[String]]()
         

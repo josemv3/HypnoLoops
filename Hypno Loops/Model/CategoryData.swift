@@ -11,10 +11,27 @@ import Foundation
 
 struct CategoryData {
     
-//    let sectionHeader = SectionHeaderData()
-//    let test = sectionHeader.nestedStringArrays
-    //let AffirmationPrompts: [String] = []
-    //dict zip from Section Headers and Categories
+    //Now we have an array of categoryString, need CatItems
+//    var subCategories: [[String]]
+//
+//    mutating func getSubCategories() {
+//        for sectionHeader in SectionHeaderData.SectionHeaders.allCases {
+//            let nestedArray = sectionHeader.categories.map { $0.replacingOccurrences(of: "_", with: " ") }
+//            subCategories.append(nestedArray)
+//        }
+//    }
+    
+    var subCategories: [[CategoryItem]] = []
+
+    mutating func getSubCategories() {
+        for sectionHeader in SectionHeaderData.SectionHeaders.allCases {
+            let nestedArray = sectionHeader.categories.map { categoryString -> CategoryItem in
+                let categoryName = categoryString.replacingOccurrences(of: "_", with: " ")
+                return CategoryItem(origin: sectionHeader.rawValue, name: categoryName)
+            }
+            subCategories.append(nestedArray)
+        }
+    }
     
 
     enum HealthAndHealing: String {
@@ -30,6 +47,16 @@ struct CategoryData {
         case Healing_from, Depression, Self_acceptance, Inspiration, Strength,
              Self_love, Spirituality, Negative_thoughts
     }
+    
+//    var nestedStringArrays: [[String]] {
+//        var nestedStringArrays = [[String]]()
+//
+//        for sectionHeader in SectionHeaderData.SectionHeaders.allCases {
+//            let nestedArray = sectionHeader.categories.map { $0.replacingOccurrences(of: "_", with: " ") }
+//            nestedStringArrays.append(nestedArray)
+//        }
+//        return nestedStringArrays
+//    }
     
     //Sports_Competitive, Weight_Loss
     

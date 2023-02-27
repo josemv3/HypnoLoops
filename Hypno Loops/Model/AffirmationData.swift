@@ -14,8 +14,7 @@ struct AffirmationData {
 //    enum categories2: String {
 //        case Divine_Healing, Gratitude, Self_belief, Intuition, Illness, Self_healing
 //    }
-    
-    
+
     //Use category item name (made from enum?) to grab Affirmations
 
     //  Make these computed, only need 1 at a time

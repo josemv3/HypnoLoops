@@ -16,14 +16,18 @@ private var setA = [
 
 
 class LoopCollectionsViewController: UIViewController, UICollectionViewDelegate {
-
+    
     @IBOutlet weak var loopCollectionsCV: UICollectionView!
     @IBOutlet weak var TopProfileImage: UIImageView!
     
+    var categoryData = CategoryData()
+    var sectionData = SectionHeaderData()
     static let sectionHeaderElementKind = "section-header-element-kind"
     var dataSource: UICollectionViewDiffableDataSource<String, String>!//SOURCE1
     private var currentSet = setA
     var headerSetA = ["Likes", "Health and Healing", "Love", "Goals", "Mental Stability"]
+    
+    var testDict: [String: [CategoryItem]] = [:]
     var itemsBySectionAndName: [String: [String]] = ["Likes": [], "Health and Healing": ["drum players", "earphones and loops", "flower", "test", "another"], "Love": ["ghost", "home", "icecream"], "Goals": ["juice", "ketchup", "lightning"], "Mental Stability": ["moon", "nuts","oven"]]
     var cellStringReceived = ""
 //    enum Section {
@@ -42,6 +46,9 @@ class LoopCollectionsViewController: UIViewController, UICollectionViewDelegate 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        categoryData.getSubCategories()
+        sectionData.makeSectionHeaders()
+        testDict = zip(sectionData.sectionHeaders, categoryData.subCategories).reduce(into: [:]) { $0[$1.0] = $1.1 }
         TopProfileImage.layer.cornerRadius = CornerRadiusModifiers.normal.size
         TopProfileImage.layer.borderWidth = 2
         TopProfileImage.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
