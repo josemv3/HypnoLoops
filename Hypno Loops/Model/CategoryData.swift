@@ -7,36 +7,32 @@
 
 //Display one category at a time, keep Likes section. That way I can build each array
 
-import UIKit
+import Foundation
 
 struct CategoryData {
     
-    let AffirmationPrompts: [CategoryItem] = []
+//    let sectionHeader = SectionHeaderData()
+//    let test = sectionHeader.nestedStringArrays
+    //let AffirmationPrompts: [String] = []
     //dict zip from Section Headers and Categories
     
-    enum SectionHeaders: String, CaseIterable {
-        case Health_and_Healing, Love, Finance,
-             Mental_Health, Self_Grounding, Entrepreneur,
-             Sports_Competitive, Weight_Loss
-        
-        
-        
-        var categories: [String] {
-            switch self {
-            case .Health_and_Healing:
-                return ["Divine Healing", "Gratitude", "Self-belief", "Intuition", "Illness", "Self-healing"]
-            default:
-                return [""]
-            }
-        }
-    }
-    
-    enum categories2: String {
+
+    enum HealthAndHealing: String {
         case Divine_Healing, Gratitude, Self_belief, Intuition, Illness, Self_healing
     }
+    enum Love: String {
+        case Attracting_love, Self_worth, Marriage, Positive_outlook
+    }
+    enum Finance: String {
+        case Abundance, Wealth, Income, Millionaire_mindset, Confidence, Wealth_attraction, Money_mastery, Prosperity, Deal_making, Financial_stability, Success, Debt_freedom
+    }
+    enum Mental_Health: String {
+        case Healing_from, Depression, Self_acceptance, Inspiration, Strength,
+             Self_love, Spirituality, Negative_thoughts
+    }
     
-    let affirmations: [categories2: [String]] = [.Divine_Healing: ["I receive Gods healing into my cells", "The power of Gods love heals me", "The Fountain of Gods love healed me", "The Power of God has healed me", "I am intuitively guided to my healing", "I knew I was healed like God promised", "I am divinely guided to my healing"]
-    ]
+    //Sports_Competitive, Weight_Loss
     
-    var item: CategoryItem = CategoryItem(origin: SectionHeaders.Health_and_Healing.rawValue, name: "Divine Healing", affirmation:  ["I receive Gods healing into my cells", "The power of Gods love heals me", "The Fountain of Gods love healed me", "The Power of God has healed me", "I am intuitively guided to my healing", "I knew I was healed like God promised", "I am divinely guided to my healing"])
+    //remove
+    var item: CategoryItem = CategoryItem(origin: SectionHeaderData.SectionHeaders.Health_and_Healing.rawValue, name: SectionHeaderData.SectionHeaders.Health_and_Healing.categories[0].replacingOccurrences(of: "_", with: " "))
 }

@@ -8,8 +8,8 @@
 import Foundation
 
 struct CategoryItem {
-    let origin: String
+    let origin: String //Enum type
     let name: String
-    var affirmation: [String]
+    //var affirmation: [String] //remove and pull from dict
+    var liked: Bool = false
 }
-
