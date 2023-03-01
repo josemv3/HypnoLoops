@@ -36,6 +36,7 @@
 		E0E5A733297B130E00B7B29D /* LoopRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E5A732297B130E00B7B29D /* LoopRecordViewController.swift */; };
 		E0E5A735297B142100B7B29D /* LoopPlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E5A734297B142100B7B29D /* LoopPlayViewController.swift */; };
 		E0E5A738297B770100B7B29D /* LoopCollecttionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E5A737297B770100B7B29D /* LoopCollecttionsCell.swift */; };
+		E0E7E05829AFED56005E760D /* AffirmationStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0E7E05729AFED56005E760D /* AffirmationStrings.swift */; };
 		E0F2A9AE29766B7B0066263F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F2A9AD29766B7B0066263F /* AppDelegate.swift */; };
 		E0F2A9B029766B7B0066263F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F2A9AF29766B7B0066263F /* SceneDelegate.swift */; };
 		E0F2A9B229766B7B0066263F /* CreateAccountController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0F2A9B129766B7B0066263F /* CreateAccountController.swift */; };
@@ -69,6 +70,7 @@
 		E0E5A732297B130E00B7B29D /* LoopRecordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopRecordViewController.swift; sourceTree = "<group>"; };
 		E0E5A734297B142100B7B29D /* LoopPlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopPlayViewController.swift; sourceTree = "<group>"; };
 		E0E5A737297B770100B7B29D /* LoopCollecttionsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopCollecttionsCell.swift; sourceTree = "<group>"; };
+		E0E7E05729AFED56005E760D /* AffirmationStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffirmationStrings.swift; sourceTree = "<group>"; };
 		E0F2A9AA29766B7A0066263F /* Hypno Loops.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hypno Loops.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E0F2A9AD29766B7B0066263F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E0F2A9AF29766B7B0066263F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 				E0408A7F29AAF87200228E8A /* SectionHeaderData.swift */,
 				E0408A7129A72C8800228E8A /* CategoryData.swift */,
 				E0408A7D29AABCB800228E8A /* AffirmationData.swift */,
+				E0E7E05729AFED56005E760D /* AffirmationStrings.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 				E0408A7C29AAAC7300228E8A /* AffirmationsView.swift in Sources */,
 				E00E46332990EFE6006F6562 /* CornerRadiusModifiers.swift in Sources */,
 				E0E5A72F2979BE9800B7B29D /* WelcomeController.swift in Sources */,
+				E0E7E05829AFED56005E760D /* AffirmationStrings.swift in Sources */,
 				E0E5A733297B130E00B7B29D /* LoopRecordViewController.swift in Sources */,
 				E0E5A731297B0F7500B7B29D /* LoopCollectionsViewController.swift in Sources */,
 				E00E46372990F914006F6562 /* LoopCollectionViewSectionHeader.swift in Sources */,

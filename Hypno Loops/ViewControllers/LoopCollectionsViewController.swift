@@ -23,7 +23,7 @@ class LoopCollectionsViewController: UIViewController, UICollectionViewDelegate 
     var categoryData = CategoryData()
     var sectionData = SectionHeaderData()
     static let sectionHeaderElementKind = "section-header-element-kind"
-    var dataSource: UICollectionViewDiffableDataSource<String, String>!//SOURCE1
+    var dataSource: UICollectionViewDiffableDataSource<String, CategoryItem>!//SOURCE1
     private var currentSet = setA
     var headerSetA = ["Likes", "Health and Healing", "Love", "Goals", "Mental Stability"]
     
@@ -34,12 +34,12 @@ class LoopCollectionsViewController: UIViewController, UICollectionViewDelegate 
 //        case main
 //    }
     
-    var filteredItemsSnapshot: NSDiffableDataSourceSnapshot<String, String> {
-        var snapshot = NSDiffableDataSourceSnapshot<String, String>()
+    var filteredItemsSnapshot: NSDiffableDataSourceSnapshot<String, CategoryItem> {
+        var snapshot = NSDiffableDataSourceSnapshot<String, CategoryItem>()
         
-        for section in headerSetA {
+        for section in sectionData.sectionHeaders {
             snapshot.appendSections([section])
-            snapshot.appendItems(itemsBySectionAndName[section]!) // new data
+            snapshot.appendItems(categoryData.finalCategories[section]!) // new data
         }
         return snapshot
     }
@@ -48,7 +48,8 @@ class LoopCollectionsViewController: UIViewController, UICollectionViewDelegate 
         super.viewDidLoad()
         categoryData.getSubCategories()
         sectionData.makeSectionHeaders()
-        testDict = zip(sectionData.sectionHeaders, categoryData.subCategories).reduce(into: [:]) { $0[$1.0] = $1.1 }
+        categoryData.finalCategories = zip(sectionData.sectionHeaders, categoryData.subCategories).reduce(into: [:]) { $0[$1.0] = $1.1 }
+        //testDict = zip(sectionData.sectionHeaders, categoryData.subCategories).reduce(into: [:]) { $0[$1.0] = $1.1 }
         TopProfileImage.layer.cornerRadius = CornerRadiusModifiers.normal.size
         TopProfileImage.layer.borderWidth = 2
         TopProfileImage.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
@@ -101,12 +102,12 @@ class LoopCollectionsViewController: UIViewController, UICollectionViewDelegate 
     //MARK: - Data Source (Cell)
     
     func configureDataSource() {//SOURCE2
-        dataSource = UICollectionViewDiffableDataSource<String, String>(collectionView: loopCollectionsCV) { (collectionView, indexPath, item) -> LoopCollecttionsCell? in
+        dataSource = UICollectionViewDiffableDataSource<String, CategoryItem>(collectionView: loopCollectionsCV) { (collectionView, indexPath, item) -> LoopCollecttionsCell? in
             
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LoopCollecttionsCell.reuseidentifier, for: indexPath) as? LoopCollecttionsCell else {
                 fatalError("Cannot create new cell")
             }
-            cell.cellLabel.text = item.description
+            cell.cellLabel.text = item.name
             cell.cellLabel.lineBreakMode = .byWordWrapping
             cell.cellLabel.numberOfLines = 3
             cell.backgroundColor = .black
@@ -115,25 +116,25 @@ class LoopCollectionsViewController: UIViewController, UICollectionViewDelegate 
             cell.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
             cell.likeButton.setImage(UIImage(named: "heart"), for: .normal)
             
-            cell.delegate = self
+            //cell.delegate = self
             return cell
         }
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath -> UICollectionReusableView? in
             let header = collectionView.dequeueReusableSupplementaryView(
                 ofKind: kind, withReuseIdentifier: "Header", for: indexPath) as! LoopCollectionViewSectionHeader
             
-            header.label.text = String(self.headerSetA[indexPath.section])
+            header.label.text = String(self.sectionData.sectionHeaders[indexPath.section])
             //header.label.font = UIFont(name: "Chalkduster", size: 18)
             header.label.textColor = UIColor.white
             
             return header
         }
         
-        var initialSnapshot = NSDiffableDataSourceSnapshot<String, String>()//SOURCE3
+        var initialSnapshot = NSDiffableDataSourceSnapshot<String, CategoryItem>()//SOURCE3
         
-        for section in headerSetA {
+        for section in sectionData.sectionHeaders {
             initialSnapshot.appendSections([section])
-            initialSnapshot.appendItems(itemsBySectionAndName[section]!)
+            initialSnapshot.appendItems(categoryData.finalCategories[section]!)
         }
        print(itemsBySectionAndName)
         
@@ -142,31 +143,31 @@ class LoopCollectionsViewController: UIViewController, UICollectionViewDelegate 
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
-        print(item)
+        print(item.name)
         
         performSegue(withIdentifier: SegueID.gotoRecord.rawValue, sender: self)
     }
 }
 
-extension LoopCollectionsViewController: LoopCellDelegate {
-    func didLikeItem(_ item: String) {
-        cellStringReceived = item
-      
-        for (key, var value) in itemsBySectionAndName {
-            if let index = value.firstIndex(of: item) {
-                // Remove the item if it exists in the value array
-                value.remove(at: index)
-                itemsBySectionAndName[key] = value
-                print("Removed '\(item)' from value for key '\(key)'")
-            }
-        }
-        
-        itemsBySectionAndName["Likes"]?.append(item)
-        self.dataSource.apply(self.filteredItemsSnapshot)
-        
-        print(itemsBySectionAndName)
-    }
-}
+//extension LoopCollectionsViewController: LoopCellDelegate {
+//    func didLikeItem(_ item: String) {
+//        cellStringReceived = item
+//
+//        for (key, var value) in itemsBySectionAndName {
+//            if let index = value.firstIndex(of: item) {
+//                // Remove the item if it exists in the value array
+//                value.remove(at: index)
+//                itemsBySectionAndName[key] = value
+//                print("Removed '\(item)' from value for key '\(key)'")
+//            }
+//        }
+//
+//        testDict["Likes"]?.append(item)
+//        self.dataSource.apply(self.filteredItemsSnapshot)
+//
+//        //print(itemsBySectionAndName)
+//    }
+//}
 
 //category type
 //name

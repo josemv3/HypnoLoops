@@ -19,9 +19,9 @@ class LoopCollecttionsCell: UICollectionViewCell {
     
     var delegate: LoopCellDelegate?
     
-//    override func layoutSubviews() {
-//        likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
-//    }
+    override func layoutSubviews() {
+        likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+    }
     
     var isLiked = false {
            didSet {
@@ -42,7 +42,8 @@ class LoopCollecttionsCell: UICollectionViewCell {
         isLiked = !isLiked
         //print(cellLabel.text ?? "error")
         //print(isLiked.description)
-        delegate?.didLikeItem(cellLabel.text!)
+        
+        //delegate?.didLikeItem(cellLabel.text)
     }
     
 }

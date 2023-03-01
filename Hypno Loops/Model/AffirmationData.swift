@@ -8,16 +8,10 @@
 import Foundation
 
 
-struct AffirmationData {
-
-    
-//    enum categories2: String {
-//        case Divine_Healing, Gratitude, Self_belief, Intuition, Illness, Self_healing
-//    }
-
-    //Use category item name (made from enum?) to grab Affirmations
-
-    //  Make these computed, only need 1 at a time
+struct AffirmationData {  
+    //This needs to be in a switch
+    //Or ca I make this CategoryData alone with one pool for each?
+    //Could Use origin
     
     let affirmationsHealing: [CategoryData.HealthAndHealing: [String]] = [
         .Divine_Healing: ["I receive Gods healing into my cells", "The power of Gods love heals me", "The Fountain of Gods love healed me", "The Power of God has healed me", "I am intuitively guided to my healing", "I knew I was healed like God promised", "I am divinely guided to my healing"],

@@ -10,18 +10,8 @@
 import Foundation
 
 struct CategoryData {
-    
-    //Now we have an array of categoryString, need CatItems
-//    var subCategories: [[String]]
-//
-//    mutating func getSubCategories() {
-//        for sectionHeader in SectionHeaderData.SectionHeaders.allCases {
-//            let nestedArray = sectionHeader.categories.map { $0.replacingOccurrences(of: "_", with: " ") }
-//            subCategories.append(nestedArray)
-//        }
-//    }
-    
     var subCategories: [[CategoryItem]] = []
+    var finalCategories: [String: [CategoryItem]] = [:]
 
     mutating func getSubCategories() {
         for sectionHeader in SectionHeaderData.SectionHeaders.allCases {
@@ -33,7 +23,6 @@ struct CategoryData {
         }
     }
     
-
     enum HealthAndHealing: String {
         case Divine_Healing, Gratitude, Self_belief, Intuition, Illness, Self_healing
     }
@@ -47,19 +36,18 @@ struct CategoryData {
         case Healing_from, Depression, Self_acceptance, Inspiration, Strength,
              Self_love, Spirituality, Negative_thoughts
     }
-    
-//    var nestedStringArrays: [[String]] {
-//        var nestedStringArrays = [[String]]()
+}
+
+
+
+
+
+//Now we have an array of categoryString, need CatItems
+//    var subCategories: [[String]]
 //
+//    mutating func getSubCategories() {
 //        for sectionHeader in SectionHeaderData.SectionHeaders.allCases {
 //            let nestedArray = sectionHeader.categories.map { $0.replacingOccurrences(of: "_", with: " ") }
-//            nestedStringArrays.append(nestedArray)
+//            subCategories.append(nestedArray)
 //        }
-//        return nestedStringArrays
 //    }
-    
-    //Sports_Competitive, Weight_Loss
-    
-    //remove
-    var item: CategoryItem = CategoryItem(origin: SectionHeaderData.SectionHeaders.Health_and_Healing.rawValue, name: SectionHeaderData.SectionHeaders.Health_and_Healing.categories[0].replacingOccurrences(of: "_", with: " "))
-}

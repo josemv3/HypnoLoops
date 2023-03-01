@@ -12,14 +12,13 @@ struct SectionHeaderData {
     var sectionHeaders: [String] = [String]()
     
     mutating func makeSectionHeaders() {
-        sectionHeaders = SectionHeaders.allCases.map { $0.rawValue }
+        sectionHeaders = SectionHeaders.allCases.map { $0.rawValue.replacingOccurrences(of: "_", with: " ") }
     }
     
     enum SectionHeaders: String, CaseIterable {
-        case Health_and_Healing, Love, Finance,
+        case Like, Health_and_Healing, Love, Finance,
              Mental_Health, Self_Grounding, Entrepreneur,
              Sports_Competitive, Weight_Loss
-        
         
         var categories: [String] {
             switch self {
@@ -58,15 +57,16 @@ struct SectionHeaderData {
             }
         }
     }
-    //Makes subcategores - Cell Items:
-    var nestedStringArrays: [[String]] {
-        var nestedStringArrays = [[String]]()
-        
-        for sectionHeader in SectionHeaders.allCases {
-            let nestedArray = sectionHeader.categories.map { $0.replacingOccurrences(of: "_", with: " ") }
-            nestedStringArrays.append(nestedArray)
-        }
-        return nestedStringArrays
-    }
-
 }
+
+
+//Makes subcategores - Cell Items:
+//    var nestedStringArrays: [[String]] {
+//        var nestedStringArrays = [[String]]()
+//
+//        for sectionHeader in SectionHeaders.allCases {
+//            let nestedArray = sectionHeader.categories.map { $0.replacingOccurrences(of: "_", with: " ") }
+//            nestedStringArrays.append(nestedArray)
+//        }
+//        return nestedStringArrays
+//    }
