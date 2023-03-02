@@ -7,9 +7,8 @@
 
 import Foundation
 
-struct CategoryItem {
-    let origin: String
+struct CategoryItem: Hashable {
+    let origin: String //Enum type
     let name: String
-    var affirmation: [String]
+    var liked: Bool = false
 }
-
