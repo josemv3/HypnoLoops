@@ -555,13 +555,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qZt-95-g5y">
-                                                    <rect key="frame" x="20" y="20" width="335" height="60"/>
+                                                    <rect key="frame" x="20" y="10" width="335" height="70"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mUZ-WK-p9S">
-                                                    <rect key="frame" x="283" y="85" width="72" height="35"/>
+                                                    <rect key="frame" x="283" y="85" width="72" height="28"/>
                                                     <color key="backgroundColor" name="hlBlue"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="05a-wA-WFD"/>
@@ -575,8 +575,8 @@
                                                 <constraint firstAttribute="trailing" secondItem="qZt-95-g5y" secondAttribute="trailing" constant="20" id="2re-BC-O33"/>
                                                 <constraint firstItem="qZt-95-g5y" firstAttribute="leading" secondItem="29k-aq-Fjd" secondAttribute="leading" constant="20" id="7eD-AW-c5E"/>
                                                 <constraint firstItem="mUZ-WK-p9S" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="29k-aq-Fjd" secondAttribute="leading" constant="20" symbolic="YES" id="Ehy-Fe-YTv"/>
-                                                <constraint firstAttribute="bottom" secondItem="mUZ-WK-p9S" secondAttribute="bottom" constant="8" id="Nve-jz-Kdb"/>
-                                                <constraint firstItem="qZt-95-g5y" firstAttribute="top" secondItem="29k-aq-Fjd" secondAttribute="top" constant="20" id="aXh-Ez-Z99"/>
+                                                <constraint firstAttribute="bottom" secondItem="mUZ-WK-p9S" secondAttribute="bottom" constant="15" id="Nve-jz-Kdb"/>
+                                                <constraint firstItem="qZt-95-g5y" firstAttribute="top" secondItem="29k-aq-Fjd" secondAttribute="top" constant="10" id="aXh-Ez-Z99"/>
                                                 <constraint firstAttribute="bottom" secondItem="qZt-95-g5y" secondAttribute="bottom" constant="48" id="cVX-3D-7RL"/>
                                                 <constraint firstItem="mUZ-WK-p9S" firstAttribute="trailing" secondItem="qZt-95-g5y" secondAttribute="trailing" id="jnY-w7-WAN"/>
                                                 <constraint firstItem="mUZ-WK-p9S" firstAttribute="top" secondItem="qZt-95-g5y" secondAttribute="bottom" constant="5" id="wtg-Ib-U8n"/>

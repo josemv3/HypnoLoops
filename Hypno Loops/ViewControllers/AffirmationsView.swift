@@ -14,13 +14,14 @@ let lessonLabelName: [String: String] = [
     "miaTalksLogo": "The Fountain of Gods love healed me",
     "learnWLukeLogo": "I like big butts and I cannot lie, you other brothers cant deny...",
     "findMeLogo": "Find me",
-    "storyTimeLogo": "Story Time", "lukeTalksLogo": "Luke Talks"]
+    "storyTimeLogo": "Story Time",
+    "lukeTalksLogo": "Luke Talks"]
 
 class AffirmationsView: UIViewController, UICollectionViewDelegate {
     @IBOutlet weak var affirmationCV: UICollectionView!
     
     var dataSource: UICollectionViewDiffableDataSource<Section, String>!//SOURCE1
-    
+    let affirmationsString = AffirmationStings()
 
     enum Section {
         case main
@@ -85,8 +86,9 @@ class AffirmationsView: UIViewController, UICollectionViewDelegate {
             cell.layer.backgroundColor = UIColor.black.cgColor
             cell.selectedButton.layer.cornerRadius = CornerRadiusModifiers.small.size
             
-            
+            //cell.affirmationLabel.text = affirmationsString.affirmations[indexPath.item]
             cell.affirmationLabel.text = lessonLabelName[item.description]
+            
             
             return cell
         })
