@@ -46,10 +46,13 @@ class LoopCollectionsViewController: UIViewController, UICollectionViewDelegate 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        categoryData.getSubCategories()
+        //Build Section header stings
         sectionData.makeSectionHeaders()
+        //Build category objects in an array
+        categoryData.getSubCategories()
+        //zip section headers and catogory items to populate collectionView
         categoryData.finalCategories = zip(sectionData.sectionHeaders, categoryData.subCategories).reduce(into: [:]) { $0[$1.0] = $1.1 }
-        //testDict = zip(sectionData.sectionHeaders, categoryData.subCategories).reduce(into: [:]) { $0[$1.0] = $1.1 }
+        
         TopProfileImage.layer.cornerRadius = CornerRadiusModifiers.normal.size
         TopProfileImage.layer.borderWidth = 2
         TopProfileImage.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
