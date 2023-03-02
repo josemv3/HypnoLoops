@@ -32,6 +32,9 @@ class LoopRecordViewController: UIViewController, AVAudioRecorderDelegate {
     var recordingSession: AVAudioSession?
     var audioPlayer: AVAudioPlayer?
     
+    var isRecording = false
+    var isPlaying = false
+    
      
     
     override func viewDidLoad() {
@@ -52,6 +55,19 @@ class LoopRecordViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     @IBAction func recordButtonPressed(_ sender: UIButton) {
+        if !isRecording {
+            startRecording()
+            isRecording.toggle()
+            playButton.isEnabled = false
+            let stopImage = UIImage(systemName: "stop.circle.fill")
+            recordButton.setImage(stopImage, for: .normal)
+        } else {
+            finishRecording(success: true)
+            isRecording.toggle()
+            playButton.isEnabled = true
+            let recordImage = UIImage(systemName: "record.circle")
+            recordButton.setImage(recordImage, for: .normal)
+        }
     }
     
     @IBAction func playButtonPressed(_ sender: UIButton) {
@@ -73,9 +89,11 @@ class LoopRecordViewController: UIViewController, AVAudioRecorderDelegate {
             try! audioEngine.start()
             audioPlayerNode.play()
             
-//            audioPlayer = try AVAudioPlayer(contentsOf: audioFileName)
-//            audioPlayer?.play()
+            audioPlayer = try AVAudioPlayer(contentsOf: audioFileName)
+            audioPlayer?.play()
             
+            let stopImage = UIImage(systemName: "stop.circle.fill")
+            playButton.setImage(stopImage, for: .normal)
             
         } catch {
 //            handle failure to play recording
