@@ -30,9 +30,6 @@ class LoopCollectionsViewController: UIViewController, UICollectionViewDelegate 
     var testDict: [String: [CategoryItem]] = [:]
     var itemsBySectionAndName: [String: [String]] = ["Likes": [], "Health and Healing": ["drum players", "earphones and loops", "flower", "test", "another"], "Love": ["ghost", "home", "icecream"], "Goals": ["juice", "ketchup", "lightning"], "Mental Stability": ["moon", "nuts","oven"]]
     var cellStringReceived = ""
-//    enum Section {
-//        case main
-//    }
     
     var filteredItemsSnapshot: NSDiffableDataSourceSnapshot<String, CategoryItem> {
         var snapshot = NSDiffableDataSourceSnapshot<String, CategoryItem>()
@@ -148,7 +145,12 @@ class LoopCollectionsViewController: UIViewController, UICollectionViewDelegate 
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
         print(item.name)
         
-        performSegue(withIdentifier: SegueID.gotoRecord.rawValue, sender: self)
+        if item.name == "Divine Healing" {
+            performSegue(withIdentifier: SegueID.gotoAffirmationsView.rawValue, sender: self)
+        } else {
+            performSegue(withIdentifier: SegueID.gotoRecord.rawValue, sender: self)
+        }
+        
     }
 }
 

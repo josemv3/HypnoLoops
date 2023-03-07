@@ -10,11 +10,8 @@ import AVFoundation
 
 class LoopRecordViewController: UIViewController, AVAudioRecorderDelegate {
     
-    @IBOutlet weak var affirmationNameLabel: UILabel!
-    @IBOutlet weak var affirmationNameTextField: UITextField!
+    @IBOutlet weak var affirmationLabel: UILabel!
     @IBOutlet weak var categoryLabel: UILabel!
-    @IBOutlet weak var categoryTextField: UITextField!
-    @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var micBackgroundView: UIView!
     @IBOutlet weak var micImageView: UIImageView!
     
@@ -89,10 +86,14 @@ class LoopRecordViewController: UIViewController, AVAudioRecorderDelegate {
     
     @IBAction func saveButtonPressed(_ sender: Any) {
         
-        guard let affirmationName = affirmationNameTextField.text, !affirmationName.isEmpty, let category = categoryTextField.text, !category.isEmpty else {
-            //            show error message
-            return
-        }
+AffirmationView-Update
+//        guard let affirmationName = affirmationNameTextField.text, !affirmationName.isEmpty, let category = categoryTextField.text, !category.isEmpty else {
+////            show error message
+//            return
+//        }
+
+        
+   main
         
         //        save recording
         
