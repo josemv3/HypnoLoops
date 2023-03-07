@@ -86,14 +86,14 @@ class LoopRecordViewController: UIViewController, AVAudioRecorderDelegate {
     
     @IBAction func saveButtonPressed(_ sender: Any) {
         
-AffirmationView-Update
+//AffirmationView-Update
 //        guard let affirmationName = affirmationNameTextField.text, !affirmationName.isEmpty, let category = categoryTextField.text, !category.isEmpty else {
 ////            show error message
 //            return
 //        }
 
         
-   main
+   //main
         
         //        save recording
         

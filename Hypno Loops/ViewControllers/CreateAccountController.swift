@@ -14,6 +14,8 @@ import FirebaseDatabaseSwift
 
 class CreateAccountController: UIViewController {
 
+    @IBOutlet weak var profileView: UIImageView!
+    @IBOutlet weak var profileButton: UIButton!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -37,8 +39,12 @@ class CreateAccountController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         resetForm()
- 
         passwordTextField.isSecureTextEntry = true
+        profileView.layer.masksToBounds = true
+        profileView.layer.borderWidth = BorderSize.small.size
+        profileView.layer.cornerRadius = CornerRadiusModifiers.normal.size
+        profileView.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
+        profileButton.tintColor = UIColor(named: Color.hlBlue.rawValue)
     }
     
     func resetForm() {
@@ -53,6 +59,11 @@ class CreateAccountController: UIViewController {
         
         submitButtton.isEnabled = false
     }
+    
+    @IBAction func profileButtonPushed(_ sender: UIButton) {
+        presentPhotoActionSheet()
+    }
+    
 
     @IBAction func submitButtonPressed(_ sender: UIButton) {
         
@@ -254,3 +265,46 @@ class CreateAccountController: UIViewController {
     }
 }
 
+extension CreateAccountController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    
+    func presentPhotoActionSheet() {
+        let actionSheet = UIAlertController(title: "Profile picture", message: "How would you like to select a profile photo", preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        actionSheet.addAction(UIAlertAction(title: "Take photo", style: .default, handler: {[weak self] _ in
+            self?.presentCamera()
+        }))
+        actionSheet.addAction(UIAlertAction(title: "Chose photo", style: .default, handler: { [weak self] _ in
+            self?.presentPhotoPicker()
+        }))
+        
+        present(actionSheet, animated: true)
+    }
+    
+    func presentCamera() {
+        let vc = UIImagePickerController()
+        vc.sourceType = .camera
+        vc.delegate = self
+        vc.allowsEditing = true //Allows crop box
+        present(vc, animated: true)
+    }
+    
+    func presentPhotoPicker() {
+        let vc = UIImagePickerController()
+        vc.sourceType = .photoLibrary
+        vc.delegate = self
+        vc.allowsEditing = true
+        present(vc, animated: true)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true)
+        guard let selectedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else {
+            return
+        }
+        profileView.image = selectedImage
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true)
+    }
+}
