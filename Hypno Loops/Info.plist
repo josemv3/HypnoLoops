@@ -27,5 +27,7 @@
 	<string>Please allow access to take a profile picture</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Please allow access to select a photo for your profile</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Hypnoloops needs to use your microphone in order to record audio.</string>
 </dict>
 </plist>
