@@ -7,7 +7,10 @@
 
 import UIKit
 
-let lessonIconImage = ["miaLearnsLogo", "miABCQuizLogo", "miaTalksLogo", "learnWLukeLogo", "findMeLogo", "storyTimeLogo", "lukeTalksLogo"]
+let affirmationName = ["Divine Healing"]
+    
+    
+//    "miaLearnsLogo", "miABCQuizLogo", "miaTalksLogo", "learnWLukeLogo", "findMeLogo", "storyTimeLogo", "lukeTalksLogo"]
 let lessonLabelName: [String: String] = [
     "miaLearnsLogo": "I receive Gods healing into my cells",
     "miABCQuizLogo": "The power of Gods love heals me",
@@ -16,6 +19,20 @@ let lessonLabelName: [String: String] = [
     "findMeLogo": "Find me",
     "storyTimeLogo": "Story Time",
     "lukeTalksLogo": "Luke Talks"]
+
+//var affirmationTexts: [String] = []
+
+let affirmations: [String: [String]] = [
+    "Divine Healing": ["I receive Gods healing into my cells", "The power of Gods love heals me", "The Fountain of Gods love healed me", "The Power of God has healed me", "I am intuitively guided to my healing", "I knew I was healed like God promised", "I am divinely guided to my healing"],
+    
+    "Gratitude": ["My body corrected all irregularities", "My body perfectly repaired this", "I'm so grateful my body cleaned it up", "Thank you “body” for letting this go", "Thank you “body” for healing yourself", "I am grateful to be whole, I am healthy in my body"],
+
+    "Self belief": ["I knew I could heal myself", "I knew I could recover from this", "I knew I would heal myself", "I am healed", "I am strong", "I trust my body to heal"],
+
+    "Intuition": ["My Intuition guided me through this", "I knew Gods love could heal me", "I knew I'd discover ways to heal this", "I am intuitively guided to my healing"]
+    ]
+
+var showAffirmation = affirmations["Divine Healing"]
 
 class AffirmationsView: UIViewController, UICollectionViewDelegate {
     @IBOutlet weak var affirmationCV: UICollectionView!
@@ -87,16 +104,24 @@ class AffirmationsView: UIViewController, UICollectionViewDelegate {
             cell.selectedButton.layer.cornerRadius = CornerRadiusModifiers.small.size
             
             //cell.affirmationLabel.text = affirmationsString.affirmations[indexPath.item]
-            cell.affirmationLabel.text = lessonLabelName[item.description]
+            //cell.affirmationLabel.text = lessonLabelName[item.description]
             
+            //affirmationTexts = affirmations[item.description] ?? [] // get the array of affirmations for the given key, or an empty array if not found
+            //let affirmationTexts = affirmations[item.description] ?? []
+            cell.affirmationLabel.text = showAffirmation![indexPath.item]
+            
+    
             
             return cell
         })
         
         var initialSnapshot = NSDiffableDataSourceSnapshot<Section, String>()//SOURCE3
         
+        //let allAffirmations = Array(affirmations.values.joined())
+        
         initialSnapshot.appendSections([.main])
-        initialSnapshot.appendItems(lessonIconImage)
+        initialSnapshot.appendItems(showAffirmation!)
+
         
         dataSource.apply(initialSnapshot, animatingDifferences: false)
     }
