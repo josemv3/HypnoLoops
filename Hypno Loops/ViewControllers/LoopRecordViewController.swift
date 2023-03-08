@@ -8,7 +8,7 @@
 import UIKit
 import AVFoundation
 
-class LoopRecordViewController: UIViewController, AVAudioRecorderDelegate {
+class LoopRecordViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
     
     @IBOutlet weak var affirmationLabel: UILabel!
     @IBOutlet weak var categoryLabel: UILabel!
@@ -36,6 +36,8 @@ class LoopRecordViewController: UIViewController, AVAudioRecorderDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        playButton.isEnabled = false
+        audioPlayer?.delegate = self
         
         micBackgroundView.layer.cornerRadius = CornerRadiusModifiers.normal.size
         micBackgroundView.layer.borderWidth = BorderSize.small.size
@@ -74,13 +76,16 @@ class LoopRecordViewController: UIViewController, AVAudioRecorderDelegate {
             recordButton.isEnabled = false
             let stopImage = UIImage(systemName: "stop.circle.fill")
             playButton.setImage(stopImage, for: .normal)
+            
+            
+            
             startPlaying()
         } else {
             isPlaying.toggle()
-            recordButton.isEnabled = false
+            recordButton.isEnabled = true
             let playImage = UIImage(systemName: "play.fill")
             playButton.setImage(playImage, for: .normal)
-            finishPlaying()
+            finishRecording(success: true)
         }
     }
     
@@ -151,7 +156,7 @@ class LoopRecordViewController: UIViewController, AVAudioRecorderDelegate {
                 let audioPlayerNode = AVAudioPlayerNode()
                 let reverb = AVAudioUnitReverb()
                 reverb.loadFactoryPreset(.cathedral)
-                reverb.wetDryMix = 50
+                reverb.wetDryMix = 100
                 audioEngine.attach(audioPlayerNode)
                 audioEngine.attach(reverb)
                 audioEngine.connect(audioPlayerNode, to: reverb, format: nil)
@@ -163,6 +168,7 @@ class LoopRecordViewController: UIViewController, AVAudioRecorderDelegate {
                 audioPlayer = try AVAudioPlayer(contentsOf: audioFileName)
                 audioPlayer?.play()
                 
+                playButton.setTitle("Stop", for: .normal)
                 let stopImage = UIImage(systemName: "stop.circle.fill")
                 playButton.setImage(stopImage, for: .normal)
                 
@@ -172,6 +178,10 @@ class LoopRecordViewController: UIViewController, AVAudioRecorderDelegate {
         }
     
     func finishPlaying() {
+        audioPlayer?.stop()
+    }
+    
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         audioPlayer?.stop()
     }
     
