@@ -25,20 +25,20 @@ class LoopRecordViewController: UIViewController, AVAudioRecorderDelegate, AVAud
     
     @IBOutlet weak var saveButtton: UIButton!
     
-    var audioRecorder: AVAudioRecorder?
-    var recordingSession = AVAudioSession.sharedInstance()
-    var audioPlayer: AVAudioPlayer?
+    var recorder    : AVAudioRecorder?
+    var playerNode  : AVAudioPlayerNode?
     
     var isRecording = false
-    var isPlaying = false
+    var isPlaying   = false
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        playButton.isEnabled = false
-        audioPlayer?.delegate = self
-        
+        setupViews()
+    }
+    
+    func setupViews() {
         micBackgroundView.layer.cornerRadius = CornerRadiusModifiers.normal.size
         micBackgroundView.layer.borderWidth = BorderSize.small.size
         micBackgroundView.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
@@ -54,135 +54,117 @@ class LoopRecordViewController: UIViewController, AVAudioRecorderDelegate, AVAud
         saveButtton.tintColor = UIColor(named: Color.hlBlue.rawValue)
     }
     
+//    MARK: - Recording
+    func startRecording() {
+        let session = AVAudioSession.sharedInstance()
+        
+        do {
+            try session.setCategory(.playAndRecord)
+            try session.setActive(true)
+            
+            let audioURL = getDocumentsDirectory().appendingPathExtension("recording.mp3")
+            
+            let settings = [
+                AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
+                AVSampleRateKey: 44100,
+                AVNumberOfChannelsKey: 1,
+                AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
+            ]
+            
+            recorder = try AVAudioRecorder(url: audioURL, settings: settings)
+            recorder?.delegate = self
+            recorder?.record()
+            isRecording = true
+            recordButton.setTitle("Stop", for: .normal)
+            let stopImage = UIImage(systemName: "stop.fill")
+            recordButton.setImage(stopImage, for: .normal)
+            
+        } catch {
+            print("Error: \(error.localizedDescription)")
+        }
+    }
+    
+    func stopRecording() {
+        recorder?.stop()
+        isRecording = false
+        let recordImage = UIImage(systemName: "circle.fill")
+        recordButton.setImage(recordImage, for: .normal)
+        
+        let audioSession = AVAudioSession.sharedInstance()
+        
+        do {
+            try audioSession.setActive(false)
+        } catch {
+            print("Error: \(error.localizedDescription)")
+        }
+    }
+    
     @IBAction func recordButtonPressed(_ sender: UIButton) {
         if !isRecording {
             startRecording()
-            isRecording.toggle()
-            playButton.isEnabled = false
-            let stopImage = UIImage(systemName: "stop.circle.fill")
-            recordButton.setImage(stopImage, for: .normal)
         } else {
-            finishRecording(success: true)
-            isRecording.toggle()
-            playButton.isEnabled = true
-            let recordImage = UIImage(systemName: "record.circle")
-            recordButton.setImage(recordImage, for: .normal)
+            stopRecording()
+        }
+    }
+    
+//    MARK: - Playing
+    
+    func startPlayback() {
+        let audioSession = AVAudioSession.sharedInstance()
+        do {
+            try audioSession.setActive(true)
+            let playBackURL = getDocumentsDirectory().appendingPathExtension("recording.mp3")
+            let audioFile = try AVAudioFile(forReading: playBackURL)
+            let audioEngine = AVAudioEngine()
+            let playerNode = AVAudioPlayerNode()
+            audioEngine.attach(playerNode)
+            let reverb = AVAudioUnitReverb()
+            reverb.loadFactoryPreset(.cathedral)
+            reverb.wetDryMix = 50
+            audioEngine.attach(reverb)
+            audioEngine.connect(playerNode, to: reverb, format: audioFile.processingFormat)
+            audioEngine.connect(reverb, to: playerNode, format: audioFile.processingFormat)
+            playerNode.scheduleFile(audioFile, at: nil)
+            playerNode.play()
+            isPlaying = true
+            playButton.setTitle("Stop", for: .normal)
+            let stopImage = UIImage(systemName: "stop.fill")
+            playButton.setImage(stopImage, for: .normal)
+            self.playerNode = playerNode
+        } catch {
+            print("Error: \(error.localizedDescription)")
+        }
+    }
+    
+    func stopPlayback() {
+        playerNode?.stop()
+        isPlaying = false
+        let playImage = UIImage(systemName: "play.fill")
+        playButton.setImage(playImage, for: .normal)
+        let audioSession = AVAudioSession.sharedInstance()
+        
+        do {
+            try audioSession.setActive(false)
+        } catch {
+            print("Error: \(error.localizedDescription)")
         }
     }
     
     @IBAction func playButtonPressed(_ sender: UIButton) {
         if !isPlaying {
-            isPlaying.toggle()
-            recordButton.isEnabled = false
-            let stopImage = UIImage(systemName: "stop.circle.fill")
-            playButton.setImage(stopImage, for: .normal)
-            
-            
-            
-            startPlaying()
+            startPlayback()
         } else {
-            isPlaying.toggle()
-            recordButton.isEnabled = true
-            let playImage = UIImage(systemName: "play.fill")
-            playButton.setImage(playImage, for: .normal)
-            finishRecording(success: true)
+            stopPlayback()
         }
     }
+    
+    
+    
+    
+    
+    
     
     @IBAction func saveButtonPressed(_ sender: Any) {
-        
-//AffirmationView-Update
-//        guard let affirmationName = affirmationNameTextField.text, !affirmationName.isEmpty, let category = categoryTextField.text, !category.isEmpty else {
-////            show error message
-//            return
-//        }
-
-        
-   //main
-        
-        //        save recording
-        
-    }
-    
-    
-    
-    
-    func startRecording() {
-        let audioFilename = getDocumentsDirectory().appendingPathComponent("recording.m4a")
-        
-        let settings = [
-            
-            AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
-            AVSampleRateKey: 12000,
-            AVNumberOfChannelsKey: 1,
-            AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
-            
-        ]
-        
-        do {
-            try recordingSession.setCategory(.playAndRecord)
-            try recordingSession.setActive(true)
-            audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
-            audioRecorder?.delegate = self
-            audioRecorder?.record()
-            
-            recordButton.setTitle("Stop", for: .normal)
-            playButton.isEnabled = false
-            
-        } catch {
-            print("Error: \(error.localizedDescription)")
-        }
-        
-    }
-    
-    func finishRecording(success: Bool) {
-        audioRecorder?.stop()
-        audioRecorder = nil
-        
-        if success {
-            recordButton.setTitle("Record", for: .normal)
-            playButton.isEnabled = true
-        } else {
-            recordButton.setTitle("Record", for: .normal)
-        }
-    }
-    
-    func startPlaying()  {
-            
-            let audioFileName = getDocumentsDirectory().appendingPathComponent("recording.m4a")
-            
-            do {
-                let audioEngine = AVAudioEngine()
-                let audioPlayerNode = AVAudioPlayerNode()
-                let reverb = AVAudioUnitReverb()
-                reverb.loadFactoryPreset(.cathedral)
-                reverb.wetDryMix = 100
-                audioEngine.attach(audioPlayerNode)
-                audioEngine.attach(reverb)
-                audioEngine.connect(audioPlayerNode, to: reverb, format: nil)
-                audioEngine.connect(reverb, to: audioEngine.mainMixerNode, format: nil)
-                audioEngine.prepare()
-                try! audioEngine.start()
-                audioPlayerNode.play()
-                
-                audioPlayer = try AVAudioPlayer(contentsOf: audioFileName)
-                audioPlayer?.play()
-                
-                playButton.setTitle("Stop", for: .normal)
-                let stopImage = UIImage(systemName: "stop.circle.fill")
-                playButton.setImage(stopImage, for: .normal)
-                
-            } catch {
-                print("Error: \(error.localizedDescription)")
-            }
-        }
-    
-    func finishPlaying() {
-        audioPlayer?.stop()
-    }
-    
-    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        audioPlayer?.stop()
     }
     
     func getDocumentsDirectory() -> URL {
