@@ -62,7 +62,7 @@ class LoopRecordViewController: UIViewController, AVAudioRecorderDelegate, AVAud
             try session.setCategory(.playAndRecord)
             try session.setActive(true)
             
-            let audioURL = getDocumentsDirectory().appendingPathExtension("recording.mp3")
+            let audioURL = getDocumentsDirectory().appendingPathExtension("recording.m4a")
             
             let settings = [
                 AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
@@ -113,7 +113,7 @@ class LoopRecordViewController: UIViewController, AVAudioRecorderDelegate, AVAud
         let audioSession = AVAudioSession.sharedInstance()
         do {
             try audioSession.setActive(true)
-            let playBackURL = getDocumentsDirectory().appendingPathExtension("recording.mp3")
+            let playBackURL = getDocumentsDirectory().appendingPathExtension("recording.m4a")
             let audioFile = try AVAudioFile(forReading: playBackURL)
             let audioEngine = AVAudioEngine()
             let playerNode = AVAudioPlayerNode()
