@@ -6,9 +6,9 @@
 //
 
 import UIKit
-import FirebaseAuth
+import Firebase
 
-class UserProfileController: UIViewController {
+class UserProfileView: UIViewController {
 
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var changeProfileImageButton: UIButton!
@@ -47,7 +47,7 @@ class UserProfileController: UIViewController {
     }
 }
 
-extension UserProfileController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension UserProfileView: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func presentPhotoActionSheet() {
         let actionSheet = UIAlertController(title: "Profile picture", message: "How would you like to select a profile photo", preferredStyle: .actionSheet)
@@ -83,6 +83,7 @@ extension UserProfileController: UIImagePickerControllerDelegate, UINavigationCo
         guard let selectedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else {
             return
         }
+        
         profileImageView.image = selectedImage
     }
     
@@ -92,6 +93,6 @@ extension UserProfileController: UIImagePickerControllerDelegate, UINavigationCo
     
     func getUserInfo() {
         //usernameTextField.placeholder = 
-        emailTextField.text = FirebaseAuth.Auth.auth().currentUser?.email
+        emailTextField.text = Auth.auth().currentUser?.email
     }
 }

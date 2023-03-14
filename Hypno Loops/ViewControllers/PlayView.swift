@@ -8,7 +8,7 @@
 import UIKit
 import AVFoundation
 
-class LoopPlayViewController: UIViewController {
+class PlayView: UIViewController {
     let reverb = AVAudioUnitReverb()
     let audioEngine = AVAudioEngine()
     let playerNode = AVAudioPlayerNode()

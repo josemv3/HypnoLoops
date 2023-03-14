@@ -11,8 +11,8 @@ protocol LoopCellDelegate {
     func didLikeItem(_ item: String)
 }
 
-class LoopCollecttionsCell: UICollectionViewCell {
-    static let reuseidentifier = String(describing: LoopCollecttionsCell.self)
+class CategoryViewCell: UICollectionViewCell {
+    static let reuseidentifier = String(describing: CategoryViewCell.self)
     
     @IBOutlet weak var cellLabel: UILabel!
     @IBOutlet weak var likeButton: UIButton!
