@@ -7,15 +7,15 @@
 
 import UIKit
 
-private var setA = [
-    "airplane", "ball", "car",
-    "drum", "earphones", "flower",
-    "ghost", "home", "icecream",
-    "juice", "ketchup", "lightning",
-    "moon", "nuts","oven"]
+//private var setA = [
+//    "airplane", "ball", "car",
+//    "drum", "earphones", "flower",
+//    "ghost", "home", "icecream",
+//    "juice", "ketchup", "lightning",
+//    "moon", "nuts","oven"]
 
 
-class LoopCollectionsViewController: UIViewController, UICollectionViewDelegate {
+class CategoryView: UIViewController, UICollectionViewDelegate {
     
     @IBOutlet weak var loopCollectionsCV: UICollectionView!
     @IBOutlet weak var TopProfileImage: UIImageView!
@@ -24,11 +24,11 @@ class LoopCollectionsViewController: UIViewController, UICollectionViewDelegate 
     var sectionData = SectionHeaderData()
     static let sectionHeaderElementKind = "section-header-element-kind"
     var dataSource: UICollectionViewDiffableDataSource<String, CategoryItem>!//SOURCE1
-    private var currentSet = setA
-    var headerSetA = ["Likes", "Health and Healing", "Love", "Goals", "Mental Stability"]
+//    private var currentSet = setA
+//    var headerSetA = ["Likes", "Health and Healing", "Love", "Goals", "Mental Stability"]
     
     var testDict: [String: [CategoryItem]] = [:]
-    var itemsBySectionAndName: [String: [String]] = ["Likes": [], "Health and Healing": ["drum players", "earphones and loops", "flower", "test", "another"], "Love": ["ghost", "home", "icecream"], "Goals": ["juice", "ketchup", "lightning"], "Mental Stability": ["moon", "nuts","oven"]]
+//    var itemsBySectionAndName: [String: [String]] = ["Likes": [], "Health and Healing": ["drum players", "earphones and loops", "flower", "test", "another"], "Love": ["ghost", "home", "icecream"], "Goals": ["juice", "ketchup", "lightning"], "Mental Stability": ["moon", "nuts","oven"]]
     var cellStringReceived = ""
     
     var filteredItemsSnapshot: NSDiffableDataSourceSnapshot<String, CategoryItem> {
@@ -44,7 +44,7 @@ class LoopCollectionsViewController: UIViewController, UICollectionViewDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         //Build Section header stings
-        sectionData.makeSectionHeaders()
+        sectionData.makeSectionHeaders() //this can be replaced with just the enum
         //Build category objects in an array
         categoryData.getSubCategories()
         //zip section headers and catogory items to populate collectionView
@@ -55,7 +55,7 @@ class LoopCollectionsViewController: UIViewController, UICollectionViewDelegate 
         TopProfileImage.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
         
         loopCollectionsCV.register(
-            LoopCollectionViewSectionHeader.self, forSupplementaryViewOfKind: LoopCollectionsViewController.sectionHeaderElementKind, withReuseIdentifier: "Header")
+            CategoryViewHeader.self, forSupplementaryViewOfKind: CategoryView.sectionHeaderElementKind, withReuseIdentifier: "Header")
             
         loopCollectionsCV.collectionViewLayout = configureLayout()
         configureDataSource()
@@ -92,7 +92,7 @@ class LoopCollectionsViewController: UIViewController, UICollectionViewDelegate 
         )
         let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
             layoutSize: headerSize,
-            elementKind: LoopCollectionsViewController.sectionHeaderElementKind,
+            elementKind: CategoryView.sectionHeaderElementKind,
             alignment: .top)
         section.boundarySupplementaryItems = [sectionHeader]
         
@@ -102,9 +102,9 @@ class LoopCollectionsViewController: UIViewController, UICollectionViewDelegate 
     //MARK: - Data Source (Cell)
     
     func configureDataSource() {//SOURCE2
-        dataSource = UICollectionViewDiffableDataSource<String, CategoryItem>(collectionView: loopCollectionsCV) { (collectionView, indexPath, item) -> LoopCollecttionsCell? in
+        dataSource = UICollectionViewDiffableDataSource<String, CategoryItem>(collectionView: loopCollectionsCV) { (collectionView, indexPath, item) -> CategoryViewCell? in
             
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LoopCollecttionsCell.reuseidentifier, for: indexPath) as? LoopCollecttionsCell else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryViewCell.reuseidentifier, for: indexPath) as? CategoryViewCell else {
                 fatalError("Cannot create new cell")
             }
             cell.cellLabel.text = item.name
@@ -121,7 +121,7 @@ class LoopCollectionsViewController: UIViewController, UICollectionViewDelegate 
         }
         dataSource.supplementaryViewProvider = { collectionView, kind, indexPath -> UICollectionReusableView? in
             let header = collectionView.dequeueReusableSupplementaryView(
-                ofKind: kind, withReuseIdentifier: "Header", for: indexPath) as! LoopCollectionViewSectionHeader
+                ofKind: kind, withReuseIdentifier: "Header", for: indexPath) as! CategoryViewHeader
             
             header.label.text = String(self.sectionData.sectionHeaders[indexPath.section])
             //header.label.font = UIFont(name: "Chalkduster", size: 18)
@@ -132,12 +132,11 @@ class LoopCollectionsViewController: UIViewController, UICollectionViewDelegate 
         
         var initialSnapshot = NSDiffableDataSourceSnapshot<String, CategoryItem>()//SOURCE3
         
-        for section in sectionData.sectionHeaders {
+        for section in sectionData.sectionHeaders { //replace this with just enum (hashable)
             initialSnapshot.appendSections([section])
             initialSnapshot.appendItems(categoryData.finalCategories[section]!)
         }
-       print(itemsBySectionAndName)
-        
+       
         dataSource.apply(initialSnapshot, animatingDifferences: false)
     }
     

@@ -8,7 +8,7 @@
 import UIKit
 import AVFoundation
 
-class LoopRecordViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
+class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
     
     @IBOutlet weak var affirmationLabel: UILabel!
     @IBOutlet weak var categoryLabel: UILabel!
@@ -110,30 +110,63 @@ class LoopRecordViewController: UIViewController, AVAudioRecorderDelegate, AVAud
 //    MARK: - Playing
     
     func startPlayback() {
+//        let audioSession = AVAudioSession.sharedInstance()
+//        do {
+//            try audioSession.setActive(true)
+//            let playBackURL = getDocumentsDirectory().appendingPathExtension("recording.m4a")
+//            let audioFile = try AVAudioFile(forReading: playBackURL)
+//            let audioEngine = AVAudioEngine()
+//            let playerNode = AVAudioPlayerNode()
+//            audioEngine.attach(playerNode)
+//            let reverb = AVAudioUnitReverb()
+//            reverb.loadFactoryPreset(.cathedral)
+//            reverb.wetDryMix = 50
+//            audioEngine.attach(reverb)
+//            audioEngine.connect(playerNode, to: reverb, format: audioFile.processingFormat)
+//            audioEngine.connect(reverb, to: playerNode, format: audioFile.processingFormat)
+//            playerNode.scheduleFile(audioFile, at: nil)
+//            playerNode.play()
+//            isPlaying = true
+//            playButton.setTitle("Stop", for: .normal)
+//            let stopImage = UIImage(systemName: "stop.fill")
+//            playButton.setImage(stopImage, for: .normal)
+//            self.playerNode = playerNode
+//        } catch {
+//            print("Error: \(error.localizedDescription)")
+//        }
         let audioSession = AVAudioSession.sharedInstance()
-        do {
-            try audioSession.setActive(true)
-            let playBackURL = getDocumentsDirectory().appendingPathExtension("recording.m4a")
-            let audioFile = try AVAudioFile(forReading: playBackURL)
-            let audioEngine = AVAudioEngine()
-            let playerNode = AVAudioPlayerNode()
-            audioEngine.attach(playerNode)
-            let reverb = AVAudioUnitReverb()
-            reverb.loadFactoryPreset(.cathedral)
-            reverb.wetDryMix = 50
-            audioEngine.attach(reverb)
-            audioEngine.connect(playerNode, to: reverb, format: audioFile.processingFormat)
-            audioEngine.connect(reverb, to: playerNode, format: audioFile.processingFormat)
-            playerNode.scheduleFile(audioFile, at: nil)
-            playerNode.play()
-            isPlaying = true
-            playButton.setTitle("Stop", for: .normal)
-            let stopImage = UIImage(systemName: "stop.fill")
-            playButton.setImage(stopImage, for: .normal)
-            self.playerNode = playerNode
-        } catch {
-            print("Error: \(error.localizedDescription)")
-        }
+          do {
+              try audioSession.setCategory(.playback)
+              try audioSession.setActive(true)
+              
+              let playBackURL = getDocumentsDirectory().appendingPathExtension("recording.m4a")
+              let audioFile = try AVAudioFile(forReading: playBackURL)
+              
+              if audioFile.length == 0 {
+                  print("Error: audio file contains no audio data")
+                  return
+              }
+              
+              let audioEngine = AVAudioEngine()
+              let playerNode = AVAudioPlayerNode()
+              audioEngine.attach(playerNode)
+              let reverb = AVAudioUnitReverb()
+              reverb.loadFactoryPreset(.cathedral)
+              reverb.wetDryMix = 50
+              audioEngine.attach(reverb)
+              audioEngine.connect(playerNode, to: reverb, format: audioFile.processingFormat)
+              audioEngine.connect(reverb, to: playerNode, format: audioFile.processingFormat)
+              playerNode.scheduleFile(audioFile, at: nil)
+              try audioEngine.start()
+              playerNode.play()
+              isPlaying = true
+              playButton.setTitle("Stop", for: .normal)
+              let stopImage = UIImage(systemName: "stop.fill")
+              playButton.setImage(stopImage, for: .normal)
+              self.playerNode = playerNode
+          } catch {
+              print("Error: \(error.localizedDescription)")
+          }
     }
     
     func stopPlayback() {
@@ -157,12 +190,6 @@ class LoopRecordViewController: UIViewController, AVAudioRecorderDelegate, AVAud
             stopPlayback()
         }
     }
-    
-    
-    
-    
-    
-    
     
     @IBAction func saveButtonPressed(_ sender: Any) {
     }

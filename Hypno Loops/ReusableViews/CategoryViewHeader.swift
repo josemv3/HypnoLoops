@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LoopCollectionViewSectionHeader: UICollectionReusableView {
+class CategoryViewHeader: UICollectionReusableView {
     var label = UILabel()
     
     override func layoutSubviews() {

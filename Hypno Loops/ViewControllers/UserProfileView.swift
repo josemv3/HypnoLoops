@@ -8,7 +8,7 @@
 import UIKit
 import Firebase
 
-class UserProfileController: UIViewController {
+class UserProfileView: UIViewController {
 
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var changeProfileImageButton: UIButton!
@@ -47,7 +47,7 @@ class UserProfileController: UIViewController {
     }
 }
 
-extension UserProfileController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension UserProfileView: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func presentPhotoActionSheet() {
         let actionSheet = UIAlertController(title: "Profile picture", message: "How would you like to select a profile photo", preferredStyle: .actionSheet)

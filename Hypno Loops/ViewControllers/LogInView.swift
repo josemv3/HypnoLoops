@@ -12,7 +12,7 @@ import FirebaseDatabaseSwift
 
 
 
-class CreateAccountController: UIViewController {
+class LogInView: UIViewController {
 
     @IBOutlet weak var profileView: UIImageView!
     @IBOutlet weak var profileButton: UIButton!
@@ -260,12 +260,12 @@ class CreateAccountController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == SegueID.gotoProfile.rawValue {
-            let destinationVC = segue.destination as! UserProfileController
+            let destinationVC = segue.destination as! UserProfileView
         }
     }
 }
 
-extension CreateAccountController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension LogInView: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func presentPhotoActionSheet() {
         let actionSheet = UIAlertController(title: "Profile picture", message: "How would you like to select a profile photo", preferredStyle: .actionSheet)

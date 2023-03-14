@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WelcomeController: UIViewController {
+class WelcomeView: UIViewController {
 
     @IBOutlet weak var TopLogoView: UIImageView!
     @IBOutlet weak var userLoginButton: UIButton!
