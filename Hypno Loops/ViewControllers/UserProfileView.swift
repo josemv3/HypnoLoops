@@ -43,7 +43,7 @@ class UserProfileView: UIViewController {
     }
     
     @IBAction func doneButtonPushed(_ sender: UIButton) {
-        performSegue(withIdentifier: SegueID.gotoLoopCollections.rawValue, sender: self)
+        performSegue(withIdentifier: SegueID.gotoCategoryView.rawValue, sender: self)
     }
 }
 

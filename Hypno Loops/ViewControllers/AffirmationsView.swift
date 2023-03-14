@@ -19,6 +19,8 @@ let affirmations: [String: [String]] = [ //this will be replaced with Affirmatio
 
 var showAffirmation = affirmations["Divine Healing"] //receiving var fromm sections CV
 
+var noAffirmation = "No affirmation selected..."
+
 class AffirmationsView: UIViewController, UICollectionViewDelegate {
     @IBOutlet weak var affirmationCV: UICollectionView!
     

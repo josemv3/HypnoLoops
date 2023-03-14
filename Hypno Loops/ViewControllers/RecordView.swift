@@ -52,6 +52,9 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
         reverbButtonView.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
         
         saveButtton.tintColor = UIColor(named: Color.hlBlue.rawValue)
+        
+        affirmationLabel.layer.borderWidth = BorderSize.small.size
+        affirmationLabel.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
     }
     
 //    MARK: - Recording
