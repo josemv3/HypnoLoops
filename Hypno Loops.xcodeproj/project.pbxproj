@@ -104,6 +104,7 @@
 		E00E4631299059F6006F6562 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				4C2D7A6C29C1750300ACE257 /* HypnoAudioRecorder.swift */,
 				E00E462F299059D9006F6562 /* SegueID.swift */,
 				E00E46342990F701006F6562 /* ErrorMessages.swift */,
 				E00E46322990EFE6006F6562 /* CornerRadiusModifiers.swift */,
@@ -209,7 +210,6 @@
 				E0F2A9B829766B7D0066263F /* LaunchScreen.storyboard */,
 				E0F2A9BB29766B7D0066263F /* Info.plist */,
 				E0E5A736297B145300B7B29D /* Loop Images */,
-				4C2D7A6C29C1750300ACE257 /* HypnoAudioRecorder.swift */,
 			);
 			path = "Hypno Loops";
 			sourceTree = "<group>";

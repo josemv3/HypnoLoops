@@ -78,8 +78,8 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
             url = audioRecorder.getAudioURL()
             playButton.isEnabled = true
             audioRecorder.stopRecording()
-            let recordImage = UIImage(systemName: "circle.fill")
-            recordButton.setTitle("Play", for: .normal)
+            let recordImage = UIImage(systemName: "record.circle")
+            recordButton.setTitle("Record", for: .normal)
             recordButton.setImage(recordImage, for: .normal)
         }
     }

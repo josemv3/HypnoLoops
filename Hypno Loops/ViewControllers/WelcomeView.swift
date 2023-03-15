@@ -27,6 +27,13 @@ class WelcomeView: UIViewController {
         performSegue(withIdentifier: SegueID.gotoCategoryView.rawValue, sender: self)
     }
     
+    @IBAction func recordingViewPushed(_ sender: UIButton) {
+        performSegue(withIdentifier: SegueID.welcomToRecord.rawValue, sender: self)
+    }
+    
+    @IBAction func playViewPushed(_ sender: UIButton) {
+    }
+    
 }
 
 //user logged in, userLogInButton = logOut

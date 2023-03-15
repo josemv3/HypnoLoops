@@ -80,6 +80,9 @@
                                         <buttonConfiguration key="configuration" style="filled" title="Recording">
                                             <color key="baseBackgroundColor" name="hlBlue"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <action selector="recordingViewPushed:" destination="Ghj-Mt-hRD" eventType="touchUpInside" id="Odp-9l-BVX"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0av-Lc-PV5">
                                         <rect key="frame" x="0.0" y="144" width="110.33333333333333" height="34.333333333333343"/>
@@ -87,6 +90,9 @@
                                         <buttonConfiguration key="configuration" style="filled" title="Play Loop">
                                             <color key="baseBackgroundColor" name="hlBlue"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <action selector="playViewPushed:" destination="Ghj-Mt-hRD" eventType="touchUpInside" id="fT2-qM-SzX"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -114,6 +120,7 @@
                         <outlet property="userLoginButton" destination="LJa-BG-rrY" id="VVi-c7-ncA"/>
                         <outlet property="userLoginImage" destination="Wld-Jd-OTZ" id="BdR-Ni-gjG"/>
                         <segue destination="V7n-Qs-3PC" kind="show" identifier="gotoCategoryView" id="7rI-M3-pwm"/>
+                        <segue destination="jUd-8a-r3l" kind="show" identifier="welcomToRecord" id="xSS-9A-hjI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vby-y3-rJL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -284,7 +291,7 @@
                         <outlet property="usernameErrorLabel" destination="r8u-dI-FJT" id="Jrh-ET-0Jw"/>
                         <outlet property="usernameTextField" destination="T3Y-ZP-SbH" id="uUr-Sp-Jbl"/>
                         <segue destination="jCa-un-fOy" kind="show" identifier="gotoProfile" id="nWX-Pm-hut"/>
-                        <segue destination="V7n-Qs-3PC" kind="show" identifier="gotoLoopCollectionsExisting" id="iSG-ay-RT5"/>
+                        <segue destination="V7n-Qs-3PC" kind="show" identifier="loginToCategory" id="iSG-ay-RT5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -857,7 +864,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="wA0-XR-ddo"/>
+        <segue reference="xSS-9A-hjI"/>
+        <segue reference="iSG-ay-RT5"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="heart" catalog="system" width="128" height="107"/>

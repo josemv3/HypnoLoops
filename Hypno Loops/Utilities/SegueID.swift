@@ -10,8 +10,9 @@ import UIKit
 enum SegueID: String {
     case gotoProfile,
          gotoCategoryView,
-         gotoLoopCollectionsExisting,
+         loginToCategory,
          gotoRecord,
          gotoPlay,
-         gotoAffirmationsView
+         gotoAffirmationsView,
+         welcomToRecord
 }

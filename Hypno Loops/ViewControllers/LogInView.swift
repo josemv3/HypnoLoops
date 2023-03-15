@@ -90,7 +90,7 @@ class LogInView: UIViewController {
             //You are signed in here.. now what?
             //No reason to go to profile screen. Go to collections?
             //HideLabels in tutorial
-            strongSelf.performSegue(withIdentifier: SegueID.gotoLoopCollectionsExisting.rawValue, sender: self)
+            strongSelf.performSegue(withIdentifier: SegueID.loginToCategory.rawValue, sender: self)
             print("You have signed in")
         })
         //resetForm()
