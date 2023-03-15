@@ -198,8 +198,8 @@
 			children = (
 				4CD13B6A29A18D750024910A /* GoogleService-Info.plist */,
 				E0E5A72C2979BCCD00B7B29D /* AppDelegate */,
-				E09704B329984BE50024A0F2 /* Model */,
 				E00E4631299059F6006F6562 /* Utilities */,
+				E09704B329984BE50024A0F2 /* Model */,
 				E0E5A72D2979BCFD00B7B29D /* ViewControllers */,
 				E04FB383297D9CE400EA7411 /* ReusableViews */,
 				E0F2A9B329766B7B0066263F /* Main.storyboard */,
