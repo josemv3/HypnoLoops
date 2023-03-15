@@ -160,8 +160,8 @@
 				E0F2A9B129766B7B0066263F /* LogInView.swift */,
 				E0E5A72A2979BCBE00B7B29D /* UserProfileView.swift */,
 				E0E5A730297B0F7500B7B29D /* CategoryView.swift */,
-				E0E5A732297B130E00B7B29D /* RecordView.swift */,
 				E0408A7B29AAAC7300228E8A /* AffirmationsView.swift */,
+				E0E5A732297B130E00B7B29D /* RecordView.swift */,
 				E0E5A734297B142100B7B29D /* PlayView.swift */,
 			);
 			path = ViewControllers;
@@ -200,8 +200,8 @@
 			children = (
 				4CD13B6A29A18D750024910A /* GoogleService-Info.plist */,
 				E0E5A72C2979BCCD00B7B29D /* AppDelegate */,
-				E09704B329984BE50024A0F2 /* Model */,
 				E00E4631299059F6006F6562 /* Utilities */,
+				E09704B329984BE50024A0F2 /* Model */,
 				E0E5A72D2979BCFD00B7B29D /* ViewControllers */,
 				E04FB383297D9CE400EA7411 /* ReusableViews */,
 				E0F2A9B329766B7B0066263F /* Main.storyboard */,

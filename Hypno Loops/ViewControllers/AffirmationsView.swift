@@ -7,23 +7,14 @@
 
 import UIKit
 
-let affirmations: [String: [String]] = [ //this will be replaced with AffirmationData
-    "Divine Healing": ["I receive Gods healing into my cells", "The power of Gods love heals me", "The Fountain of Gods love healed me", "The Power of God has healed me", "I am intuitively guided to my healing", "I knew I was healed like God promised", "I am divinely guided to my healing"],
-    
-    "Gratitude": ["My body corrected all irregularities", "My body perfectly repaired this", "I'm so grateful my body cleaned it up", "Thank you “body” for letting this go", "Thank you “body” for healing yourself", "I am grateful to be whole, I am healthy in my body"],
-
-    "Self belief": ["I knew I could heal myself", "I knew I could recover from this", "I knew I would heal myself", "I am healed", "I am strong", "I trust my body to heal"],
-
-    "Intuition": ["My Intuition guided me through this", "I knew Gods love could heal me", "I knew I'd discover ways to heal this", "I am intuitively guided to my healing"]
-    ]
-
-var showAffirmation = affirmations["Divine Healing"] //receiving var fromm sections CV
-
 class AffirmationsView: UIViewController, UICollectionViewDelegate {
     @IBOutlet weak var affirmationCV: UICollectionView!
-    
+
     var dataSource: UICollectionViewDiffableDataSource<Section, String>!//SOURCE1
     let affirmationsString = AffirmationStings()
+    var categoryReceived = "" //receiving var fromm sections CV
+    var showAffirmation: [String] = [] //categoryReceived is used to pull affirmation in dict
+    var noAffirmation = "No affirmation selected..."
 
     enum Section {
         case main
@@ -31,6 +22,8 @@ class AffirmationsView: UIViewController, UICollectionViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //2 sources of truth
+        showAffirmation = affirmationsString.affirmations[categoryReceived] ?? ["Error"]
         affirmationCV.collectionViewLayout = configureLayout()
         configureDataSource()
     }
@@ -87,13 +80,7 @@ class AffirmationsView: UIViewController, UICollectionViewDelegate {
             cell.layer.borderWidth = BorderSize.small.size
             cell.layer.backgroundColor = UIColor.black.cgColor
             cell.selectedButton.layer.cornerRadius = CornerRadiusModifiers.small.size
-            
-            //cell.affirmationLabel.text = affirmationsString.affirmations[indexPath.item]
-            //cell.affirmationLabel.text = lessonLabelName[item.description]
-            
-            //affirmationTexts = affirmations[item.description] ?? [] // get the array of affirmations for the given key, or an empty array if not found
-            //let affirmationTexts = affirmations[item.description] ?? []
-            cell.affirmationLabel.text = showAffirmation![indexPath.item] //showAfffirmation is an optional array built from affirmations Dict. Then Item bulds cells from string sentences.
+            cell.affirmationLabel.text = self.showAffirmation[indexPath.item] //showAfffirmation is an optional array built from affirmations Dict. Then Item bulds cells from string sentences.
             
             return cell
         })
@@ -101,7 +88,7 @@ class AffirmationsView: UIViewController, UICollectionViewDelegate {
         var initialSnapshot = NSDiffableDataSourceSnapshot<Section, String>()//SOURCE3
         
         initialSnapshot.appendSections([.main])
-        initialSnapshot.appendItems(showAffirmation!)
+        initialSnapshot.appendItems(showAffirmation)
 
         dataSource.apply(initialSnapshot, animatingDifferences: false)
     }

@@ -7,14 +7,6 @@
 
 import UIKit
 
-//private var setA = [
-//    "airplane", "ball", "car",
-//    "drum", "earphones", "flower",
-//    "ghost", "home", "icecream",
-//    "juice", "ketchup", "lightning",
-//    "moon", "nuts","oven"]
-
-
 class CategoryView: UIViewController, UICollectionViewDelegate {
     
     @IBOutlet weak var loopCollectionsCV: UICollectionView!
@@ -24,12 +16,9 @@ class CategoryView: UIViewController, UICollectionViewDelegate {
     var sectionData = SectionHeaderData()
     static let sectionHeaderElementKind = "section-header-element-kind"
     var dataSource: UICollectionViewDiffableDataSource<String, CategoryItem>!//SOURCE1
-//    private var currentSet = setA
-//    var headerSetA = ["Likes", "Health and Healing", "Love", "Goals", "Mental Stability"]
-    
     var testDict: [String: [CategoryItem]] = [:]
-//    var itemsBySectionAndName: [String: [String]] = ["Likes": [], "Health and Healing": ["drum players", "earphones and loops", "flower", "test", "another"], "Love": ["ghost", "home", "icecream"], "Goals": ["juice", "ketchup", "lightning"], "Mental Stability": ["moon", "nuts","oven"]]
     var cellStringReceived = ""
+    var itemSelected = ""
     
     var filteredItemsSnapshot: NSDiffableDataSourceSnapshot<String, CategoryItem> {
         var snapshot = NSDiffableDataSourceSnapshot<String, CategoryItem>()
@@ -49,9 +38,10 @@ class CategoryView: UIViewController, UICollectionViewDelegate {
         categoryData.getSubCategories()
         //zip section headers and catogory items to populate collectionView
         categoryData.finalCategories = zip(sectionData.sectionHeaders, categoryData.subCategories).reduce(into: [:]) { $0[$1.0] = $1.1 }
+        print(categoryData.finalCategories)
         
         TopProfileImage.layer.cornerRadius = CornerRadiusModifiers.normal.size
-        TopProfileImage.layer.borderWidth = 2
+        TopProfileImage.layer.borderWidth = BorderSize.small.size
         TopProfileImage.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
         
         loopCollectionsCV.register(
@@ -144,12 +134,21 @@ class CategoryView: UIViewController, UICollectionViewDelegate {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
         print(item.name)
         
-        if item.name == "Divine Healing" {
-            performSegue(withIdentifier: SegueID.gotoAffirmationsView.rawValue, sender: self)
-        } else {
+        if item.name == "Self healing" {
             performSegue(withIdentifier: SegueID.gotoRecord.rawValue, sender: self)
+        } else {
+            itemSelected = item.name
+            performSegue(withIdentifier: SegueID.gotoAffirmationsView.rawValue, sender: self)
+            
+            
         }
-        
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == SegueID.gotoAffirmationsView.rawValue {
+            let destinationVC = segue.destination as! AffirmationsView
+            destinationVC.categoryReceived = itemSelected
+            
+        }
     }
 }
 
