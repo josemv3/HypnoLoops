@@ -71,7 +71,8 @@ struct AffirmationStings {
         
         "Spirituality": ["God has given me a sound mind"],
         
-        "Negative thoughts": ["My repetitive thoughts are not facts", "My subconscious fear patterns are healed", "gain momentum by taking small steps"]
+        "Negative thoughts": ["My repetitive thoughts are not facts", "My subconscious fear patterns are healed", "gain momentum by taking small steps"],
+        "Error": ["Something went wrong, please try again."]
     ]
     
 }

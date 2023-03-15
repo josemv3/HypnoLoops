@@ -158,8 +158,8 @@
 				E0F2A9B129766B7B0066263F /* LogInView.swift */,
 				E0E5A72A2979BCBE00B7B29D /* UserProfileView.swift */,
 				E0E5A730297B0F7500B7B29D /* CategoryView.swift */,
-				E0E5A732297B130E00B7B29D /* RecordView.swift */,
 				E0408A7B29AAAC7300228E8A /* AffirmationsView.swift */,
+				E0E5A732297B130E00B7B29D /* RecordView.swift */,
 				E0E5A734297B142100B7B29D /* PlayView.swift */,
 			);
 			path = ViewControllers;

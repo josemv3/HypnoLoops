@@ -10,10 +10,13 @@ import AVFoundation
 
 class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
     
-    @IBOutlet weak var affirmationLabel: UILabel!
     @IBOutlet weak var categoryLabel: UILabel!
+    @IBOutlet weak var sectionLabel: UILabel!
     @IBOutlet weak var micBackgroundView: UIView!
     @IBOutlet weak var micImageView: UIImageView!
+    
+    @IBOutlet weak var affirmationView: UIView!
+    @IBOutlet weak var affirmationLabel: UILabel!
     
     @IBOutlet weak var recordButtonView: UIView!
     @IBOutlet weak var recordButton: UIButton!
@@ -30,8 +33,6 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
     
     var isRecording = false
     var isPlaying   = false
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,8 +54,12 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
         
         saveButtton.tintColor = UIColor(named: Color.hlBlue.rawValue)
         
-        affirmationLabel.layer.borderWidth = BorderSize.small.size
-        affirmationLabel.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
+        //categoryLabel.layer.borderWidth = BorderSize.small.size
+        //categoryLabel.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
+        
+        affirmationView.layer.cornerRadius = CornerRadiusModifiers.normal.size
+        affirmationView.layer.borderWidth = BorderSize.small.size
+        affirmationView.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
     }
     
 //    MARK: - Recording
