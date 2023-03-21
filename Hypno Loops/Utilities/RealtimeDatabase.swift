@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Storage: String {
+enum RealtimeDatabase: String {
     case referenceURLString =
     "https://console.firebase.google.com/project/hypno-loops/database/hypno-loops-default-rtdb/data/~2F"
 }

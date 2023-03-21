@@ -25,7 +25,6 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
     @IBOutlet weak var reverbButtonView: UIView!
     @IBOutlet weak var reverbSlider: UISlider!
     @IBOutlet weak var compressionSlider: UISlider!
-    
     @IBOutlet weak var saveButtton: UIButton!
     
     var audioRecorder = HypnoAudioRecorder()
