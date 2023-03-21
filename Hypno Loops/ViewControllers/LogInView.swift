@@ -9,11 +9,12 @@ import UIKit
 import FirebaseAuth
 import FirebaseDatabase
 import FirebaseDatabaseSwift
+import FirebaseStorage
 
 
 
 class LogInView: UIViewController {
-
+    
     @IBOutlet weak var profileView: UIImageView!
     @IBOutlet weak var profileButton: UIButton!
     @IBOutlet weak var usernameTextField: UITextField!
@@ -26,13 +27,13 @@ class LogInView: UIViewController {
     
     @IBOutlet weak var submitButtton: UIButton!
     @IBOutlet weak var skipButton: UIButton!
-
+    
     enum requiredText: String {
         case Required, Success
     }
     
-//    private var userNameAdded: String? {
-//    }
+    //    private var userNameAdded: String? {
+    //    }
     
     //private var userNameAdded: String = ""
     
@@ -48,7 +49,7 @@ class LogInView: UIViewController {
     }
     
     func resetForm() {
-     
+        
         usernameErrorLabel.text = requiredText.Required.rawValue
         emailErrorLabel.text = requiredText.Required.rawValue
         passwordErrorLabel.text = requiredText.Required.rawValue
@@ -64,17 +65,17 @@ class LogInView: UIViewController {
         presentPhotoActionSheet()
     }
     
-
+    
     @IBAction func submitButtonPressed(_ sender: UIButton) {
         
         guard let email = emailTextField.text,
               let password = passwordTextField.text else { return }
-                    
+        
         //Get authorization Instance
         //Attempt signin
         //If failure alert popup to create account
         //Alert continue = create account
- 
+        
         FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password, completion: { [weak self] result, error in
             guard let strongSelf = self else {
                 //strongSelf used in error to call func.show
@@ -102,30 +103,44 @@ class LogInView: UIViewController {
             
             FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password) {
                 [weak self] result, error in
-                guard let strongSelf = self else {
-                    return
-                }
+                guard let strongSelf = self else { return }
                 guard error == nil else {
                     print("Account creation failed")
                     return
                 }
                 
                 guard result != nil else { return }
-                            guard let uid = result?.user.uid else { return }
+                guard let uid = result?.user.uid else { return }
                 
                 let reference = FirebaseDatabase.Database.database().reference(
-                    fromURL: Storage.referenceURLString.rawValue)
+                    fromURL: RealtimeDatabase.referenceURLString.rawValue)
                 let usersReference = reference.child("users").child(uid)
                 
-                let values = ["email": email, "username": strongSelf.usernameTextField.text ?? "Empty"]
-                usersReference.updateChildValues(values) { databaseError, databaseReference in
-                                if databaseError != nil {
-                                    print("THERE WAS AN ERROR \(String(describing: databaseError))")
-                                    return
-                                }
-                            
-                                print("User Saved Successfully")
+                let imageData = strongSelf.profileView.image?.jpegData(compressionQuality: 0.5)
+                let storageReference = Storage.storage().reference().child("users/\(uid)/profile.jpg")
+                
+                let uploadTask = storageReference.putData(imageData!)
+                
+                uploadTask.observe(.success) { snapshot in
+                    storageReference.downloadURL { url, error in
+                        guard let downloadURL = url else {
+                            return
+                        }
+                        
+                        let urlString = NSString(string: "\(downloadURL)")
+                        let values = [" email": email, "username": strongSelf.usernameTextField.text, "profilePhotoURL": urlString ]
+                        print(downloadURL)
+                        
+                        usersReference.updateChildValues(values) { databaseError, databaseReference in
+                            if databaseError != nil {
+                                print("THERE WAS AN ERROR \(String(describing: databaseError))")
+                                return
                             }
+                            
+                            print("User Saved Successfully")
+                        }
+                    }
+                }
                 
                 print("You have created an account and signed in")
                 //in video he hides labels with Strong self, use for segue
@@ -136,7 +151,6 @@ class LogInView: UIViewController {
         alert.addAction(UIAlertAction(title: "Canel", style: .cancel))
         
         present(alert, animated: true)
-        
     }
     
     @IBAction func skipButtonPressed(_ sender: UIButton) {
@@ -171,7 +185,7 @@ class LogInView: UIViewController {
     //MARK: - Check Email
     
     @IBAction func emailChanged(_ sender: UITextField) {
-      
+        
         if let email = emailTextField.text {
             if let errorMessage = invalidEmail(email) {
                 emailErrorLabel.text = errorMessage
