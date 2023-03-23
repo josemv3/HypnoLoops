@@ -23,6 +23,11 @@ class WelcomeView: UIViewController {
         userLoginImage.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
     }
     
+    
+    @IBAction func userLoginButtonPushed(_ sender: UIButton) {
+        performSegue(withIdentifier: SegueID.welcomeToLoginView.rawValue, sender: self)
+    }
+    
     @IBAction func categoryViewButtonPush(_ sender: UIButton) {
         performSegue(withIdentifier: SegueID.gotoCategoryView.rawValue, sender: self)
     }
@@ -34,6 +39,26 @@ class WelcomeView: UIViewController {
     @IBAction func playViewPushed(_ sender: UIButton) {
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == SegueID.welcomeToLoginView.rawValue {
+            let destinationVC = segue.destination as! LogInView
+        }
+        
+        switch segue.identifier {
+        case SegueID.welcomeToLoginView.rawValue:
+            let logInView = segue.destination as! LogInView
+            //logInView.emailErrorLabel
+            //use loginView.?? to access any property or function in LogInView
+        case SegueID.gotoProfile.rawValue:
+            let userProfileView =  segue.destination as! UserProfileView
+        case SegueID.gotoCategoryView.rawValue:
+            let categoryView = segue.destination as! CategoryView
+        case SegueID.welcomToRecord.rawValue:
+            let recordView = segue.destination as! RecordView
+        default:
+            print("Error in WelcomView segue")
+        }
+    }
 }
 
 //user logged in, userLogInButton = logOut

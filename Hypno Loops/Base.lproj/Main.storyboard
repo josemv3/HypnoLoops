@@ -45,7 +45,7 @@
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Wld-Jd-OTZ">
-                                <rect key="frame" x="112.66666666666667" y="319" width="149.66666666666657" height="148.66666666666669"/>
+                                <rect key="frame" x="112.66666666666667" y="319" width="149.66666666666663" height="148.66666666666669"/>
                                 <color key="tintColor" name="hlBlue"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="iXv-l5-uLq"/>
@@ -61,7 +61,7 @@
                                             <color key="baseBackgroundColor" name="hlBlue"/>
                                         </buttonConfiguration>
                                         <connections>
-                                            <segue destination="BYZ-38-t0r" kind="show" id="Q0i-wk-ccH"/>
+                                            <action selector="userLoginButtonPushed:" destination="Ghj-Mt-hRD" eventType="touchUpInside" id="D2Q-jY-oK4"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qaq-bB-qwH">
@@ -121,6 +121,7 @@
                         <outlet property="userLoginImage" destination="Wld-Jd-OTZ" id="BdR-Ni-gjG"/>
                         <segue destination="V7n-Qs-3PC" kind="show" identifier="gotoCategoryView" id="7rI-M3-pwm"/>
                         <segue destination="jUd-8a-r3l" kind="show" identifier="welcomToRecord" id="xSS-9A-hjI"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="welcomeToLoginView" id="yre-UE-IyY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vby-y3-rJL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
