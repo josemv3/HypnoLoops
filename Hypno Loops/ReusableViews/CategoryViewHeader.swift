@@ -19,8 +19,6 @@ class CategoryViewHeader: UICollectionReusableView {
         label.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
         label.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
         label.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10),
-        
-     
       ])
     }
 }
