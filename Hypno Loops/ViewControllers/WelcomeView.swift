@@ -49,10 +49,13 @@ class WelcomeView: UIViewController {
         }
     }
     
+<<<<<<< HEAD
     @IBAction func userLoginButtonPushed(_ sender: UIButton) {
         performSegue(withIdentifier: SegueID.welcomeToLoginView.rawValue, sender: self)
     }
     
+=======
+>>>>>>> f8455911def8181facaba5718942e7a0a0c425a6
     @IBAction func categoryViewButtonPush(_ sender: UIButton) {
         performSegue(withIdentifier: SegueID.gotoCategoryView.rawValue, sender: self)
     }
