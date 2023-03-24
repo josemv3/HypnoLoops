@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct User {
+struct UserData {
     let username: String
     let image: UIImage
 }
