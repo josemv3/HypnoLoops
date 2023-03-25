@@ -13,24 +13,27 @@ class NetworkManager {
     private init () {}
     static let shared = NetworkManager()
     
-    func fetchUserProfileImage(user: User) -> UIImage {
-        var image = UIImage()
-        let usersRef = Database.database().reference(fromURL: RealtimeDatabase.referenceURLString.rawValue).child("users").child(user.uid)
-        
-        usersRef.observeSingleEvent(of: .value) { snapshot in
-            let profilePhotoURL = snapshot.childSnapshot(forPath: "profilePhotoURL").value as! String
+    func fetchUserProfileImage(completion: @escaping (URL?) -> Void) {
+        if let user = Auth.auth().currentUser {
+            let reference = Database.database().reference(fromURL: RealtimeDatabase.referenceURLString.rawValue)
+            let userRef = reference.child("users").child(user.uid)
             
-            let url = URL(string: profilePhotoURL)!
-            
-            let task = URLSession.shared.dataTask(with: url) { data, _, error in
-                if error != nil { return }
-                guard let data = data else { return }
-                image = UIImage(data: data)!
+            userRef.observeSingleEvent(of: .value) { snapshot in
+                let profilePhotoURL = snapshot.childSnapshot(forPath: "profilePhotoURL").value as? String
+                let url = URL(string: profilePhotoURL ?? "")
+                completion(url)
             }
-            task.resume()
+        } else {
+            completion(nil)
         }
-        
-        return image
     }
+
+    
+    
+    
+    
+    
+    
+    
     
 }

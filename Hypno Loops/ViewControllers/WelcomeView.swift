@@ -16,6 +16,7 @@ class WelcomeView: UIViewController {
     @IBOutlet weak var categoryViewButton: UIButton!
     @IBOutlet weak var recordingViewButton: UIButton!
     @IBOutlet weak var playViewButton: UIButton!
+    var isLoggedIn = Auth.auth().currentUser == nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,15 +27,10 @@ class WelcomeView: UIViewController {
     }
     
     func configureProfileImageView() {
-        if let user = Auth.auth().currentUser {
+        if let _ = Auth.auth().currentUser {
             userLoginButton.isHidden = true
-            let reference = Database.database().reference(fromURL: RealtimeDatabase.referenceURLString.rawValue)
-            let userRef = reference.child("users").child(user.uid)
-            
-            userRef.observeSingleEvent(of: .value) { snapshot in
-                let profilePhotoURL = snapshot.childSnapshot(forPath: "profilePhotoURL").value as! String
-                let url = URL(string: profilePhotoURL)!
-                
+            NetworkManager.shared.fetchUserProfileImage { [weak self] url in
+                guard let url = url else { return }
                 URLSession.shared.dataTask(with: url) { [weak self] data, _, _ in
                     guard let data = data else { return }
                     let image = UIImage(data: data)
@@ -43,19 +39,14 @@ class WelcomeView: UIViewController {
                     }
                 }.resume()
             }
-            
-        } else {
-            print("logged out")
         }
     }
+
     
-<<<<<<< HEAD
     @IBAction func userLoginButtonPushed(_ sender: UIButton) {
         performSegue(withIdentifier: SegueID.welcomeToLoginView.rawValue, sender: self)
     }
     
-=======
->>>>>>> f8455911def8181facaba5718942e7a0a0c425a6
     @IBAction func categoryViewButtonPush(_ sender: UIButton) {
         performSegue(withIdentifier: SegueID.gotoCategoryView.rawValue, sender: self)
     }
