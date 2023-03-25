@@ -59,9 +59,9 @@ class WelcomeView: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == SegueID.welcomeToLoginView.rawValue {
-            let destinationVC = segue.destination as! LogInView
-        }
+//        if segue.identifier == SegueID.welcomeToLoginView.rawValue {
+//            let destinationVC = segue.destination as! LogInView
+//        }
         
         switch segue.identifier {
         case SegueID.welcomeToLoginView.rawValue:
