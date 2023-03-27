@@ -10,7 +10,7 @@ import UIKit
 class CategoryView: UIViewController, UICollectionViewDelegate {
     
     @IBOutlet weak var loopCollectionsCV: UICollectionView!
-    @IBOutlet weak var TopProfileImage: UIImageView!
+    @IBOutlet weak var topProfileImage: UIImageView!
     
     var categoryData = CategoryData()
     var sectionData = SectionHeaderData()
@@ -19,6 +19,7 @@ class CategoryView: UIViewController, UICollectionViewDelegate {
     var testDict: [String: [CategoryItem]] = [:]
     var cellStringReceived = ""
     var itemSelected = ""
+    var userData: UserData?
     
     var filteredItemsSnapshot: NSDiffableDataSourceSnapshot<String, CategoryItem> {
         var snapshot = NSDiffableDataSourceSnapshot<String, CategoryItem>()
@@ -32,6 +33,7 @@ class CategoryView: UIViewController, UICollectionViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureProfileImageView()
         //Build Section header stings
         sectionData.makeSectionHeaders() //this can be replaced with just the enum
         //Build category objects in an array
@@ -40,15 +42,20 @@ class CategoryView: UIViewController, UICollectionViewDelegate {
         categoryData.finalCategories = zip(sectionData.sectionHeaders, categoryData.subCategories).reduce(into: [:]) { $0[$1.0] = $1.1 }
         print(categoryData.finalCategories)
         
-        TopProfileImage.layer.cornerRadius = CornerRadiusModifiers.normal.size
-        TopProfileImage.layer.borderWidth = BorderSize.small.size
-        TopProfileImage.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
+        topProfileImage.layer.cornerRadius = CornerRadiusModifiers.normal.size
+        topProfileImage.layer.borderWidth = BorderSize.small.size
+        topProfileImage.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
         
         loopCollectionsCV.register(
             CategoryViewHeader.self, forSupplementaryViewOfKind: CategoryView.sectionHeaderElementKind, withReuseIdentifier: "Header")
             
         loopCollectionsCV.collectionViewLayout = configureLayout()
         configureDataSource()
+    }
+    
+    func configureProfileImageView()  {
+        guard let url = userData?.imageURL else { return }
+        NetworkManager.shared.fetchUserProfileImageURL(photoURLString: url, imageView: topProfileImage)
     }
     
     //MARK: - Compositional CV LAYOUT

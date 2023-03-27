@@ -23,7 +23,7 @@
 		E0408A7C29AAAC7300228E8A /* AffirmationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0408A7B29AAAC7300228E8A /* AffirmationsView.swift */; };
 		E0408A7E29AABCB800228E8A /* AffirmationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0408A7D29AABCB800228E8A /* AffirmationData.swift */; };
 		E0408A8029AAF87200228E8A /* SectionHeaderData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0408A7F29AAF87200228E8A /* SectionHeaderData.swift */; };
-		E09704B529984C1E0024A0F2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09704B429984C1E0024A0F2 /* User.swift */; };
+		E09704B529984C1E0024A0F2 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09704B429984C1E0024A0F2 /* UserData.swift */; };
 		E0A413372995738800077302 /* RealtimeDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A413362995738800077302 /* RealtimeDatabase.swift */; };
 		E0A4133A299578E900077302 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = E0A41339299578E900077302 /* FirebaseDatabase */; };
 		E0A4133C299578E900077302 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E0A4133B299578E900077302 /* FirebaseDatabaseSwift */; };
@@ -62,7 +62,7 @@
 		E0408A7B29AAAC7300228E8A /* AffirmationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffirmationsView.swift; sourceTree = "<group>"; };
 		E0408A7D29AABCB800228E8A /* AffirmationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AffirmationData.swift; sourceTree = "<group>"; };
 		E0408A7F29AAF87200228E8A /* SectionHeaderData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderData.swift; sourceTree = "<group>"; };
-		E09704B429984C1E0024A0F2 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		E09704B429984C1E0024A0F2 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		E0A413362995738800077302 /* RealtimeDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealtimeDatabase.swift; sourceTree = "<group>"; };
 		E0AE5256299850D90012C068 /* BorderSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderSize.swift; sourceTree = "<group>"; };
 		E0AE525E299C01B70012C068 /* CategoryItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryItem.swift; sourceTree = "<group>"; };
@@ -132,7 +132,7 @@
 		E09704B329984BE50024A0F2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				E09704B429984C1E0024A0F2 /* User.swift */,
+				E09704B429984C1E0024A0F2 /* UserData.swift */,
 				E0AE525E299C01B70012C068 /* CategoryItem.swift */,
 				E0408A7F29AAF87200228E8A /* SectionHeaderData.swift */,
 				E0408A7129A72C8800228E8A /* CategoryData.swift */,
@@ -319,7 +319,7 @@
 				E0E5A731297B0F7500B7B29D /* CategoryView.swift in Sources */,
 				E00E46372990F914006F6562 /* CategoryViewHeader.swift in Sources */,
 				E00E4630299059D9006F6562 /* SegueID.swift in Sources */,
-				E09704B529984C1E0024A0F2 /* User.swift in Sources */,
+				E09704B529984C1E0024A0F2 /* UserData.swift in Sources */,
 				4C2D7A6D29C1750300ACE257 /* HypnoAudioRecorder.swift in Sources */,
 				E0F2A9AE29766B7B0066263F /* AppDelegate.swift in Sources */,
 				4CA5428B29CCFC4B00C9753A /* NetworkManager.swift in Sources */,
