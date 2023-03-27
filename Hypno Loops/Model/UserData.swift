@@ -8,6 +8,6 @@
 import UIKit
 
 struct UserData {
-    let username: String
-    let image: UIImage
+    var username: String
+    var imageURL: String
 }

@@ -128,7 +128,7 @@ class LogInView: UIViewController {
                         }
                         
                         let urlString = NSString(string: "\(downloadURL)")
-                        let values = [" email": email, "username": strongSelf.usernameTextField.text, "profilePhotoURL": urlString ]
+                        let values = ["username": strongSelf.usernameTextField.text, "profilePhotoURL": urlString ]
                         print(downloadURL)
                         
                         usersReference.updateChildValues(values) { databaseError, databaseReference in
@@ -136,8 +136,6 @@ class LogInView: UIViewController {
                                 print("THERE WAS AN ERROR \(String(describing: databaseError))")
                                 return
                             }
-                            
-                            print("User Saved Successfully")
                         }
                     }
                 }

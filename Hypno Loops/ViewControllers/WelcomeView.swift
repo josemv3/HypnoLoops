@@ -17,10 +17,12 @@ class WelcomeView: UIViewController {
     @IBOutlet weak var recordingViewButton: UIButton!
     @IBOutlet weak var playViewButton: UIButton!
     var isLoggedIn = Auth.auth().currentUser == nil
+    var userData: UserData?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureProfileImageView()
+        getUserData()
+//        configureProfileImageView()
         userLoginImage.layer.borderWidth = BorderSize.small.size
         userLoginImage.layer.cornerRadius = CornerRadiusModifiers.normal.size
         userLoginImage.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
@@ -29,15 +31,21 @@ class WelcomeView: UIViewController {
     func configureProfileImageView() {
         if let _ = Auth.auth().currentUser {
             userLoginButton.isHidden = true
-            NetworkManager.shared.fetchUserProfileImage { [weak self] url in
-                guard let url = url else { return }
-                URLSession.shared.dataTask(with: url) { [weak self] data, _, _ in
-                    guard let data = data else { return }
-                    let image = UIImage(data: data)
-                    DispatchQueue.main.async {
-                        self?.userLoginImage.image = image
-                    }
-                }.resume()
+            guard let url = userData?.imageURL else { return }
+            NetworkManager.shared.fetchUserProfileImageURL(photoURLString: url, imageView: userLoginImage)
+        }
+    }
+    
+    func getUserData() {
+        if let _ = Auth.auth().currentUser {
+            NetworkManager.shared.getCurrentUserData { [weak self] result in
+                switch result {
+                case .success(let data):
+                    self?.userData = data
+                    self?.configureProfileImageView()
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
             }
         }
     }
@@ -72,6 +80,7 @@ class WelcomeView: UIViewController {
             let userProfileView =  segue.destination as! UserProfileView
         case SegueID.gotoCategoryView.rawValue:
             let categoryView = segue.destination as! CategoryView
+            categoryView.userData = userData
         case SegueID.welcomToRecord.rawValue:
             let recordView = segue.destination as! RecordView
         default:
