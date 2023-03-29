@@ -103,6 +103,13 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
         }
     }
     
+    @IBAction func reverbChanged(_ sender: UISlider) {
+    }
+    
+    
+    @IBAction func compressonChanged(_ sender: UISlider) {
+    }
+    
     @IBAction func saveButtonPressed(_ sender: Any) {
         performSegue(withIdentifier: SegueID.gotoPlay.rawValue, sender: self)
     }
