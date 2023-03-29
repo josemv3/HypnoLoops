@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -854,14 +855,121 @@
                     <view key="view" contentMode="scaleToFill" id="9YJ-Ux-Uwq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="waveform" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Mbb-DK-p3j">
+                                <rect key="frame" x="16" y="91.333333333333343" width="343" height="127.33333333333331"/>
+                                <color key="tintColor" name="hlBlue"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="GK5-tO-ln0"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4cC-Ry-MNI">
+                                <rect key="frame" x="16" y="273" width="51" height="35"/>
+                                <color key="tintColor" name="hlBlue"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="slider.horizontal.3" catalog="system"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7:21" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wOg-mi-GsL">
+                                <rect key="frame" x="208" y="280" width="31.333333333333343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" name="hlPalePurple"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xRy-rT-JVc">
+                                <rect key="frame" x="247.66666666666666" y="280" width="5" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" name="hlBlue"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="21:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zNy-2l-Wvl">
+                                <rect key="frame" x="260.66666666666669" y="280" width="42.666666666666686" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" name="hlBlue"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rh1-HO-muZ">
+                                <rect key="frame" x="307.33333333333331" y="273" width="51.666666666666686" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="iTF-TI-j6Y"/>
+                                </constraints>
+                                <color key="tintColor" name="hlBlue"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="repeat" catalog="system"/>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gVq-Ce-Bbc">
+                                <rect key="frame" x="127" y="332" width="121" height="120"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xwh-Fo-sR8">
+                                        <rect key="frame" x="10.666666666666657" y="10" width="100" height="100"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="0md-0H-1Oc"/>
+                                            <constraint firstAttribute="height" constant="100" id="lDz-JA-wMn"/>
+                                        </constraints>
+                                        <color key="tintColor" name="hlBlue"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" image="play.fill" catalog="system" imagePlacement="bottom" title="Play" cornerStyle="capsule">
+                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" name="hlDarkGrey"/>
+                                <constraints>
+                                    <constraint firstItem="Xwh-Fo-sR8" firstAttribute="centerX" secondItem="gVq-Ce-Bbc" secondAttribute="centerX" id="H0W-2G-yWQ"/>
+                                    <constraint firstItem="Xwh-Fo-sR8" firstAttribute="centerY" secondItem="gVq-Ce-Bbc" secondAttribute="centerY" id="cLr-92-BZd"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chakra sound bowls" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZKa-8d-xai">
+                                <rect key="frame" x="175" y="234" width="172" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="172" id="XRS-lC-w7q"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" name="hlBlue"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ae8-Ae-mfi">
+                                <rect key="frame" x="16" y="227" width="140" height="35"/>
+                                <color key="tintColor" name="hlBlue"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" imagePlacement="trailing" title="Sound Scape" imagePadding="5">
+                                    <imageReference key="image" image="chevron.right" catalog="system" symbolScale="small"/>
+                                </buttonConfiguration>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Kcy-CQ-z8P"/>
                         <color key="backgroundColor" name="hlIndigo"/>
+                        <constraints>
+                            <constraint firstItem="xRy-rT-JVc" firstAttribute="baseline" secondItem="zNy-2l-Wvl" secondAttribute="baseline" id="54f-42-AiW"/>
+                            <constraint firstItem="Mbb-DK-p3j" firstAttribute="trailing" secondItem="Rh1-HO-muZ" secondAttribute="trailing" id="ERu-cR-d7l"/>
+                            <constraint firstItem="ZKa-8d-xai" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Ae8-Ae-mfi" secondAttribute="trailing" constant="8" symbolic="YES" id="GeS-Fc-ODn"/>
+                            <constraint firstItem="Rh1-HO-muZ" firstAttribute="baseline" secondItem="zNy-2l-Wvl" secondAttribute="firstBaseline" id="IYy-Qd-Ja9"/>
+                            <constraint firstItem="Rh1-HO-muZ" firstAttribute="leading" secondItem="zNy-2l-Wvl" secondAttribute="trailing" constant="4" id="K8X-l1-Ki4"/>
+                            <constraint firstItem="gVq-Ce-Bbc" firstAttribute="top" secondItem="wOg-mi-GsL" secondAttribute="bottom" constant="31" id="KGR-Z8-0EE"/>
+                            <constraint firstItem="Kcy-CQ-z8P" firstAttribute="bottom" secondItem="4cC-Ry-MNI" secondAttribute="bottom" constant="470" id="Kyf-Vy-LdJ"/>
+                            <constraint firstItem="Kcy-CQ-z8P" firstAttribute="trailing" secondItem="ZKa-8d-xai" secondAttribute="trailing" constant="28" id="MD3-EC-C28"/>
+                            <constraint firstItem="wOg-mi-GsL" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="4cC-Ry-MNI" secondAttribute="trailing" constant="8" symbolic="YES" id="NRR-WM-1qJ"/>
+                            <constraint firstItem="zNy-2l-Wvl" firstAttribute="leading" secondItem="xRy-rT-JVc" secondAttribute="trailing" constant="8" id="Sge-As-hU5"/>
+                            <constraint firstItem="4cC-Ry-MNI" firstAttribute="leading" secondItem="Kcy-CQ-z8P" secondAttribute="leading" constant="16" id="SkZ-nz-BXG"/>
+                            <constraint firstItem="ZKa-8d-xai" firstAttribute="centerY" secondItem="Ae8-Ae-mfi" secondAttribute="centerY" id="Uqi-Fx-vgS"/>
+                            <constraint firstItem="Mbb-DK-p3j" firstAttribute="trailing" secondItem="9YJ-Ux-Uwq" secondAttribute="trailingMargin" id="aRD-zz-qgf"/>
+                            <constraint firstItem="Mbb-DK-p3j" firstAttribute="top" secondItem="Kcy-CQ-z8P" secondAttribute="top" id="ca7-aw-U8B"/>
+                            <constraint firstItem="4cC-Ry-MNI" firstAttribute="leading" secondItem="Ae8-Ae-mfi" secondAttribute="leading" id="dZu-cF-j5r"/>
+                            <constraint firstItem="wOg-mi-GsL" firstAttribute="baseline" secondItem="xRy-rT-JVc" secondAttribute="baseline" id="daz-9w-kAT"/>
+                            <constraint firstItem="gVq-Ce-Bbc" firstAttribute="leading" secondItem="Kcy-CQ-z8P" secondAttribute="leading" constant="127" id="e0p-Eh-P25"/>
+                            <constraint firstItem="4cC-Ry-MNI" firstAttribute="top" secondItem="Ae8-Ae-mfi" secondAttribute="bottom" constant="11" id="eiO-Wh-qwX"/>
+                            <constraint firstItem="4cC-Ry-MNI" firstAttribute="top" secondItem="Rh1-HO-muZ" secondAttribute="top" id="n3g-zN-Mqg"/>
+                            <constraint firstItem="xRy-rT-JVc" firstAttribute="leading" secondItem="wOg-mi-GsL" secondAttribute="trailing" constant="8.3333330154418945" id="tsI-Us-KW7"/>
+                            <constraint firstItem="Kcy-CQ-z8P" firstAttribute="bottom" secondItem="gVq-Ce-Bbc" secondAttribute="bottom" constant="326" id="uZk-by-n1Q"/>
+                            <constraint firstItem="Mbb-DK-p3j" firstAttribute="leading" secondItem="9YJ-Ux-Uwq" secondAttribute="leadingMargin" id="wgo-gk-hRu"/>
+                            <constraint firstItem="gVq-Ce-Bbc" firstAttribute="centerX" secondItem="Mbb-DK-p3j" secondAttribute="centerX" id="zVS-nu-CZt"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="qWP-hj-clh"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ECN-VX-179" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3684" y="3"/>
+            <point key="canvasLocation" x="3684" y="2.9556650246305418"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
@@ -869,12 +977,16 @@
         <segue reference="7rI-M3-pwm"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="chevron.right" catalog="system" width="97" height="128"/>
         <image name="heart" catalog="system" width="128" height="107"/>
         <image name="mic.fill" catalog="system" width="110" height="128"/>
         <image name="mindLogo.png" width="768" height="384"/>
         <image name="person.circle.fill" catalog="system" width="128" height="123"/>
         <image name="play.fill" catalog="system" width="117" height="128"/>
         <image name="record.circle" catalog="system" width="128" height="123"/>
+        <image name="repeat" catalog="system" width="128" height="98"/>
+        <image name="slider.horizontal.3" catalog="system" width="128" height="99"/>
+        <image name="waveform" catalog="system" width="125" height="128"/>
         <namedColor name="New Blue">
             <color red="0.27099999785423279" green="0.68599998950958252" blue="0.89399999380111694" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -889,6 +1001,9 @@
         </namedColor>
         <namedColor name="hlIndigo">
             <color red="0.054999999701976776" green="0.075000002980232239" blue="0.15700000524520874" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="hlPalePurple">
+            <color red="0.50199997425079346" green="0.42399999499320984" blue="0.61599999666213989" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="hlPurple">
             <color red="0.51800000667572021" green="0.22699999809265137" blue="0.43500000238418579" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

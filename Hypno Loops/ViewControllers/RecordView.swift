@@ -104,6 +104,7 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
     }
     
     @IBAction func saveButtonPressed(_ sender: Any) {
+        performSegue(withIdentifier: SegueID.gotoPlay.rawValue, sender: self)
     }
     
 }
