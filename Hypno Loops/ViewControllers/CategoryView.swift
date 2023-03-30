@@ -40,7 +40,7 @@ class CategoryView: UIViewController, UICollectionViewDelegate {
         categoryData.getSubCategories()
         //zip section headers and catogory items to populate collectionView
         categoryData.finalCategories = zip(sectionData.sectionHeaders, categoryData.subCategories).reduce(into: [:]) { $0[$1.0] = $1.1 }
-        print(categoryData.finalCategories)
+        //print(categoryData.finalCategories)
         
         topProfileImage.layer.cornerRadius = CornerRadiusModifiers.normal.size
         topProfileImage.layer.borderWidth = BorderSize.small.size
@@ -139,7 +139,7 @@ class CategoryView: UIViewController, UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
-        print(item.name)
+        //print(item.name)
         
         if item.name == "Self healing" {
             performSegue(withIdentifier: SegueID.gotoRecord.rawValue, sender: self)

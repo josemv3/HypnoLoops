@@ -9,7 +9,7 @@ import UIKit
 
 class AffirmationsView: UIViewController, UICollectionViewDelegate {
     @IBOutlet weak var affirmationCV: UICollectionView!
-
+    
     var dataSource: UICollectionViewDiffableDataSource<Section, String>!//SOURCE1
     let affirmationsString = AffirmationStings()
     var categoryReceived = "" //receiving var fromm sections CV
@@ -26,6 +26,19 @@ class AffirmationsView: UIViewController, UICollectionViewDelegate {
         showAffirmation = affirmationsString.affirmations[categoryReceived] ?? ["Error"]
         affirmationCV.collectionViewLayout = configureLayout()
         configureDataSource()
+        runJsonData()
+        
+    }
+    
+    func runJsonData() -> [CategoryModel] {
+        let jsonURL = Bundle.main.url(forResource: "Affirmations", withExtension: "json")
+        let json = try! String(contentsOf: jsonURL!, encoding: String.Encoding.utf8)
+
+        let jsonData = json.data(using: .utf8)!
+        let categories: [CategoryModel] = try! JSONDecoder().decode([CategoryModel].self, from: jsonData)
+        print("SHIT!", categories)
+        
+        return categories
     }
     
     //MARK: - Layout
@@ -92,4 +105,6 @@ class AffirmationsView: UIViewController, UICollectionViewDelegate {
 
         dataSource.apply(initialSnapshot, animatingDifferences: false)
     }
+    
+    
 }

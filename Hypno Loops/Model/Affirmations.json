@@ -1,0 +1,15 @@
+
+[
+    {
+        "title" : "Divine Healing",
+        "affirmations" : [
+            {"id": "divine_healing_1", "affirmation": "I receive Gods healing into my cells"},
+            {"id": "divine_healing_2", "affirmation": "The power of Gods love heals me"},
+            {"id": "divine_healing_3", "affirmation": "The Fountain of Gods love healed me"},
+            {"id": "divine_healing_4", "affirmation": "The Power of God has healed me"},
+            {"id": "divine_healing_5", "affirmation": "I am intuitively guided to my healing"},
+            {"id": "divine_healing_6", "affirmation": "I knew I was healed like God promised"},
+            {"id": "divine_healing_7", "affirmation": "I am divinely guided to my healing"}
+        ]
+    }
+]
