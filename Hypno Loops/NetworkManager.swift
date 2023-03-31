@@ -41,6 +41,19 @@ class NetworkManager {
         }
         
     }
+    
+    func parseJSONData(completed: @escaping (Result<[CategoryModel], Error>) -> Void) {
+        if let url = Bundle.main.url(forResource: "Affirmations", withExtension: "json") {
+            do {
+                let decoder = JSONDecoder()
+                let data = try Data(contentsOf: url)
+                let categories = try decoder.decode([CategoryModel].self, from: data)
+                completed(.success(categories))
+            } catch {
+                completed(.failure(error))
+            }
+        }
+    }
 
     
     
