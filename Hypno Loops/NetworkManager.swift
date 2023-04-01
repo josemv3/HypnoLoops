@@ -42,13 +42,13 @@ class NetworkManager {
         
     }
     
-    func parseJSONData(completed: @escaping (Result<[CategoryModel], Error>) -> Void) {
+    func getSectionHeaders(completed: @escaping (Result<[SectionHeaderModel], Error>) -> Void) {
         if let url = Bundle.main.url(forResource: "Affirmations", withExtension: "json") {
             do {
                 let decoder = JSONDecoder()
                 let data = try Data(contentsOf: url)
-                let categories = try decoder.decode([CategoryModel].self, from: data)
-                completed(.success(categories))
+                let headers = try decoder.decode([SectionHeaderModel].self, from: data)
+                completed(.success(headers))
             } catch {
                 completed(.failure(error))
             }

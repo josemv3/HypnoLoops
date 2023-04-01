@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct CategoryModel: Decodable {
+struct CategoryModel: Decodable, Hashable {
+    
     var title: String
     var affirmations: [AffirmationModel]
 }

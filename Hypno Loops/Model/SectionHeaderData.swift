@@ -9,11 +9,14 @@ import Foundation
 
 struct SectionHeaderData {
     
-    var sectionHeaders: [String] = [String]()
     
-    mutating func makeSectionHeaders() {
-        sectionHeaders = SectionHeaders.allCases.map { $0.rawValue.replacingOccurrences(of: "_", with: " ") }
-    }
+    
+    
+//    var sectionHeaders: [String] = [String]()
+//    
+//    mutating func makeSectionHeaders() {
+//        sectionHeaders = SectionHeaders.allCases.map { $0.rawValue.replacingOccurrences(of: "_", with: " ") }
+//    }
     
     enum SectionHeaders: String, CaseIterable {
         case Like, Health_and_Healing, Love, Finance,

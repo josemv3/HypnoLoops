@@ -15,16 +15,17 @@ class CategoryView: UIViewController, UICollectionViewDelegate {
     var categoryData = CategoryData()
     var sectionData = SectionHeaderData()
     static let sectionHeaderElementKind = "section-header-element-kind"
-    var dataSource: UICollectionViewDiffableDataSource<String, CategoryItem>!//SOURCE1
+    var dataSource: UICollectionViewDiffableDataSource<SectionHeaderModel, CategoryItem>!//SOURCE1
     var testDict: [String: [CategoryItem]] = [:]
     var cellStringReceived = ""
     var itemSelected = ""
     var userData: UserData?
+    var headers = [SectionHeaderModel]()
     
-    var filteredItemsSnapshot: NSDiffableDataSourceSnapshot<String, CategoryItem> {
-        var snapshot = NSDiffableDataSourceSnapshot<String, CategoryItem>()
+    var filteredItemsSnapshot: NSDiffableDataSourceSnapshot<SectionHeaderModel, CategoryItem> {
+        var snapshot = NSDiffableDataSourceSnapshot<SectionHeaderModel, CategoryItem>()
         
-        for section in sectionData.sectionHeaders {
+        for section in headers {
             snapshot.appendSections([section])
             snapshot.appendItems(categoryData.finalCategories[section]!) // new data
         }
@@ -33,13 +34,14 @@ class CategoryView: UIViewController, UICollectionViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        retrieveHeaders()
         configureProfileImageView()
         //Build Section header stings
-        sectionData.makeSectionHeaders() //this can be replaced with just the enum
+//        sectionData.makeSectionHeaders() //this can be replaced with just the enum
         //Build category objects in an array
         categoryData.getSubCategories()
         //zip section headers and catogory items to populate collectionView
-        categoryData.finalCategories = zip(sectionData.sectionHeaders, categoryData.subCategories).reduce(into: [:]) { $0[$1.0] = $1.1 }
+//        categoryData.finalCategories = zip(sectionData.sectionHeaders, categoryData.subCategories).reduce(into: [:]) { $0[$1.0] = $1.1 }
         //print(categoryData.finalCategories)
         
         topProfileImage.layer.cornerRadius = CornerRadiusModifiers.normal.size
@@ -51,6 +53,18 @@ class CategoryView: UIViewController, UICollectionViewDelegate {
             
         loopCollectionsCV.collectionViewLayout = configureLayout()
         configureDataSource()
+    }
+    
+    func retrieveHeaders() {
+        NetworkManager.shared.getSectionHeaders { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let response):
+                self.headers = response
+            case .failure(let failure):
+                print(failure)
+            }
+        }
     }
     
     func configureProfileImageView()  {
@@ -99,7 +113,7 @@ class CategoryView: UIViewController, UICollectionViewDelegate {
     //MARK: - Data Source (Cell)
     
     func configureDataSource() {//SOURCE2
-        dataSource = UICollectionViewDiffableDataSource<String, CategoryItem>(collectionView: loopCollectionsCV) { (collectionView, indexPath, item) -> CategoryViewCell? in
+        dataSource = UICollectionViewDiffableDataSource<SectionHeaderModel, CategoryItem>(collectionView: loopCollectionsCV) { (collectionView, indexPath, item) -> CategoryViewCell? in
             
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryViewCell.reuseidentifier, for: indexPath) as? CategoryViewCell else {
                 fatalError("Cannot create new cell")
@@ -120,16 +134,16 @@ class CategoryView: UIViewController, UICollectionViewDelegate {
             let header = collectionView.dequeueReusableSupplementaryView(
                 ofKind: kind, withReuseIdentifier: "Header", for: indexPath) as! CategoryViewHeader
             
-            header.label.text = String(self.sectionData.sectionHeaders[indexPath.section])
+            header.label.text = self.headers[indexPath.section].headerTitle
             //header.label.font = UIFont(name: "Chalkduster", size: 18)
             header.label.textColor = UIColor.white
             
             return header
         }
         
-        var initialSnapshot = NSDiffableDataSourceSnapshot<String, CategoryItem>()//SOURCE3
+        var initialSnapshot = NSDiffableDataSourceSnapshot<SectionHeaderModel, CategoryItem>()//SOURCE3
         
-        for section in sectionData.sectionHeaders { //replace this with just enum (hashable)
+        for section in headers { //replace this with just enum (hashable)
             initialSnapshot.appendSections([section])
             initialSnapshot.appendItems(categoryData.finalCategories[section]!)
         }
