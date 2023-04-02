@@ -153,18 +153,21 @@ class CategoryView: UIViewController, UICollectionViewDelegate {
         dataSource.apply(initialSnapshot, animatingDifferences: false)
     }
     
+
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
         //print(item.name)
         categorySelected = item
         performSegue(withIdentifier: SegueID.gotoAffirmationsView.rawValue, sender: self)
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == SegueID.gotoAffirmationsView.rawValue {
             let destinationVC = segue.destination as! AffirmationsView
             //destinationVC.categoryReceived = itemSelected
-            destinationVC.userData = userData
+            //destinationVC.userData = userData
             destinationVC.category = categorySelected 
         
         }

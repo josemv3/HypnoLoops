@@ -16,7 +16,7 @@ class AffirmationsView: UIViewController, UICollectionViewDelegate {
     //var showAffirmation: [String] = [] //categoryReceived is used to pull affirmation in dict
     var noAffirmation = "No affirmation selected..."
     var category: CategoryModel?
-    var userData: UserData?
+    //var userData: UserData?
 
     enum Section {
         case main
@@ -84,8 +84,8 @@ class AffirmationsView: UIViewController, UICollectionViewDelegate {
             cell.selectedButton.layer.cornerRadius = CornerRadiusModifiers.small.size
             cell.affirmationLabel.text = item.affirmation //showAfffirmation is an optional array built from affirmations Dict. Then Item bulds cells from string sentences.
             cell.affirmation = item
-            cell.userData = self?.userData
-            print("USER HERE: \(self?.userData)")
+            //cell.userData = self?.userData
+            //print("USER HERE: \(self?.userData)")
             return cell
         })
         
@@ -97,5 +97,7 @@ class AffirmationsView: UIViewController, UICollectionViewDelegate {
         dataSource.apply(initialSnapshot, animatingDifferences: false)
     }
     
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        <#code#>
+    }
 }

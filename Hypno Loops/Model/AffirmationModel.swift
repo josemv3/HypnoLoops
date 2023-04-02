@@ -26,11 +26,14 @@ struct AffirmationModel: Decodable, Equatable, Hashable {
     }
     
     mutating func toggleLiked(userData: inout UserData) {
-        if self.liked {
-            userData.removeLikedAffirmation(affirmationId: self.id)
-        } else {
-            userData.addLikedAffirmation(affirmationId: self.id)
-        }
         self.liked.toggle()
+        
+        if self.liked {
+            userData.addLikedAffirmation(affirmationId: self.id)
+        } else {
+            userData.removeLikedAffirmation(affirmationId: self.id)
+            
+        }
+        
     }
 }

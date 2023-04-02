@@ -10,7 +10,7 @@ import Firebase
 
 class AffirmationCell: UICollectionViewCell {
     var affirmation: AffirmationModel!
-    var userData: UserData!
+    //var userData: UserData!
     static let reuseidentifier = String(describing: AffirmationCell.self)
     
     @IBOutlet weak var affirmationLabel: UILabel!
@@ -33,9 +33,7 @@ class AffirmationCell: UICollectionViewCell {
             }
         }
         
-        affirmation.toggleLiked(userData: &userData)
+        affirmation.toggleLiked(userData: &LogInView.userData!)
     }
-    
-
     
 }

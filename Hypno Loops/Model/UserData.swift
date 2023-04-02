@@ -11,7 +11,7 @@ struct UserData {
     var username: String
     var likedAffirmationIds: [String] = []
     
-    init(username: String) {
+    init(username: String, likedAffirmationIds: [String]) {
         self.username = username
     }
     

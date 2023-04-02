@@ -131,9 +131,9 @@ func showCreateAccount(email: String, password: String) {
                             let userName = Auth.auth().currentUser?.displayName
                             var likedAffirmations = [String]()
                             databaseReference.child("users").child(uid).getData { error, snapshot in
-                                likedAffirmations = snapshot?.value
+                                likedAffirmations = snapshot?.value as? [String] ?? []
                             }
-                            LogInView.userData = UserData(username: userName!)
+                            LogInView.userData = UserData(username: userName!,likedAffirmationIds: likedAffirmations )
                             strongSelf.performSegue(withIdentifier: SegueID.gotoProfile.rawValue, sender: self)
                         }
                     }
