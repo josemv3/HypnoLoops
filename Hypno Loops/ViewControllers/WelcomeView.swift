@@ -21,6 +21,7 @@ class WelcomeView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if Auth.auth().currentUser != nil { print("USER FOUND: ", Auth.auth().currentUser) }
 //        getUserData()
 //        configureProfileImageView()
         userLoginImage.layer.borderWidth = BorderSize.small.size
@@ -38,16 +39,15 @@ class WelcomeView: UIViewController {
     
     func getUserData() {
         if let _ = Auth.auth().currentUser {
-            NetworkManager.shared.getCurrentUserData { [weak self] result in
+            NetworkManager.shared.getCurrentUserData { result in
                 switch result {
-                case .success(let data):
-                    self?.userData = data
-//                    self?.configureProfileImageView()
+                case .success(let success):
+                    let username = Auth.auth().currentUser.displayName
+                    NetworkManager.userData = UserData(username: username, likedAffirmationIds: ["future"])
                 case .failure(let error):
-                    print(error.localizedDescription)
+                    print(error)
                 }
             }
-        }
     }
 
     

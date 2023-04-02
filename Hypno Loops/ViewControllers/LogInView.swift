@@ -26,8 +26,6 @@ class LogInView: UIViewController {
     @IBOutlet weak var submitButtton: UIButton!
     @IBOutlet weak var skipButton: UIButton!
     
-    public static var userData: UserData?
-    
     enum requiredText: String {
         case Required, Success
     }
@@ -133,7 +131,7 @@ func showCreateAccount(email: String, password: String) {
                             databaseReference.child("users").child(uid).getData { error, snapshot in
                                 likedAffirmations = snapshot?.value as? [String] ?? []
                             }
-                            LogInView.userData = UserData(username: userName!,likedAffirmationIds: likedAffirmations )
+                            NetworkManager.userData = UserData(username: userName!,likedAffirmationIds: likedAffirmations )
                             strongSelf.performSegue(withIdentifier: SegueID.gotoProfile.rawValue, sender: self)
                         }
                     }

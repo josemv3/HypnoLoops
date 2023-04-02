@@ -24,6 +24,7 @@ class AffirmationsView: UIViewController, UICollectionViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(NetworkManager.userData)
         //2 sources of truth
         //showAffirmation = category?.affirmations ?? ["Error"]
         affirmationCV.collectionViewLayout = configureLayout()
@@ -78,7 +79,8 @@ class AffirmationsView: UIViewController, UICollectionViewDelegate {
         dataSource = UICollectionViewDiffableDataSource<Section, AffirmationModel>(collectionView: affirmationCV, cellProvider: { [weak self] collectionView, indexPath, item in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AffirmationCell.reuseidentifier, for: indexPath) as! AffirmationCell
             
-            print("LIKED!", item.liked)
+            cell.setLiked()
+            
             if item.liked {
                 cell.likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
             } else {

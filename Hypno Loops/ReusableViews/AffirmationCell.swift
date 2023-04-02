@@ -10,7 +10,6 @@ import Firebase
 
 class AffirmationCell: UICollectionViewCell {
     var affirmation: AffirmationModel!
-    //var userData: UserData!
     static let reuseidentifier = String(describing: AffirmationCell.self)
     
     @IBOutlet weak var affirmationLabel: UILabel!
@@ -18,22 +17,23 @@ class AffirmationCell: UICollectionViewCell {
     @IBOutlet weak var likeButton: UIButton!
     
     
+    
     @IBAction func likeButtonPressed(_ sender: UIButton) {
-        print("pressed")
+        affirmation.toggleLiked(userData: &NetworkManager.userData!)
         
         if affirmation.liked {
             let image = UIImage(systemName: "heart.fill")
-            //DispatchQueue.main.async {
-                self.likeButton.setImage(image, for: .normal)
-            //}
+            self.likeButton.setImage(image, for: .normal)
         } else {
             let image = UIImage(systemName: "heart")
-            //DispatchQueue.main.async {
-                self.likeButton.setImage(image, for: .normal)
-            //}
+            self.likeButton.setImage(image, for: .normal)
         }
-        
-        affirmation.toggleLiked(userData: &LogInView.userData!)
+    }
+    
+    func setLiked() {
+        if NetworkManager.userData!.likedAffirmationIds.contains(affirmation.id) {
+            affirmation.liked = true
+        }
     }
     
 }

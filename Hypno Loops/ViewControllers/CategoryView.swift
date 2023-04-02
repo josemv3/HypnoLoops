@@ -159,6 +159,7 @@ class CategoryView: UIViewController, UICollectionViewDelegate {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
         //print(item.name)
         categorySelected = item
+        
         performSegue(withIdentifier: SegueID.gotoAffirmationsView.rawValue, sender: self)
     }
     

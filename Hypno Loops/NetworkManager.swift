@@ -15,6 +15,8 @@ class NetworkManager {
     private init () {}
     static let shared = NetworkManager()
     
+    public static var userData: UserData?
+    
     func fetchUserProfileImageURL(photoURLString: String, imageView: UIImageView) {
         guard let photoURL = URL(string: photoURLString) else { return }
         
@@ -31,15 +33,13 @@ class NetworkManager {
     func getCurrentUserData(completion: @escaping (Result<UserData, Error>) -> Void) {
         if let user = Auth.auth().currentUser {
             let reference = Database.database().reference()
-            let userRef = reference.child("users").child(user.uid)
+            let userRef = reference.child("users").child(user.uid).child("likedAffirmations")
             
-            userRef.observeSingleEvent(of: .value) { snapshot, type  in
-                let username = snapshot.childSnapshot(forPath: "username").value as! String
-                let likedAffirmationIds = snapshot.childSnapshot(forPath: "likedAffirmations").value as! [String]
-                completion(.success(UserData(username: username, likedAffirmationIds: likedAffirmationIds)))
+            userRef.getData { data, error in
+                let likedAffirmationIds = data.value as! [String] ?? []
+                completion(.success(UserData(username: Auth.auth().currentUser.displayName, likedAffirmationIds: likedAffirmationIds)))
             }
         }
-        
     }
     
     func getSectionHeaders(completed: @escaping (Result<[SectionHeaderModel], Error>) -> Void) {
