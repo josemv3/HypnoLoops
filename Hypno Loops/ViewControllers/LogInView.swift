@@ -6,9 +6,7 @@
 //
 
 import UIKit
-import FirebaseAuth
-import FirebaseDatabase
-import FirebaseDatabaseSwift
+import Firebase
 import FirebaseStorage
 
 
@@ -27,6 +25,8 @@ class LogInView: UIViewController {
     
     @IBOutlet weak var submitButtton: UIButton!
     @IBOutlet weak var skipButton: UIButton!
+    
+    public static var userData: UserData?
     
     enum requiredText: String {
         case Required, Success
@@ -76,7 +76,7 @@ class LogInView: UIViewController {
         //If failure alert popup to create account
         //Alert continue = create account
         
-        FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password, completion: { [weak self] result, error in
+        Auth.auth().signIn(withEmail: email, password: password, completion: { [weak self] result, error in
             guard let strongSelf = self else {
                 //strongSelf used in error to call func.show
                 return
@@ -97,11 +97,11 @@ class LogInView: UIViewController {
         //resetForm()
     }
     
-    func showCreateAccount(email: String, password: String) {
+func showCreateAccount(email: String, password: String) {
         let alert = UIAlertController(title: "Create Account", message: "Would you like to create an account?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Continue", style: .default, handler: {_ in
             
-            FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password) { [weak self] result, error in
+            Auth.auth().createUser(withEmail: email, password: password) { [weak self] result, error in
                 guard let strongSelf = self else { return }
                 guard error == nil else {
                     print("Account creation failed")
@@ -110,12 +110,15 @@ class LogInView: UIViewController {
                 
                 guard result != nil else { return }
                 guard let uid = result?.user.uid else { return }
+                let databaseReference = Database.database().reference()
                 
                 //                MARK: handle profile pic
                 let image = strongSelf.profileView.image!
                 let imageData = image.jpegData(compressionQuality: 0.5)
                 let storageReference = Storage.storage().reference().child("users/\(uid)/profile.jpg")
                 storageReference.putData(imageData!)
+                
+                 
                 
                 if let user = Auth.auth().currentUser {
                     let changeRequest = user.createProfileChangeRequest()
@@ -125,18 +128,20 @@ class LogInView: UIViewController {
                         if let _ = error {
                             print(error)
                         } else {
-                            print(Auth.auth().currentUser?.displayName, Auth.auth().currentUser?.photoURL)
-                            print("You have created an account and signed in")
+                            let userName = Auth.auth().currentUser?.displayName
+                            var likedAffirmations = [String]()
+                            databaseReference.child("users").child(uid).getData { error, snapshot in
+                                likedAffirmations = snapshot?.value
+                            }
+                            LogInView.userData = UserData(username: userName!)
                             strongSelf.performSegue(withIdentifier: SegueID.gotoProfile.rawValue, sender: self)
                         }
                     }
                 }
                 
-                
             }
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-        
         present(alert, animated: true)
     }
     

@@ -164,6 +164,7 @@ class CategoryView: UIViewController, UICollectionViewDelegate {
         if segue.identifier == SegueID.gotoAffirmationsView.rawValue {
             let destinationVC = segue.destination as! AffirmationsView
             //destinationVC.categoryReceived = itemSelected
+            destinationVC.userData = userData
             destinationVC.category = categorySelected 
         
         }

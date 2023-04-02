@@ -56,9 +56,11 @@ class NetworkManager {
     }
     
     func updateLikedAffirmations(userAffirmationIDs: [String]) {
+        print("inside")
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let reference = Database.database().reference()
         let affirmationIds = reference.child("users").child(uid).child("likedAffirmations")
+        print(affirmationIds)
         
         affirmationIds.setValue(userAffirmationIDs) { (error, ref) in
             if let _ = error {

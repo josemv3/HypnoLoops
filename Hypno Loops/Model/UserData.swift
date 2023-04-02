@@ -9,12 +9,10 @@ import UIKit
 
 struct UserData {
     var username: String
-//    var imageURL: String
     var likedAffirmationIds: [String] = []
     
-    init(username: String, likedAffirmationIds: [String]) {
+    init(username: String) {
         self.username = username
-        self.likedAffirmationIds = likedAffirmationIds
     }
     
     
