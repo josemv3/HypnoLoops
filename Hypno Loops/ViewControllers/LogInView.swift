@@ -130,7 +130,7 @@ func showCreateAccount(email: String, password: String) {
                         } else {
                             let userName = user.displayName
                             var likedAffirmations = [String]()
-                            databaseReference.child("users").child(uid).likedAffirmations.getData { error, snapshot in
+                            databaseReference.child("users").child(uid).child("likedAffirmations").getData { error, snapshot in
                                 likedAffirmations = snapshot?.value as? [String] ?? []
                             }
                             NetworkManager.userData = UserData(username: userName!,likedAffirmationIds: likedAffirmations )

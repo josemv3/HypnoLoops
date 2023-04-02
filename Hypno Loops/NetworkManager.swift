@@ -17,9 +17,8 @@ class NetworkManager {
     
     public static var userData: UserData?
     
-    func fetchUserProfileImageURL(photoURLString: String, imageView: UIImageView) {
-        guard let photoURL = URL(string: photoURLString) else { return }
-        
+    func fetchUserProfileImageURL(photoURL: URL, imageView: UIImageView) {
+         
         URLSession.shared.dataTask(with: photoURL) { data, _, _ in
             guard let data = data else { return }
             guard let image = UIImage(data: data) else { return }
@@ -34,14 +33,30 @@ class NetworkManager {
         if let user = Auth.auth().currentUser {
             let reference = Database.database().reference()
             let userRef = reference.child("users").child(user.uid).child("likedAffirmations")
-           
-            
-            userRef.getData { error, data in
-                let likedAffirmationIds = data?.value as? [String] ?? []
+
+            userRef.getData { error, snapshot in
+                let likedAffirmationIds = snapshot?.value as? [String] ?? []
                 completion(.success(UserData(username: user.displayName!, likedAffirmationIds: likedAffirmationIds)))
             }
         }
     }
+    
+//    func getCurrentUserData() -> Task<UserData, Error> {
+//        Task { [weak self] in
+//            guard let self = self, let user = Auth.auth().currentUser else {
+//                throw NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "User not found"])
+//            }
+//            let reference = Database.database().reference()
+//            let userRef = reference.child("users").child(user.uid).child("likedAffirmations")
+//            do {
+//                let data = try await userRef.getData()
+//                let likedAffirmationIds = data.value as? [String] ?? []
+//                return UserData(username: user.displayName!, likedAffirmationIds: likedAffirmationIds)
+//            } catch {
+//                throw error
+//            }
+//        }
+//    }
     
     func getSectionHeaders(completed: @escaping (Result<[SectionHeaderModel], Error>) -> Void) {
         if let url = Bundle.main.url(forResource: "Affirmations", withExtension: "json") {
