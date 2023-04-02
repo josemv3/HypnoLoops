@@ -15,19 +15,21 @@ class CategoryView: UIViewController, UICollectionViewDelegate {
     var categoryData = CategoryData()
     var sectionData = SectionHeaderData()
     static let sectionHeaderElementKind = "section-header-element-kind"
-    var dataSource: UICollectionViewDiffableDataSource<SectionHeaderModel, CategoryItem>!//SOURCE1
-    var testDict: [String: [CategoryItem]] = [:]
+    var dataSource: UICollectionViewDiffableDataSource<SectionHeaderModel, CategoryModel>!//SOURCE1
+    var testDict: [String: [CategoryModel]] = [:]
     var cellStringReceived = ""
     var itemSelected = ""
     var userData: UserData?
     var headers = [SectionHeaderModel]()
+    var categorySelected: CategoryModel?
     
-    var filteredItemsSnapshot: NSDiffableDataSourceSnapshot<SectionHeaderModel, CategoryItem> {
-        var snapshot = NSDiffableDataSourceSnapshot<SectionHeaderModel, CategoryItem>()
+    
+    var filteredItemsSnapshot: NSDiffableDataSourceSnapshot<SectionHeaderModel, CategoryModel> {
+        var snapshot = NSDiffableDataSourceSnapshot<SectionHeaderModel, CategoryModel>()
         
         for section in headers {
             snapshot.appendSections([section])
-            snapshot.appendItems(categoryData.finalCategories[section]!) // new data
+            snapshot.appendItems(section.categories) // new data
         }
         return snapshot
     }
@@ -113,12 +115,12 @@ class CategoryView: UIViewController, UICollectionViewDelegate {
     //MARK: - Data Source (Cell)
     
     func configureDataSource() {//SOURCE2
-        dataSource = UICollectionViewDiffableDataSource<SectionHeaderModel, CategoryItem>(collectionView: loopCollectionsCV) { (collectionView, indexPath, item) -> CategoryViewCell? in
+        dataSource = UICollectionViewDiffableDataSource<SectionHeaderModel, CategoryModel>(collectionView: loopCollectionsCV) { (collectionView, indexPath, item) -> CategoryViewCell? in
             
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryViewCell.reuseidentifier, for: indexPath) as? CategoryViewCell else {
                 fatalError("Cannot create new cell")
             }
-            cell.cellLabel.text = item.name
+            cell.cellLabel.text = item.title
             cell.cellLabel.lineBreakMode = .byWordWrapping
             cell.cellLabel.numberOfLines = 3
             cell.backgroundColor = .black
@@ -141,11 +143,11 @@ class CategoryView: UIViewController, UICollectionViewDelegate {
             return header
         }
         
-        var initialSnapshot = NSDiffableDataSourceSnapshot<SectionHeaderModel, CategoryItem>()//SOURCE3
+        var initialSnapshot = NSDiffableDataSourceSnapshot<SectionHeaderModel, CategoryModel>()//SOURCE3
         
         for section in headers { //replace this with just enum (hashable)
             initialSnapshot.appendSections([section])
-            initialSnapshot.appendItems(categoryData.finalCategories[section]!)
+            initialSnapshot.appendItems(section.categories)
         }
        
         dataSource.apply(initialSnapshot, animatingDifferences: false)
@@ -154,21 +156,16 @@ class CategoryView: UIViewController, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
         //print(item.name)
-        
-        if item.name == "Self healing" {
-            performSegue(withIdentifier: SegueID.gotoRecord.rawValue, sender: self)
-        } else {
-            itemSelected = item.name
-            performSegue(withIdentifier: SegueID.gotoAffirmationsView.rawValue, sender: self)
-            
-            
-        }
+        categorySelected = item
+        performSegue(withIdentifier: SegueID.gotoAffirmationsView.rawValue, sender: self)
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if segue.identifier == SegueID.gotoAffirmationsView.rawValue {
             let destinationVC = segue.destination as! AffirmationsView
-            destinationVC.categoryReceived = itemSelected
-            
+            //destinationVC.categoryReceived = itemSelected
+            destinationVC.category = categorySelected 
+        
         }
     }
 }

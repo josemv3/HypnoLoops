@@ -143,13 +143,13 @@
 				E093C6C029D5EDCD00722196 /* AffirmationModel.swift */,
 				E093C6C229D5F0A800722196 /* CategoryModel.swift */,
 				4C7CD30829D88C0E00BF836A /* SectionHeaderModel.swift */,
+				4C7CD30A29D8914300BF836A /* Affirmations.json */,
 				E09704B429984C1E0024A0F2 /* UserData.swift */,
 				E0AE525E299C01B70012C068 /* CategoryItem.swift */,
 				E0408A7F29AAF87200228E8A /* SectionHeaderData.swift */,
 				E0408A7129A72C8800228E8A /* CategoryData.swift */,
 				E0408A7D29AABCB800228E8A /* AffirmationData.swift */,
 				E0E7E05729AFED56005E760D /* AffirmationStrings.swift */,
-				4C7CD30A29D8914300BF836A /* Affirmations.json */,
 			);
 			path = Model;
 			sourceTree = "<group>";

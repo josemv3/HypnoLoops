@@ -13,4 +13,9 @@ class AffirmationCell: UICollectionViewCell {
     @IBOutlet weak var affirmationLabel: UILabel!
     @IBOutlet weak var selectedButton: UIButton!
     
+    @IBOutlet weak var likeButton: UIButton!
+    
+    @IBAction func likeButtonPressed(_ sender: UIButton) {
+    }
+    
 }
