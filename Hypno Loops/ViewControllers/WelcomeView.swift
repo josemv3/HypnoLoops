@@ -17,79 +17,101 @@ class WelcomeView: UIViewController {
     @IBOutlet weak var recordingViewButton: UIButton!
     @IBOutlet weak var playViewButton: UIButton!
     var isLoggedIn = Auth.auth().currentUser == nil
-    var userData: UserData?
+    //var userData = NetworkManager.userData
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getUserData()
-//        configureProfileImageView()
+        //if Auth.auth().currentUser != nil { print("USER FOUND: ", Auth.auth().currentUser) }
+        configureProfile()
         userLoginImage.layer.borderWidth = BorderSize.small.size
         userLoginImage.layer.cornerRadius = CornerRadiusModifiers.normal.size
         userLoginImage.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
+        //print("UserData HERE >", NetworkManager.userData)
     }
     
-    func configureProfileImageView() {
-        if let _ = Auth.auth().currentUser {
-            userLoginButton.isHidden = true
-            guard let url = userData?.imageURL else { return }
-            NetworkManager.shared.fetchUserProfileImageURL(photoURLString: url, imageView: userLoginImage)
+    func configureProfile() {
+        NetworkManager.shared.getCurrentUserData { result in
+            switch result {
+            case .success(let userData):
+                NetworkManager.userData = userData
+                NetworkManager.shared.fetchUserProfileImageURL(photoURL: (Auth.auth().currentUser?.photoURL)!, imageView: self.userLoginImage)
+                print("USER DATA HERE ->", userData)
+            case .failure(let error):
+                print(error)
+            }
         }
     }
     
     func getUserData() {
-        if let _ = Auth.auth().currentUser {
-            NetworkManager.shared.getCurrentUserData { [weak self] result in
+        if let user = Auth.auth().currentUser {
+            print("Inside getUserData")
+            NetworkManager.shared.getCurrentUserData { result in
                 switch result {
-                case .success(let data):
-                    self?.userData = data
-                    self?.configureProfileImageView()
+                case .success(let userData):
+                    print("inside user data", userData)
+                    NetworkManager.userData = userData
                 case .failure(let error):
-                    print(error.localizedDescription)
+                    print(error)
                 }
             }
         }
     }
-
     
-    @IBAction func userLoginButtonPushed(_ sender: UIButton) {
-        performSegue(withIdentifier: SegueID.welcomeToLoginView.rawValue, sender: self)
-    }
-    
-    @IBAction func categoryViewButtonPush(_ sender: UIButton) {
-        performSegue(withIdentifier: SegueID.gotoCategoryView.rawValue, sender: self)
-    }
-    
-    @IBAction func recordingViewPushed(_ sender: UIButton) {
-        performSegue(withIdentifier: SegueID.welcomToRecord.rawValue, sender: self)
-    }
-    
-    @IBAction func playViewPushed(_ sender: UIButton) {
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == SegueID.welcomeToLoginView.rawValue {
-//            let destinationVC = segue.destination as! LogInView
+//    func getUserData() async {
+//        if let user = Auth.auth().currentUser {
+//            do {
+//                let task = NetworkManager.shared.getCurrentUserData()
+//                let userData = try await task.value
+//                NetworkManager.userData = userData
+//                configureProfileImageView()
+//            } catch {
+//                print(error)
+//            }
 //        }
+//    }
         
-        switch segue.identifier {
-        case SegueID.welcomeToLoginView.rawValue:
-            let logInView = segue.destination as! LogInView
-            //logInView.emailErrorLabel
-            //use loginView.?? to access any property or function in LogInView
-        case SegueID.gotoProfile.rawValue:
-            let userProfileView =  segue.destination as! UserProfileView
-        case SegueID.gotoCategoryView.rawValue:
-            let categoryView = segue.destination as! CategoryView
-            categoryView.userData = userData
-        case SegueID.welcomToRecord.rawValue:
-            let recordView = segue.destination as! RecordView
-        default:
-            print("Error in WelcomView segue")
+        
+        @IBAction func userLoginButtonPushed(_ sender: UIButton) {
+            performSegue(withIdentifier: SegueID.welcomeToLoginView.rawValue, sender: self)
+        }
+        
+        @IBAction func categoryViewButtonPush(_ sender: UIButton) {
+            performSegue(withIdentifier: SegueID.gotoCategoryView.rawValue, sender: self)
+        }
+        
+        @IBAction func recordingViewPushed(_ sender: UIButton) {
+            performSegue(withIdentifier: SegueID.welcomToRecord.rawValue, sender: self)
+        }
+        
+        @IBAction func playViewPushed(_ sender: UIButton) {
+        }
+        
+        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            //        if segue.identifier == SegueID.welcomeToLoginView.rawValue {
+            //            let destinationVC = segue.destination as! LogInView
+            //        }
+            
+            switch segue.identifier {
+            case SegueID.welcomeToLoginView.rawValue:
+                let logInView = segue.destination as! LogInView
+                //logInView.emailErrorLabel
+                //use loginView.?? to access any property or function in LogInView
+            case SegueID.gotoProfile.rawValue:
+                let userProfileView =  segue.destination as! UserProfileView
+            case SegueID.gotoCategoryView.rawValue:
+                let categoryView = segue.destination as! CategoryView
+                categoryView.userData = NetworkManager.userData
+            case SegueID.welcomToRecord.rawValue:
+                let recordView = segue.destination as! RecordView
+            default:
+                print("Error in WelcomView segue")
+            }
         }
     }
-}
+    
+    //user logged in, userLogInButton = logOut
+    //then go to loginView
+    
+    //
 
-//user logged in, userLogInButton = logOut
-//then go to loginView
-
-//

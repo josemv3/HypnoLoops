@@ -9,12 +9,14 @@ import UIKit
 
 class AffirmationsView: UIViewController, UICollectionViewDelegate {
     @IBOutlet weak var affirmationCV: UICollectionView!
-
-    var dataSource: UICollectionViewDiffableDataSource<Section, String>!//SOURCE1
-    let affirmationsString = AffirmationStings()
-    var categoryReceived = "" //receiving var fromm sections CV
-    var showAffirmation: [String] = [] //categoryReceived is used to pull affirmation in dict
+    
+    var dataSource: UICollectionViewDiffableDataSource<Section, AffirmationModel>!//SOURCE1
+    //let affirmationsString = AffirmationStings()
+    //var categoryReceived = "" //receiving var fromm sections CV
+    //var showAffirmation: [String] = [] //categoryReceived is used to pull affirmation in dict
     var noAffirmation = "No affirmation selected..."
+    var category: CategoryModel?
+    //var userData: UserData?
 
     enum Section {
         case main
@@ -22,8 +24,9 @@ class AffirmationsView: UIViewController, UICollectionViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(NetworkManager.userData)
         //2 sources of truth
-        showAffirmation = affirmationsString.affirmations[categoryReceived] ?? ["Error"]
+        //showAffirmation = category?.affirmations ?? ["Error"]
         affirmationCV.collectionViewLayout = configureLayout()
         configureDataSource()
     }
@@ -73,22 +76,33 @@ class AffirmationsView: UIViewController, UICollectionViewDelegate {
     //MARK: - DataSource
     private func configureDataSource() {
         ///CELL
-        dataSource = UICollectionViewDiffableDataSource<Section, String>(collectionView: affirmationCV, cellProvider: { collectionView, indexPath, item in
+        dataSource = UICollectionViewDiffableDataSource<Section, AffirmationModel>(collectionView: affirmationCV, cellProvider: { [weak self] collectionView, indexPath, item in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AffirmationCell.reuseidentifier, for: indexPath) as! AffirmationCell
+            
+            cell.setLiked()
+            
+            if item.liked {
+                cell.likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            } else {
+                cell.likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+            }
+            
             cell.layer.cornerRadius = CornerRadiusModifiers.normal.size
             cell.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
             cell.layer.borderWidth = BorderSize.small.size
             cell.layer.backgroundColor = UIColor.black.cgColor
             cell.selectedButton.layer.cornerRadius = CornerRadiusModifiers.small.size
-            cell.affirmationLabel.text = self.showAffirmation[indexPath.item] //showAfffirmation is an optional array built from affirmations Dict. Then Item bulds cells from string sentences.
-            
+            cell.affirmationLabel.text = item.affirmation //showAfffirmation is an optional array built from affirmations Dict. Then Item bulds cells from string sentences.
+            cell.affirmation = item
+            //cell.userData = self?.userData
+            //print("USER HERE: \(self?.userData)")
             return cell
         })
         
-        var initialSnapshot = NSDiffableDataSourceSnapshot<Section, String>()//SOURCE3
+        var initialSnapshot = NSDiffableDataSourceSnapshot<Section, AffirmationModel>()//SOURCE3
         
         initialSnapshot.appendSections([.main])
-        initialSnapshot.appendItems(showAffirmation)
+        initialSnapshot.appendItems(category!.affirmations)
 
         dataSource.apply(initialSnapshot, animatingDifferences: false)
     }

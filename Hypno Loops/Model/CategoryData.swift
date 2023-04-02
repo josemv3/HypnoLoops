@@ -11,7 +11,10 @@ import Foundation
 
 struct CategoryData {
     var subCategories: [[CategoryItem]] = []
-    var finalCategories: [String: [CategoryItem]] = [:]
+    var finalCategories: [SectionHeaderModel: [CategoryItem]] = [:]
+    
+    
+    
 
     mutating func getSubCategories() {
         for sectionHeader in SectionHeaderData.SectionHeaders.allCases {

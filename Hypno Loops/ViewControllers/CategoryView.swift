@@ -15,32 +15,36 @@ class CategoryView: UIViewController, UICollectionViewDelegate {
     var categoryData = CategoryData()
     var sectionData = SectionHeaderData()
     static let sectionHeaderElementKind = "section-header-element-kind"
-    var dataSource: UICollectionViewDiffableDataSource<String, CategoryItem>!//SOURCE1
-    var testDict: [String: [CategoryItem]] = [:]
+    var dataSource: UICollectionViewDiffableDataSource<SectionHeaderModel, CategoryModel>!//SOURCE1
+    var testDict: [String: [CategoryModel]] = [:]
     var cellStringReceived = ""
     var itemSelected = ""
     var userData: UserData?
+    var headers = [SectionHeaderModel]()
+    var categorySelected: CategoryModel?
     
-    var filteredItemsSnapshot: NSDiffableDataSourceSnapshot<String, CategoryItem> {
-        var snapshot = NSDiffableDataSourceSnapshot<String, CategoryItem>()
+    
+    var filteredItemsSnapshot: NSDiffableDataSourceSnapshot<SectionHeaderModel, CategoryModel> {
+        var snapshot = NSDiffableDataSourceSnapshot<SectionHeaderModel, CategoryModel>()
         
-        for section in sectionData.sectionHeaders {
+        for section in headers {
             snapshot.appendSections([section])
-            snapshot.appendItems(categoryData.finalCategories[section]!) // new data
+            snapshot.appendItems(section.categories) // new data
         }
         return snapshot
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureProfileImageView()
+        retrieveHeaders()
+//        configureProfileImageView()
         //Build Section header stings
-        sectionData.makeSectionHeaders() //this can be replaced with just the enum
+//        sectionData.makeSectionHeaders() //this can be replaced with just the enum
         //Build category objects in an array
         categoryData.getSubCategories()
         //zip section headers and catogory items to populate collectionView
-        categoryData.finalCategories = zip(sectionData.sectionHeaders, categoryData.subCategories).reduce(into: [:]) { $0[$1.0] = $1.1 }
-        print(categoryData.finalCategories)
+//        categoryData.finalCategories = zip(sectionData.sectionHeaders, categoryData.subCategories).reduce(into: [:]) { $0[$1.0] = $1.1 }
+        //print(categoryData.finalCategories)
         
         topProfileImage.layer.cornerRadius = CornerRadiusModifiers.normal.size
         topProfileImage.layer.borderWidth = BorderSize.small.size
@@ -53,10 +57,22 @@ class CategoryView: UIViewController, UICollectionViewDelegate {
         configureDataSource()
     }
     
-    func configureProfileImageView()  {
-        guard let url = userData?.imageURL else { return }
-        NetworkManager.shared.fetchUserProfileImageURL(photoURLString: url, imageView: topProfileImage)
+    func retrieveHeaders() {
+        NetworkManager.shared.getSectionHeaders { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let response):
+                self.headers = response
+            case .failure(let failure):
+                print(failure)
+            }
+        }
     }
+    
+//    func configureProfileImageView()  {
+//        guard let url = userData?.imageURL else { return }
+//        NetworkManager.shared.fetchUserProfileImageURL(photoURLString: url, imageView: topProfileImage)
+//    }
     
     //MARK: - Compositional CV LAYOUT
     
@@ -99,12 +115,12 @@ class CategoryView: UIViewController, UICollectionViewDelegate {
     //MARK: - Data Source (Cell)
     
     func configureDataSource() {//SOURCE2
-        dataSource = UICollectionViewDiffableDataSource<String, CategoryItem>(collectionView: loopCollectionsCV) { (collectionView, indexPath, item) -> CategoryViewCell? in
+        dataSource = UICollectionViewDiffableDataSource<SectionHeaderModel, CategoryModel>(collectionView: loopCollectionsCV) { (collectionView, indexPath, item) -> CategoryViewCell? in
             
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryViewCell.reuseidentifier, for: indexPath) as? CategoryViewCell else {
                 fatalError("Cannot create new cell")
             }
-            cell.cellLabel.text = item.name
+            cell.cellLabel.text = item.title
             cell.cellLabel.lineBreakMode = .byWordWrapping
             cell.cellLabel.numberOfLines = 3
             cell.backgroundColor = .black
@@ -120,41 +136,41 @@ class CategoryView: UIViewController, UICollectionViewDelegate {
             let header = collectionView.dequeueReusableSupplementaryView(
                 ofKind: kind, withReuseIdentifier: "Header", for: indexPath) as! CategoryViewHeader
             
-            header.label.text = String(self.sectionData.sectionHeaders[indexPath.section])
+            header.label.text = self.headers[indexPath.section].headerTitle
             //header.label.font = UIFont(name: "Chalkduster", size: 18)
             header.label.textColor = UIColor.white
             
             return header
         }
         
-        var initialSnapshot = NSDiffableDataSourceSnapshot<String, CategoryItem>()//SOURCE3
+        var initialSnapshot = NSDiffableDataSourceSnapshot<SectionHeaderModel, CategoryModel>()//SOURCE3
         
-        for section in sectionData.sectionHeaders { //replace this with just enum (hashable)
+        for section in headers { //replace this with just enum (hashable)
             initialSnapshot.appendSections([section])
-            initialSnapshot.appendItems(categoryData.finalCategories[section]!)
+            initialSnapshot.appendItems(section.categories)
         }
        
         dataSource.apply(initialSnapshot, animatingDifferences: false)
     }
     
+
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
-        print(item.name)
+        //print(item.name)
+        categorySelected = item
         
-        if item.name == "Self healing" {
-            performSegue(withIdentifier: SegueID.gotoRecord.rawValue, sender: self)
-        } else {
-            itemSelected = item.name
-            performSegue(withIdentifier: SegueID.gotoAffirmationsView.rawValue, sender: self)
-            
-            
-        }
+        performSegue(withIdentifier: SegueID.gotoAffirmationsView.rawValue, sender: self)
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if segue.identifier == SegueID.gotoAffirmationsView.rawValue {
             let destinationVC = segue.destination as! AffirmationsView
-            destinationVC.categoryReceived = itemSelected
-            
+            //destinationVC.categoryReceived = itemSelected
+            //destinationVC.userData = userData
+            destinationVC.category = categorySelected 
+        
         }
     }
 }

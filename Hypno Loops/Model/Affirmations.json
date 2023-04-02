@@ -1,0 +1,608 @@
+[
+  {
+    "headerTitle": "Health and Healing",
+    "categories": [
+      {
+        "title": "Divine Healing",
+        "affirmations": [
+          {
+            "id": "divine_healing_1",
+            "affirmation": "I receive Gods healing into my cells"
+          },
+          {
+            "id": "divine_healing_2",
+            "affirmation": "The power of Gods love heals me"
+          },
+          {
+            "id": "divine_healing_3",
+            "affirmation": "The Fountain of Gods love healed me"
+          },
+          {
+            "id": "divine_healing_4",
+            "affirmation": "The Power of God has healed me"
+          },
+          {
+            "id": "divine_healing_5",
+            "affirmation": "I am intuitively guided to my healing"
+          },
+          {
+            "id": "divine_healing_6",
+            "affirmation": "I knew I was healed like God promised"
+          },
+          {
+            "id": "divine_healing_7",
+            "affirmation": "I am divinely guided to my healing"
+          }
+        ]
+      },
+      {
+        "title": "Gratitude",
+        "affirmations": [
+          {
+            "id": "gratitude_1",
+            "affirmation": "My body corrected all irregularities"
+          },
+          {
+            "id": "gratitude_2",
+            "affirmation": "My body perfectly repaired this"
+          },
+          {
+            "id": "gratitude_3",
+            "affirmation": "I'm so grateful my body cleaned it up"
+          },
+          {
+            "id": "gratitude_4",
+            "affirmation": "Thank you \"body\" for letting this go"
+          },
+          {
+            "id": "gratitude_5",
+            "affirmation": "Thank you \"body\" for healing yourself"
+          },
+          {
+            "id": "gratitude_6",
+            "affirmation": "I am grateful to be whole, I am healthy in my body"
+          }
+        ]
+      },
+      {
+        "title": "Self Belief",
+        "affirmations": [
+          {
+            "id": "self_belief_1",
+            "affirmation": "I knew I could heal myself"
+          },
+          {
+            "id": "self_belief_2",
+            "affirmation": "I knew I could recover from this"
+          },
+          {
+            "id": "self_belief_3",
+            "affirmation": "I knew I would heal myself"
+          },
+          {
+            "id": "self_belief_4",
+            "affirmation": "I am healed"
+          },
+          {
+            "id": "self_belief_5",
+            "affirmation": "I am strong"
+          },
+          {
+            "id": "self_belief_6",
+            "affirmation": "I trust my body to heal"
+          }
+        ]
+      },
+      {
+        "title": "Intuition",
+        "affirmations": [
+          {
+            "id": "intuition_1",
+            "affirmation": "My Intuition guided me through this"
+          },
+          {
+            "id": "intuition_2",
+            "affirmation": "I knew Gods love could heal me"
+          },
+          {
+            "id": "intuition_3",
+            "affirmation": "I knew I'd discover ways to heal this"
+          },
+          {
+            "id": "intuition_4",
+            "affirmation": "I am intuitively guided to my healing"
+          }
+        ]
+      },
+      {
+        "title": "Illness",
+        "affirmations": [
+          {
+            "id": "illness_1",
+            "affirmation": "All evidence of cancer is gone"
+          },
+          {
+            "id": "illness_2",
+            "affirmation": "All evidence of __ is gone (or healed)"
+          },
+          {
+            "id": "illness_3",
+            "affirmation": "I deserve to be free from ___."
+          }
+        ]
+      },
+      {
+        "title": "Self Healing",
+        "affirmations": [
+          {
+            "id": "self_healing_1",
+            "affirmation": "My body is full of healing energy"
+          },
+          {
+            "id": "self_healing_2",
+            "affirmation": "My nervous system is whole"
+          },
+          {
+            "id": "self_healing_3",
+            "affirmation": "My Body knows how to heal itself"
+          },
+          {
+            "id": "self_healing_4",
+            "affirmation": "I perceive what my body needs to heal"
+          },
+          {
+            "id": "self_healing_5",
+            "affirmation": "I know what my body needs to heal"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "headerTitle": "Love",
+    "categories": [
+      {
+        "title": "Attracting Love",
+        "affirmations": [
+          {
+            "id": "attracting_love_1",
+            "affirmation": "I am attracting healthy relationships"
+          },
+          {
+            "id": "attracting_love_2",
+            "affirmation": "I am attracting true love"
+          },
+          {
+            "id": "attracting_love_3",
+            "affirmation": "I am attracting romantic love"
+          },
+          {
+            "id": "attracting_love_4",
+            "affirmation": "I am moving towards a love I can feel proud of"
+          }
+        ]
+      },
+      {
+        "title": "Self Worth",
+        "affirmations": [
+          {
+            "id": "self_worth_1",
+            "affirmation": "I am worthy of being cherished and deeply cared for"
+          },
+          {
+            "id": "self_worth_2",
+            "affirmation": "I am worthy of affection"
+          },
+          {
+            "id": "self_worth_3",
+            "affirmation": "I am worthy of love"
+          }
+        ]
+      },
+      {
+        "title": "Marriage",
+        "affirmations": [
+          {
+            "id": "marriage_1",
+            "affirmation": "I am in a happy marriage"
+          },
+          {
+            "id": "marriage_2",
+            "affirmation": "I am married and loving it"
+          }
+        ]
+      },
+      {
+        "title": "Positive Outlook",
+        "affirmations": [
+          {
+            "id": "positive_outlook_1",
+            "affirmation": "I am in a happy marriage"
+          },
+          {
+            "id": "positive_outlook_2",
+            "affirmation": "I am married and loving it"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "headerTitle": "Finance",
+    "categories": [
+      {
+        "title": "Abundance",
+        "affirmations": [
+          {
+            "id": "abundance_1",
+            "affirmation": "I manifest abundance easily"
+          },
+          {
+            "id": "abundance_2",
+            "affirmation": "I am worthy of abundance"
+          },
+          {
+            "id": "abundance_3",
+            "affirmation": "Abundance is my birthright"
+          }
+        ]
+      },
+      {
+        "title": "Wealth",
+        "affirmations": [
+          {
+            "id": "wealth_1",
+            "affirmation": "I generate amazing sources of income"
+          },
+          {
+            "id": "wealth_2",
+            "affirmation": "I allow wealth to flow into my life"
+          },
+          {
+            "id": "wealth_3",
+            "affirmation": "Money comes to me easily"
+          },
+          {
+            "id": "wealth_4",
+            "affirmation": "I have the power to attract wealth"
+          },
+          {
+            "id": "wealth_5",
+            "affirmation": "I have the power to create wealth"
+          }
+        ]
+      },
+      {
+        "title": "Income",
+        "affirmations": [
+          {
+            "id": "income_1",
+            "affirmation": "I generate amazing sources of income"
+          },
+          {
+            "id": "income_2",
+            "affirmation": "I make money easily"
+          },
+          {
+            "id": "income_3",
+            "affirmation": "Everyday I'm getting paid"
+          }
+        ]
+      },
+      {
+        "title": "Millionaire Mindset",
+        "affirmations": [
+          {
+            "id": "millianaire_mindset_1",
+            "affirmation": "I am a multimillionaire"
+          },
+          {
+            "id": "millianaire_mindset_2",
+            "affirmation": "I am independently wealthy"
+          },
+          {
+            "id": "millianaire_mindset_3",
+            "affirmation": "I am rich and loving it"
+          }
+        ]
+      },
+      {
+        "title": "Confidence",
+        "affirmations": [
+          {
+            "id": "confidence_1",
+            "affirmation": "I am confident in my ability"
+          },
+          {
+            "id": "confidence_2",
+            "affirmation": "I am stable financially"
+          },
+          {
+            "id": "confidence_3",
+            "affirmation": "I am abundant and successful"
+          },
+          {
+            "id": "confidence_4",
+            "affirmation": "I am inspired to succeed"
+          },
+          {
+            "id": "confidence_5",
+            "affirmation": "I am strong creative and wealthy"
+          },
+          {
+            "id": "confidence_6",
+            "affirmation": "I knew my hard work would pay off"
+          }
+        ]
+      },
+      {
+        "title": "Wealth Attraction",
+        "affirmations": [
+          {
+            "id": "wealth_attraction_1",
+            "affirmation": "I allow wealth to flow into my life"
+          },
+          {
+            "id": "wealth_attraction_2",
+            "affirmation": "Money comes to me easily"
+          },
+          {
+            "id": "wealth_attraction_3",
+            "affirmation": "I have the power to attract wealth"
+          }
+        ]
+      },
+      {
+        "title": "Wealth Mastery",
+        "affirmations": [
+          {
+            "id": "wealth_mastery_1",
+            "affirmation": "I make money easily"
+          },
+          {
+            "id": "wealth_mastery_2",
+            "affirmation": "I am a deal magnet"
+          }
+        ]
+      },
+      {
+        "title": "Prosperity",
+        "affirmations": [
+          {
+            "id": "prosperity_1",
+            "affirmation": "I am an abundant being"
+          },
+          {
+            "id": "prosperity_2",
+            "affirmation": "Abundance is my birthright"
+          },
+          {
+            "id": "prosperity_3",
+            "affirmation": "I am blessed"
+          },
+          {
+            "id": "prosperity_4",
+            "affirmation": "favored, and prosperous"
+          }
+        ]
+      },
+      {
+        "title": "Deal Making",
+        "affirmations": [
+          {
+            "id": "deal_making_1",
+            "affirmation": "I am a deal magnet"
+          },
+          {
+            "id": "deal_making_2",
+            "affirmation": "I have the power to create wealth"
+          }
+        ]
+      },
+      {
+        "title": "Financial Stability",
+        "affirmations": [
+          {
+            "id": "financial_stability_1",
+            "affirmation": "I am stable financially"
+          },
+          {
+            "id": "financial_stability_2",
+            "affirmation": "I am totally debt free"
+          }
+        ]
+      },
+      {
+        "title": "Success",
+        "affirmations": [
+          {
+            "id": "success_1",
+            "affirmation": "I am abundant and successful"
+          },
+          {
+            "id": "success_2",
+            "affirmation": "I am inspired to succeed"
+          },
+          {
+            "id": "success_3",
+            "affirmation": "I am strong creative and wealthy"
+          }
+        ]
+      },
+      {
+        "title": "Debt Freedom",
+        "affirmations": [
+          {
+            "id": "debt_freedom_1",
+            "affirmation": "I am totally debt free"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "headerTitle": "Mental Health",
+    "categories": [
+      {
+        "title": "Healing From Mental Illness",
+        "affirmations": [
+          {
+            "id": "healing_from_1",
+            "affirmation": "I am healed from anxiety"
+          },
+          {
+            "id": "healing_from_2",
+            "affirmation": "Healing from depression is possible"
+          },
+          {
+            "id": "healing_from_3",
+            "affirmation": "I am capable of healing depression"
+          },
+          {
+            "id": "healing_from_4",
+            "affirmation": "I am healed of depression"
+          }
+        ]
+      },
+      {
+        "title": "Depression",
+        "affirmations": [
+          {
+            "id": "depression_1",
+            "affirmation": "I am managing my depressing thoughts"
+          },
+          {
+            "id": "depression_2",
+            "affirmation": "I am strong enough to handle this"
+          },
+          {
+            "id": "depression_3",
+            "affirmation": "I have what it takes to get through this"
+          },
+          {
+            "id": "depression_4",
+            "affirmation": "I can and will heal from depression"
+          },
+          {
+            "id": "depression_5",
+            "affirmation": "It's time to outgrow depression"
+          },
+          {
+            "id": "depression_6",
+            "affirmation": "I am capable of managing depression symptoms"
+          }
+        ]
+      },
+      {
+        "title": "Self Acceptance",
+        "affirmations": [
+          {
+            "id": "self_acceptance_1",
+            "affirmation": "I celebrate the good things about my life"
+          },
+          {
+            "id": "self_acceptance_2",
+            "affirmation": "I celebrate the good things about myself"
+          },
+          {
+            "id": "self_acceptance_3",
+            "affirmation": "I have so much to be grateful for"
+          },
+          {
+            "id": "self_acceptance_4",
+            "affirmation": "I am much more than how I feel right now"
+          },
+          {
+            "id": "self_acceptance_5",
+            "affirmation": "I am worthy of great things in my life"
+          }
+        ]
+      },
+      {
+        "title": "Inspiration",
+        "affirmations": [
+          {
+            "id": "inspiration_1",
+            "affirmation": "I knew I'd find inspiration to change"
+          },
+          {
+            "id": "inspiration_2",
+            "affirmation": "I will find inspiration to change"
+          },
+          {
+            "id": "inspiration_3",
+            "affirmation": "My Life's possibilities are endless"
+          },
+          {
+            "id": "inspiration_4",
+            "affirmation": "I knew my mind would be whole"
+          },
+          {
+            "id": "inspiration_5",
+            "affirmation": "I am motivated to fight for my life"
+          }
+        ]
+      },
+      {
+        "title": "Strength",
+        "affirmations": [
+          {
+            "id": "strength_1",
+            "affirmation": "I will navigate these feelings with strength and love"
+          },
+          {
+            "id": "strength_2",
+            "affirmation": "I am mentally strong and stable"
+          },
+          {
+            "id": "strength_3",
+            "affirmation": "I am optimistic"
+          },
+          {
+            "id": "strength_4",
+            "affirmation": "I am capable of managing anxiety symptoms"
+          }
+        ]
+      },
+      {
+        "title": "Self Love",
+        "affirmations": [
+          {
+            "id": "self_love_1",
+            "affirmation": "I love you"
+          },
+          {
+            "id": "self_love_2",
+            "affirmation": "You are safe"
+          }
+        ]
+      },
+      {
+        "title": "Spirituality",
+        "affirmations": [
+          {
+            "id": "spirituality_1",
+            "affirmation": "God has given me a sound mind"
+          }
+        ]
+      },
+      {
+        "title": "Negative Thoughts",
+        "affirmations": [
+          {
+            "id": "negative_thoughts_1",
+            "affirmation": "My repetitive thoughts are not facts"
+          },
+          {
+            "id": "negative_thoughts_2",
+            "affirmation": "My subconscious fear patterns are healed"
+          },
+          {
+            "id": "negative_thoughts_3",
+            "affirmation": "Gain momentum by taking small steps"
+          }
+        ]
+      }
+    ]
+  }
+]

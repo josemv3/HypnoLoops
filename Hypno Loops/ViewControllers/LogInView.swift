@@ -6,9 +6,7 @@
 //
 
 import UIKit
-import FirebaseAuth
-import FirebaseDatabase
-import FirebaseDatabaseSwift
+import Firebase
 import FirebaseStorage
 
 
@@ -76,7 +74,7 @@ class LogInView: UIViewController {
         //If failure alert popup to create account
         //Alert continue = create account
         
-        FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password, completion: { [weak self] result, error in
+        Auth.auth().signIn(withEmail: email, password: password, completion: { [weak self] result, error in
             guard let strongSelf = self else {
                 //strongSelf used in error to call func.show
                 return
@@ -97,12 +95,13 @@ class LogInView: UIViewController {
         //resetForm()
     }
     
-    func showCreateAccount(email: String, password: String) {
+func showCreateAccount(email: String, password: String) {
         let alert = UIAlertController(title: "Create Account", message: "Would you like to create an account?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Continue", style: .default, handler: {_ in
+    
+    alert.addAction(UIAlertAction(title: "Continue", style: .default, handler: {action in
             
-            FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password) {
-                [weak self] result, error in
+            let auth = Auth.auth()
+            auth.createUser(withEmail: email, password: password) { [weak self] result, error in
                 guard let strongSelf = self else { return }
                 guard error == nil else {
                     print("Account creation failed")
@@ -111,43 +110,38 @@ class LogInView: UIViewController {
                 
                 guard result != nil else { return }
                 guard let uid = result?.user.uid else { return }
+                let databaseReference = Database.database().reference()
                 
-                let reference = FirebaseDatabase.Database.database().reference(
-                    fromURL: RealtimeDatabase.referenceURLString.rawValue)
-                let usersReference = reference.child("users").child(uid)
-                
-                let imageData = strongSelf.profileView.image?.jpegData(compressionQuality: 0.5)
+                //                MARK: handle profile pic
+                let image = strongSelf.profileView.image!
+                let imageData = image.jpegData(compressionQuality: 0.5)
                 let storageReference = Storage.storage().reference().child("users/\(uid)/profile.jpg")
+                storageReference.putData(imageData!)
                 
-                let uploadTask = storageReference.putData(imageData!)
+                 
                 
-                uploadTask.observe(.success) { snapshot in
-                    storageReference.downloadURL { url, error in
-                        guard let downloadURL = url else {
-                            return
-                        }
-                        
-                        let urlString = NSString(string: "\(downloadURL)")
-                        let values = ["username": strongSelf.usernameTextField.text, "profilePhotoURL": urlString ]
-                        print(downloadURL)
-                        
-                        usersReference.updateChildValues(values) { databaseError, databaseReference in
-                            if databaseError != nil {
-                                print("THERE WAS AN ERROR \(String(describing: databaseError))")
-                                return
+                if let user = auth.currentUser {
+                    let changeRequest = user.createProfileChangeRequest()
+                    changeRequest.photoURL = URL(string: storageReference.fullPath)
+                    changeRequest.displayName = strongSelf.usernameTextField.text
+                    changeRequest.commitChanges { error in
+                        if error != nil {
+                            print(error)
+                        } else {
+                            let userName = user.displayName
+                            var likedAffirmations = [String]()
+                            databaseReference.child("users").child(uid).child("likedAffirmations").getData { error, snapshot in
+                                likedAffirmations = snapshot?.value as? [String] ?? []
                             }
+                            NetworkManager.userData = UserData(username: userName!,likedAffirmationIds: likedAffirmations )
+                            strongSelf.performSegue(withIdentifier: SegueID.gotoProfile.rawValue, sender: self)
                         }
                     }
                 }
                 
-                print("You have created an account and signed in")
-                //in video he hides labels with Strong self, use for segue
-                //Segue to profile screen so user ca customize profile the first time.
-                strongSelf.performSegue(withIdentifier: SegueID.gotoProfile.rawValue, sender: self)
             }
         }))
-        alert.addAction(UIAlertAction(title: "Canel", style: .cancel))
-        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         present(alert, animated: true)
     }
     
@@ -272,7 +266,7 @@ class LogInView: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == SegueID.gotoProfile.rawValue {
-            let destinationVC = segue.destination as! UserProfileView
+            //let destinationVC = segue.destination as! UserProfileView
         }
     }
 }
