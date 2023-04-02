@@ -22,74 +22,76 @@ class WelcomeView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if Auth.auth().currentUser != nil { print("USER FOUND: ", Auth.auth().currentUser) }
-//        getUserData()
-//        configureProfileImageView()
+        //        getUserData()
+        //        configureProfileImageView()
         userLoginImage.layer.borderWidth = BorderSize.small.size
         userLoginImage.layer.cornerRadius = CornerRadiusModifiers.normal.size
         userLoginImage.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
     }
     
-//    func configureProfileImageView() {
-//        if let _ = Auth.auth().currentUser {
-//            userLoginButton.isHidden = true
-//            guard let url = userData?.imageURL else { return }
-//            NetworkManager.shared.fetchUserProfileImageURL(photoURLString: url, imageView: userLoginImage)
-//        }
-//    }
+    //    func configureProfileImageView() {
+    //        if let _ = Auth.auth().currentUser {
+    //            userLoginButton.isHidden = true
+    //            guard let url = userData?.imageURL else { return }
+    //            NetworkManager.shared.fetchUserProfileImageURL(photoURLString: url, imageView: userLoginImage)
+    //        }
+    //    }
     
     func getUserData() {
-        if let _ = Auth.auth().currentUser {
+        if let user = Auth.auth().currentUser {
             NetworkManager.shared.getCurrentUserData { result in
                 switch result {
                 case .success(let success):
-                    let username = Auth.auth().currentUser.displayName
-                    NetworkManager.userData = UserData(username: username, likedAffirmationIds: ["future"])
+                    let username = user.displayName
+                    NetworkManager.userData = UserData(username: username!, likedAffirmationIds: ["future"])
                 case .failure(let error):
                     print(error)
                 }
             }
-    }
-
-    
-    @IBAction func userLoginButtonPushed(_ sender: UIButton) {
-        performSegue(withIdentifier: SegueID.welcomeToLoginView.rawValue, sender: self)
-    }
-    
-    @IBAction func categoryViewButtonPush(_ sender: UIButton) {
-        performSegue(withIdentifier: SegueID.gotoCategoryView.rawValue, sender: self)
-    }
-    
-    @IBAction func recordingViewPushed(_ sender: UIButton) {
-        performSegue(withIdentifier: SegueID.welcomToRecord.rawValue, sender: self)
-    }
-    
-    @IBAction func playViewPushed(_ sender: UIButton) {
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == SegueID.welcomeToLoginView.rawValue {
-//            let destinationVC = segue.destination as! LogInView
-//        }
-        
-        switch segue.identifier {
-        case SegueID.welcomeToLoginView.rawValue:
-            let logInView = segue.destination as! LogInView
-            //logInView.emailErrorLabel
-            //use loginView.?? to access any property or function in LogInView
-        case SegueID.gotoProfile.rawValue:
-            let userProfileView =  segue.destination as! UserProfileView
-        case SegueID.gotoCategoryView.rawValue:
-            let categoryView = segue.destination as! CategoryView
-            categoryView.userData = userData
-        case SegueID.welcomToRecord.rawValue:
-            let recordView = segue.destination as! RecordView
-        default:
-            print("Error in WelcomView segue")
         }
     }
-}
+        
+        
+        @IBAction func userLoginButtonPushed(_ sender: UIButton) {
+            performSegue(withIdentifier: SegueID.welcomeToLoginView.rawValue, sender: self)
+        }
+        
+        @IBAction func categoryViewButtonPush(_ sender: UIButton) {
+            performSegue(withIdentifier: SegueID.gotoCategoryView.rawValue, sender: self)
+        }
+        
+        @IBAction func recordingViewPushed(_ sender: UIButton) {
+            performSegue(withIdentifier: SegueID.welcomToRecord.rawValue, sender: self)
+        }
+        
+        @IBAction func playViewPushed(_ sender: UIButton) {
+        }
+        
+        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            //        if segue.identifier == SegueID.welcomeToLoginView.rawValue {
+            //            let destinationVC = segue.destination as! LogInView
+            //        }
+            
+            switch segue.identifier {
+            case SegueID.welcomeToLoginView.rawValue:
+                let logInView = segue.destination as! LogInView
+                //logInView.emailErrorLabel
+                //use loginView.?? to access any property or function in LogInView
+            case SegueID.gotoProfile.rawValue:
+                let userProfileView =  segue.destination as! UserProfileView
+            case SegueID.gotoCategoryView.rawValue:
+                let categoryView = segue.destination as! CategoryView
+                categoryView.userData = userData
+            case SegueID.welcomToRecord.rawValue:
+                let recordView = segue.destination as! RecordView
+            default:
+                print("Error in WelcomView segue")
+            }
+        }
+    }
+    
+    //user logged in, userLogInButton = logOut
+    //then go to loginView
+    
+    //
 
-//user logged in, userLogInButton = logOut
-//then go to loginView
-
-//

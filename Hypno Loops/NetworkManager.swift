@@ -34,10 +34,11 @@ class NetworkManager {
         if let user = Auth.auth().currentUser {
             let reference = Database.database().reference()
             let userRef = reference.child("users").child(user.uid).child("likedAffirmations")
+           
             
-            userRef.getData { data, error in
-                let likedAffirmationIds = data.value as! [String] ?? []
-                completion(.success(UserData(username: Auth.auth().currentUser.displayName, likedAffirmationIds: likedAffirmationIds)))
+            userRef.getData { error, data in
+                let likedAffirmationIds = data?.value as? [String] ?? []
+                completion(.success(UserData(username: user.displayName!, likedAffirmationIds: likedAffirmationIds)))
             }
         }
     }

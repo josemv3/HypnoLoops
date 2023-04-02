@@ -97,9 +97,11 @@ class LogInView: UIViewController {
     
 func showCreateAccount(email: String, password: String) {
         let alert = UIAlertController(title: "Create Account", message: "Would you like to create an account?", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Continue", style: .default, handler: {_ in
+    
+    alert.addAction(UIAlertAction(title: "Continue", style: .default, handler: {action in
             
-            Auth.auth().createUser(withEmail: email, password: password) { [weak self] result, error in
+            let auth = Auth.auth()
+            auth.createUser(withEmail: email, password: password) { [weak self] result, error in
                 guard let strongSelf = self else { return }
                 guard error == nil else {
                     print("Account creation failed")
@@ -118,17 +120,17 @@ func showCreateAccount(email: String, password: String) {
                 
                  
                 
-                if let user = Auth.auth().currentUser {
+                if let user = auth.currentUser {
                     let changeRequest = user.createProfileChangeRequest()
                     changeRequest.photoURL = URL(string: storageReference.fullPath)
                     changeRequest.displayName = strongSelf.usernameTextField.text
                     changeRequest.commitChanges { error in
-                        if let _ = error {
+                        if error != nil {
                             print(error)
                         } else {
-                            let userName = Auth.auth().currentUser?.displayName
+                            let userName = user.displayName
                             var likedAffirmations = [String]()
-                            databaseReference.child("users").child(uid).getData { error, snapshot in
+                            databaseReference.child("users").child(uid).likedAffirmations.getData { error, snapshot in
                                 likedAffirmations = snapshot?.value as? [String] ?? []
                             }
                             NetworkManager.userData = UserData(username: userName!,likedAffirmationIds: likedAffirmations )
@@ -264,7 +266,7 @@ func showCreateAccount(email: String, password: String) {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == SegueID.gotoProfile.rawValue {
-            let destinationVC = segue.destination as! UserProfileView
+            //let destinationVC = segue.destination as! UserProfileView
         }
     }
 }
