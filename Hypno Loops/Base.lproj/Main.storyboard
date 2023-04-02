@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kgG-JK-jTc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="kgG-JK-jTc">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -138,7 +138,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="EAK-H9-3K8">
-                                <rect key="frame" x="100" y="103.99999999999999" width="175" height="173.66666666666669"/>
+                                <rect key="frame" x="109" y="103.99999999999999" width="175" height="173.66666666666669"/>
                                 <color key="tintColor" name="hlBlue"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="175" id="vRq-U6-pqz"/>
@@ -146,7 +146,7 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z69-3y-kJ0">
-                                <rect key="frame" x="99.666666666666671" y="288" width="175.66666666666663" height="34.333333333333314"/>
+                                <rect key="frame" x="99.666666666666671" y="288" width="193.66666666666663" height="34.333333333333314"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Chose profile image"/>
                                 <connections>
@@ -606,12 +606,12 @@
                                                     <buttonConfiguration key="configuration" style="plain" title="Select"/>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zFK-de-qIB">
-                                                    <rect key="frame" x="20" y="85" width="28" height="28"/>
+                                                    <rect key="frame" x="20" y="99" width="28" height="14"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="28" id="g2U-FV-hkr"/>
                                                     </constraints>
                                                     <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain" image="heart" catalog="system"/>
+                                                    <buttonConfiguration key="configuration" style="plain"/>
                                                     <connections>
                                                         <action selector="likeButtonPressed:" destination="j4F-qQ-4ma" eventType="touchUpInside" id="Hv5-OO-hGU"/>
                                                     </connections>
@@ -619,17 +619,14 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="qZt-95-g5y" secondAttribute="trailing" constant="20" id="2re-BC-O33"/>
-                                                <constraint firstItem="zFK-de-qIB" firstAttribute="top" secondItem="qZt-95-g5y" secondAttribute="bottom" constant="5" id="6sr-Kd-eF5"/>
                                                 <constraint firstItem="qZt-95-g5y" firstAttribute="leading" secondItem="29k-aq-Fjd" secondAttribute="leading" constant="20" id="7eD-AW-c5E"/>
-                                                <constraint firstItem="zFK-de-qIB" firstAttribute="firstBaseline" secondItem="mUZ-WK-p9S" secondAttribute="baseline" id="AIm-lk-3zb"/>
+                                                <constraint firstAttribute="bottom" secondItem="zFK-de-qIB" secondAttribute="bottom" constant="15" id="B6k-cf-XHn"/>
                                                 <constraint firstItem="mUZ-WK-p9S" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="29k-aq-Fjd" secondAttribute="leading" constant="20" symbolic="YES" id="Ehy-Fe-YTv"/>
-                                                <constraint firstAttribute="bottom" secondItem="zFK-de-qIB" secondAttribute="bottom" constant="15" id="FEQ-xA-mfm"/>
                                                 <constraint firstAttribute="bottom" secondItem="mUZ-WK-p9S" secondAttribute="bottom" constant="15" id="Nve-jz-Kdb"/>
-                                                <constraint firstItem="zFK-de-qIB" firstAttribute="baseline" secondItem="mUZ-WK-p9S" secondAttribute="firstBaseline" id="RLr-MA-3aT"/>
                                                 <constraint firstItem="qZt-95-g5y" firstAttribute="top" secondItem="29k-aq-Fjd" secondAttribute="top" constant="10" id="aXh-Ez-Z99"/>
                                                 <constraint firstAttribute="bottom" secondItem="qZt-95-g5y" secondAttribute="bottom" constant="48" id="cVX-3D-7RL"/>
                                                 <constraint firstItem="mUZ-WK-p9S" firstAttribute="trailing" secondItem="qZt-95-g5y" secondAttribute="trailing" id="jnY-w7-WAN"/>
-                                                <constraint firstItem="zFK-de-qIB" firstAttribute="leading" secondItem="qZt-95-g5y" secondAttribute="leading" id="tqZ-6O-fyp"/>
+                                                <constraint firstItem="zFK-de-qIB" firstAttribute="leading" secondItem="29k-aq-Fjd" secondAttribute="leading" constant="20" id="rqT-u5-CDi"/>
                                                 <constraint firstItem="mUZ-WK-p9S" firstAttribute="top" secondItem="qZt-95-g5y" secondAttribute="bottom" constant="5" id="wtg-Ib-U8n"/>
                                             </constraints>
                                         </collectionViewCellContentView>

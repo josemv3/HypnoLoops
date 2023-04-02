@@ -15,22 +15,22 @@ class AffirmationCell: UICollectionViewCell {
     
     @IBOutlet weak var affirmationLabel: UILabel!
     @IBOutlet weak var selectedButton: UIButton!
-    
     @IBOutlet weak var likeButton: UIButton!
+    
     
     @IBAction func likeButtonPressed(_ sender: UIButton) {
         print("pressed")
         
         if affirmation.liked {
             let image = UIImage(systemName: "heart.fill")
-            DispatchQueue.main.async {
+            //DispatchQueue.main.async {
                 self.likeButton.setImage(image, for: .normal)
-            }
+            //}
         } else {
             let image = UIImage(systemName: "heart")
-            DispatchQueue.main.async {
+            //DispatchQueue.main.async {
                 self.likeButton.setImage(image, for: .normal)
-            }
+            //}
         }
         
         affirmation.toggleLiked(userData: &LogInView.userData!)

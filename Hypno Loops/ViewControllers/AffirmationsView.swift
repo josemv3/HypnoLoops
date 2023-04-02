@@ -77,6 +77,14 @@ class AffirmationsView: UIViewController, UICollectionViewDelegate {
         ///CELL
         dataSource = UICollectionViewDiffableDataSource<Section, AffirmationModel>(collectionView: affirmationCV, cellProvider: { [weak self] collectionView, indexPath, item in
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AffirmationCell.reuseidentifier, for: indexPath) as! AffirmationCell
+            
+            print("LIKED!", item.liked)
+            if item.liked {
+                cell.likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+            } else {
+                cell.likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+            }
+            
             cell.layer.cornerRadius = CornerRadiusModifiers.normal.size
             cell.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
             cell.layer.borderWidth = BorderSize.small.size
@@ -95,9 +103,5 @@ class AffirmationsView: UIViewController, UICollectionViewDelegate {
         initialSnapshot.appendItems(category!.affirmations)
 
         dataSource.apply(initialSnapshot, animatingDifferences: false)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        <#code#>
     }
 }
