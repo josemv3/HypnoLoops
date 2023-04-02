@@ -101,8 +101,7 @@ class LogInView: UIViewController {
         let alert = UIAlertController(title: "Create Account", message: "Would you like to create an account?", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Continue", style: .default, handler: {_ in
             
-            FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password) {
-                [weak self] result, error in
+            FirebaseAuth.Auth.auth().createUser(withEmail: email, password: password) { [weak self] result, error in
                 guard let strongSelf = self else { return }
                 guard error == nil else {
                     print("Account creation failed")
@@ -112,41 +111,31 @@ class LogInView: UIViewController {
                 guard result != nil else { return }
                 guard let uid = result?.user.uid else { return }
                 
-                let reference = FirebaseDatabase.Database.database().reference(
-                    fromURL: RealtimeDatabase.referenceURLString.rawValue)
-                let usersReference = reference.child("users").child(uid)
-                
-                let imageData = strongSelf.profileView.image?.jpegData(compressionQuality: 0.5)
+                //                MARK: handle profile pic
+                let image = strongSelf.profileView.image!
+                let imageData = image.jpegData(compressionQuality: 0.5)
                 let storageReference = Storage.storage().reference().child("users/\(uid)/profile.jpg")
+                storageReference.putData(imageData!)
                 
-                let uploadTask = storageReference.putData(imageData!)
-                
-                uploadTask.observe(.success) { snapshot in
-                    storageReference.downloadURL { url, error in
-                        guard let downloadURL = url else {
-                            return
-                        }
-                        
-                        let urlString = NSString(string: "\(downloadURL)")
-                        let values = ["username": strongSelf.usernameTextField.text, "profilePhotoURL": urlString ]
-                        print(downloadURL)
-                        
-                        usersReference.updateChildValues(values) { databaseError, databaseReference in
-                            if databaseError != nil {
-                                print("THERE WAS AN ERROR \(String(describing: databaseError))")
-                                return
-                            }
+                if let user = Auth.auth().currentUser {
+                    let changeRequest = user.createProfileChangeRequest()
+                    changeRequest.photoURL = URL(string: storageReference.fullPath)
+                    changeRequest.displayName = strongSelf.usernameTextField.text
+                    changeRequest.commitChanges { error in
+                        if let _ = error {
+                            print(error)
+                        } else {
+                            print(Auth.auth().currentUser?.displayName, Auth.auth().currentUser?.photoURL)
+                            print("You have created an account and signed in")
+                            strongSelf.performSegue(withIdentifier: SegueID.gotoProfile.rawValue, sender: self)
                         }
                     }
                 }
                 
-                print("You have created an account and signed in")
-                //in video he hides labels with Strong self, use for segue
-                //Segue to profile screen so user ca customize profile the first time.
-                strongSelf.performSegue(withIdentifier: SegueID.gotoProfile.rawValue, sender: self)
+                
             }
         }))
-        alert.addAction(UIAlertAction(title: "Canel", style: .cancel))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         
         present(alert, animated: true)
     }

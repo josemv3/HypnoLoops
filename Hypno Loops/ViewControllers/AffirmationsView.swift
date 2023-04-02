@@ -82,6 +82,7 @@ class AffirmationsView: UIViewController, UICollectionViewDelegate {
             cell.layer.backgroundColor = UIColor.black.cgColor
             cell.selectedButton.layer.cornerRadius = CornerRadiusModifiers.small.size
             cell.affirmationLabel.text = item.affirmation //showAfffirmation is an optional array built from affirmations Dict. Then Item bulds cells from string sentences.
+            cell.affirmation = item
             
             return cell
         })

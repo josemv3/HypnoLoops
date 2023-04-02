@@ -37,7 +37,7 @@ class CategoryView: UIViewController, UICollectionViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         retrieveHeaders()
-        configureProfileImageView()
+//        configureProfileImageView()
         //Build Section header stings
 //        sectionData.makeSectionHeaders() //this can be replaced with just the enum
         //Build category objects in an array
@@ -69,10 +69,10 @@ class CategoryView: UIViewController, UICollectionViewDelegate {
         }
     }
     
-    func configureProfileImageView()  {
-        guard let url = userData?.imageURL else { return }
-        NetworkManager.shared.fetchUserProfileImageURL(photoURLString: url, imageView: topProfileImage)
-    }
+//    func configureProfileImageView()  {
+//        guard let url = userData?.imageURL else { return }
+//        NetworkManager.shared.fetchUserProfileImageURL(photoURLString: url, imageView: topProfileImage)
+//    }
     
     //MARK: - Compositional CV LAYOUT
     

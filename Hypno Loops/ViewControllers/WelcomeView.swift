@@ -21,20 +21,20 @@ class WelcomeView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getUserData()
+//        getUserData()
 //        configureProfileImageView()
         userLoginImage.layer.borderWidth = BorderSize.small.size
         userLoginImage.layer.cornerRadius = CornerRadiusModifiers.normal.size
         userLoginImage.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
     }
     
-    func configureProfileImageView() {
-        if let _ = Auth.auth().currentUser {
-            userLoginButton.isHidden = true
-            guard let url = userData?.imageURL else { return }
-            NetworkManager.shared.fetchUserProfileImageURL(photoURLString: url, imageView: userLoginImage)
-        }
-    }
+//    func configureProfileImageView() {
+//        if let _ = Auth.auth().currentUser {
+//            userLoginButton.isHidden = true
+//            guard let url = userData?.imageURL else { return }
+//            NetworkManager.shared.fetchUserProfileImageURL(photoURLString: url, imageView: userLoginImage)
+//        }
+//    }
     
     func getUserData() {
         if let _ = Auth.auth().currentUser {
@@ -42,7 +42,7 @@ class WelcomeView: UIViewController {
                 switch result {
                 case .success(let data):
                     self?.userData = data
-                    self?.configureProfileImageView()
+//                    self?.configureProfileImageView()
                 case .failure(let error):
                     print(error.localizedDescription)
                 }

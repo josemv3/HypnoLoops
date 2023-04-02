@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Firebase
 
 struct AffirmationModel: Decodable, Equatable, Hashable {
     var id: String
@@ -22,5 +23,14 @@ struct AffirmationModel: Decodable, Equatable, Hashable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.id = try container.decode(String.self, forKey: .id)
         self.affirmation = try container.decode(String.self, forKey: .affirmation)
+    }
+    
+    mutating func toggleLiked(userData: inout UserData) {
+        if self.liked {
+            userData.removeLikedAffirmation(affirmationId: self.id)
+        } else {
+            userData.addLikedAffirmation(affirmationId: self.id)
+        }
+        self.liked.toggle()
     }
 }

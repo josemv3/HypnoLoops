@@ -30,13 +30,13 @@ class NetworkManager {
     
     func getCurrentUserData(completion: @escaping (Result<UserData, Error>) -> Void) {
         if let user = Auth.auth().currentUser {
-            let reference = Database.database().reference(fromURL: RealtimeDatabase.referenceURLString.rawValue)
+            let reference = Database.database().reference()
             let userRef = reference.child("users").child(user.uid)
             
-            userRef.observeSingleEvent(of: .value) { snapshot in
-                let urlString = snapshot.childSnapshot(forPath: "profilePhotoURL").value as! String
+            userRef.observeSingleEvent(of: .value) { snapshot, type  in
                 let username = snapshot.childSnapshot(forPath: "username").value as! String
-                completion(.success(UserData(username: username, imageURL: urlString)))
+                let likedAffirmationIds = snapshot.childSnapshot(forPath: "likedAffirmations").value as! [String]
+                completion(.success(UserData(username: username, likedAffirmationIds: likedAffirmationIds)))
             }
         }
         
@@ -51,6 +51,20 @@ class NetworkManager {
                 completed(.success(headers))
             } catch {
                 completed(.failure(error))
+            }
+        }
+    }
+    
+    func updateLikedAffirmations(userAffirmationIDs: [String]) {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let reference = Database.database().reference()
+        let affirmationIds = reference.child("users").child(uid).child("likedAffirmations")
+        
+        affirmationIds.setValue(userAffirmationIDs) { (error, ref) in
+            if let _ = error {
+                print("failed to update like affirmations")
+            } else {
+                print("updated successfully")
             }
         }
     }

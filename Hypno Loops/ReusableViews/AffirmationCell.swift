@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import Firebase
 
 class AffirmationCell: UICollectionViewCell {
+    var affirmation: AffirmationModel?
+    var userData: UserData?
     static let reuseidentifier = String(describing: AffirmationCell.self)
     
     @IBOutlet weak var affirmationLabel: UILabel!
@@ -16,6 +19,9 @@ class AffirmationCell: UICollectionViewCell {
     @IBOutlet weak var likeButton: UIButton!
     
     @IBAction func likeButtonPressed(_ sender: UIButton) {
+        
     }
+    
+
     
 }
