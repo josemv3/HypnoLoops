@@ -25,13 +25,13 @@ struct AffirmationModel: Decodable, Equatable, Hashable {
         self.affirmation = try container.decode(String.self, forKey: .affirmation)
     }
     
-    mutating func toggleLiked(userData: inout UserData) {
+    mutating func toggleLiked() {
         self.liked.toggle()
         
         if self.liked {
-            userData.addLikedAffirmation(affirmationId: self.id)
+            NetworkManager.userData!.addLikedAffirmation(affirmationId: self.id)
         } else {
-            userData.removeLikedAffirmation(affirmationId: self.id)
+            NetworkManager.userData!.removeLikedAffirmation(affirmationId: self.id)
             
         }
         
