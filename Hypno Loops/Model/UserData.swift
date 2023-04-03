@@ -27,7 +27,6 @@ struct UserData {
     
     mutating func removeLikedAffirmation(affirmationId: String) {
         let liked = self.likedAffirmationIds.filter { $0 != affirmationId }
-        print("LIKED IDS", liked)
         self.likedAffirmationIds = liked
         NetworkManager.shared.updateLikedAffirmations(likedAffirmationIds: self.likedAffirmationIds)
     }
