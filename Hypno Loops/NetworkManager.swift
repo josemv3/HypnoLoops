@@ -29,14 +29,15 @@ class NetworkManager {
         
     }
     
-    func getCurrentUserData(completion: @escaping (Result<UserData, Error>) -> Void) {
+    func getCurrentUserData() {
         if let user = Auth.auth().currentUser {
             let reference = Database.database().reference()
             let userRef = reference.child("users").child(user.uid).child("likedAffirmations")
 
             userRef.getData { error, snapshot in
                 let likedAffirmationIds = snapshot?.value as? [String] ?? []
-                completion(.success(UserData(username: user.displayName!, likedAffirmationIds: likedAffirmationIds)))
+                //completion(.success(UserData(username: user.displayName!, likedAffirmationIds: likedAffirmationIds)))
+                NetworkManager.userData = UserData(username: user.displayName!, likedAffirmationIds: likedAffirmationIds)
             }
         }
     }
@@ -71,14 +72,12 @@ class NetworkManager {
         }
     }
     
-    func updateLikedAffirmations(userAffirmationIDs: [String]) {
-        print("inside")
+    func updateLikedAffirmations(likedAffirmationIds: [String]) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let reference = Database.database().reference()
         let affirmationIds = reference.child("users").child(uid).child("likedAffirmations")
-        print(affirmationIds)
         
-        affirmationIds.setValue(userAffirmationIDs) { (error, ref) in
+        affirmationIds.setValue(likedAffirmationIds) { (error, ref) in
             if let _ = error {
                 print("failed to update like affirmations")
             } else {

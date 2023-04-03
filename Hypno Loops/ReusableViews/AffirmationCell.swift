@@ -19,7 +19,7 @@ class AffirmationCell: UICollectionViewCell {
     
     
     @IBAction func likeButtonPressed(_ sender: UIButton) {
-        affirmation.toggleLiked(userData: &NetworkManager.userData!)
+        affirmation.toggleLiked()
         
         if affirmation.liked {
             let image = UIImage(systemName: "heart.fill")

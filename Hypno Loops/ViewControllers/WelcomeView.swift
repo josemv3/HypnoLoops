@@ -23,40 +23,34 @@ class WelcomeView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //if Auth.auth().currentUser != nil { print("USER FOUND: ", Auth.auth().currentUser) }
-        configureProfile()
+        //configureProfile()
+        NetworkManager.shared.getCurrentUserData()
         userLoginImage.layer.borderWidth = BorderSize.small.size
         userLoginImage.layer.cornerRadius = CornerRadiusModifiers.normal.size
         userLoginImage.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
         //print("UserData HERE >", NetworkManager.userData)
     }
     
-    func configureProfile() {
-        NetworkManager.shared.getCurrentUserData { result in
-            switch result {
-            case .success(let userData):
-                NetworkManager.userData = userData
-                NetworkManager.shared.fetchUserProfileImageURL(photoURL: (Auth.auth().currentUser?.photoURL)!, imageView: self.userLoginImage)
-                print("USER DATA HERE ->", userData)
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
+//    func configureProfile() {
+//        NetworkManager.shared.getCurrentUserData()
+//
+//
+//    }
     
-    func getUserData() {
-        if let user = Auth.auth().currentUser {
-            print("Inside getUserData")
-            NetworkManager.shared.getCurrentUserData { result in
-                switch result {
-                case .success(let userData):
-                    print("inside user data", userData)
-                    NetworkManager.userData = userData
-                case .failure(let error):
-                    print(error)
-                }
-            }
-        }
-    }
+//    func getUserData() {
+//        if let user = Auth.auth().currentUser {
+//            print("Inside getUserData")
+//            NetworkManager.shared.getCurrentUserData { result in
+//                switch result {
+//                case .success(let userData):
+//                    print("inside user data", userData)
+//                    NetworkManager.userData = userData
+//                case .failure(let error):
+//                    print(error)
+//                }
+//            }
+//        }
+//    }
     
 //    func getUserData() async {
 //        if let user = Auth.auth().currentUser {
@@ -101,7 +95,7 @@ class WelcomeView: UIViewController {
                 let userProfileView =  segue.destination as! UserProfileView
             case SegueID.gotoCategoryView.rawValue:
                 let categoryView = segue.destination as! CategoryView
-                categoryView.userData = NetworkManager.userData
+                //categoryView.userData = NetworkManager.userData
             case SegueID.welcomToRecord.rawValue:
                 let recordView = segue.destination as! RecordView
             default:

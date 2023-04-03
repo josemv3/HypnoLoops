@@ -12,17 +12,10 @@ class CategoryView: UIViewController, UICollectionViewDelegate {
     @IBOutlet weak var loopCollectionsCV: UICollectionView!
     @IBOutlet weak var topProfileImage: UIImageView!
     
-    var categoryData = CategoryData()
-    var sectionData = SectionHeaderData()
     static let sectionHeaderElementKind = "section-header-element-kind"
     var dataSource: UICollectionViewDiffableDataSource<SectionHeaderModel, CategoryModel>!//SOURCE1
-    var testDict: [String: [CategoryModel]] = [:]
-    var cellStringReceived = ""
-    var itemSelected = ""
-    var userData: UserData?
     var headers = [SectionHeaderModel]()
     var categorySelected: CategoryModel?
-    
     
     var filteredItemsSnapshot: NSDiffableDataSourceSnapshot<SectionHeaderModel, CategoryModel> {
         var snapshot = NSDiffableDataSourceSnapshot<SectionHeaderModel, CategoryModel>()
@@ -37,15 +30,6 @@ class CategoryView: UIViewController, UICollectionViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         retrieveHeaders()
-//        configureProfileImageView()
-        //Build Section header stings
-//        sectionData.makeSectionHeaders() //this can be replaced with just the enum
-        //Build category objects in an array
-        categoryData.getSubCategories()
-        //zip section headers and catogory items to populate collectionView
-//        categoryData.finalCategories = zip(sectionData.sectionHeaders, categoryData.subCategories).reduce(into: [:]) { $0[$1.0] = $1.1 }
-        //print(categoryData.finalCategories)
-        
         topProfileImage.layer.cornerRadius = CornerRadiusModifiers.normal.size
         topProfileImage.layer.borderWidth = BorderSize.small.size
         topProfileImage.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
@@ -68,11 +52,6 @@ class CategoryView: UIViewController, UICollectionViewDelegate {
             }
         }
     }
-    
-//    func configureProfileImageView()  {
-//        guard let url = userData?.imageURL else { return }
-//        NetworkManager.shared.fetchUserProfileImageURL(photoURLString: url, imageView: topProfileImage)
-//    }
     
     //MARK: - Compositional CV LAYOUT
     
@@ -127,7 +106,7 @@ class CategoryView: UIViewController, UICollectionViewDelegate {
             cell.layer.cornerRadius = CornerRadiusModifiers.small.size
             cell.layer.borderWidth = BorderSize.small.size
             cell.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
-            cell.likeButton.setImage(UIImage(named: "heart"), for: .normal)
+            //cell.likeButton.setImage(UIImage(named: "heart"), for: .normal)
             
             //cell.delegate = self
             return cell
@@ -167,8 +146,6 @@ class CategoryView: UIViewController, UICollectionViewDelegate {
         
         if segue.identifier == SegueID.gotoAffirmationsView.rawValue {
             let destinationVC = segue.destination as! AffirmationsView
-            //destinationVC.categoryReceived = itemSelected
-            //destinationVC.userData = userData
             destinationVC.category = categorySelected 
         
         }

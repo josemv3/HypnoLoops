@@ -13,19 +13,21 @@ struct UserData {
     
     init(username: String, likedAffirmationIds: [String]) {
         self.username = username
+        self.likedAffirmationIds = likedAffirmationIds
     }
     
     
     mutating func addLikedAffirmation(affirmationId: String) {
         if !self.likedAffirmationIds.contains(affirmationId) {
+            //NetworkManager.userData!.likedAffirmationIds.append(affirmationId)
             self.likedAffirmationIds.append(affirmationId)
-            NetworkManager.shared.updateLikedAffirmations(userAffirmationIDs: self.likedAffirmationIds)
+            NetworkManager.shared.updateLikedAffirmations(likedAffirmationIds: self.likedAffirmationIds)
         }
     }
     
     mutating func removeLikedAffirmation(affirmationId: String) {
-        let liked = self.likedAffirmationIds.filter { $0 == affirmationId }
+        let liked = self.likedAffirmationIds.filter { $0 != affirmationId }
         self.likedAffirmationIds = liked
-        NetworkManager.shared.updateLikedAffirmations(userAffirmationIDs: self.likedAffirmationIds)
+        NetworkManager.shared.updateLikedAffirmations(likedAffirmationIds: self.likedAffirmationIds)
     }
 }
