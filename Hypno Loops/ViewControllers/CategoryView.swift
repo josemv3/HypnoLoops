@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class CategoryView: UIViewController, UICollectionViewDelegate {
     
@@ -29,6 +30,7 @@ class CategoryView: UIViewController, UICollectionViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureProfileImage()
         retrieveHeaders()
         topProfileImage.layer.cornerRadius = CornerRadiusModifiers.normal.size
         topProfileImage.layer.borderWidth = BorderSize.small.size
@@ -39,6 +41,12 @@ class CategoryView: UIViewController, UICollectionViewDelegate {
             
         loopCollectionsCV.collectionViewLayout = configureLayout()
         configureDataSource()
+    }
+    
+    func configureProfileImage() {
+        if let _ = Auth.auth().currentUser {
+            NetworkManager.shared.fetchUserProfileImageURL(imageView: topProfileImage)
+        }
     }
     
     func retrieveHeaders() {
