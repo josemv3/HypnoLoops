@@ -104,10 +104,12 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
     }
     
     @IBAction func reverbChanged(_ sender: UISlider) {
+        audioPlayer.reverb?.wetDryMix = sender.value
     }
     
     
     @IBAction func compressonChanged(_ sender: UISlider) {
+        audioPlayer.compressionNode.wetDryMix = sender.value
     }
     
     @IBAction func saveButtonPressed(_ sender: Any) {
