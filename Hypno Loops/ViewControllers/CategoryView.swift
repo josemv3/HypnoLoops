@@ -41,6 +41,8 @@ class CategoryView: UIViewController, UICollectionViewDelegate {
             
         loopCollectionsCV.collectionViewLayout = configureLayout()
         configureDataSource()
+        print("User > ", NetworkManager.userData?.username)
+        print("HERE >  ", NetworkManager.userData?.likedAffirmationIds)
     }
     
     func configureProfileImage() {
@@ -154,7 +156,15 @@ class CategoryView: UIViewController, UICollectionViewDelegate {
         
         if segue.identifier == SegueID.gotoAffirmationsView.rawValue {
             let destinationVC = segue.destination as! AffirmationsView
-            destinationVC.category = categorySelected 
+            
+            for (index, affirmation) in categorySelected!.affirmations.enumerated() {
+                if NetworkManager.userData!.likedAffirmationIds.contains(affirmation.id) {
+                    categorySelected!.affirmations[index].liked = true
+                }
+            }
+            let sorted = categorySelected!.affirmations.sorted(by: { $0.liked && !$1.liked })
+            categorySelected?.affirmations = sorted
+            destinationVC.category = categorySelected
         
         }
     }

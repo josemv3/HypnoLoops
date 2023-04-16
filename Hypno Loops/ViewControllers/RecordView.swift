@@ -72,14 +72,17 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
             let stopImage = UIImage(systemName: "stop.fill")
             recordButton.setTitle("Stop", for: .normal)
             recordButton.setImage(stopImage, for: .normal)
+            micImageView.tintColor = .red
         } else {
             isRecording.toggle()
             url = audioRecorder.getAudioURL()
             playButton.isEnabled = true
             audioRecorder.stopRecording()
+            promptFileName()
             let recordImage = UIImage(systemName: "record.circle")
             recordButton.setTitle("Record", for: .normal)
             recordButton.setImage(recordImage, for: .normal)
+            micImageView.tintColor = UIColor(named: Color.hlIndigo.rawValue)
         }
     }
     
@@ -103,13 +106,37 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
         }
     }
     
+    func promptFileName() {
+        let url = audioRecorder.getAudioURL()
+        let alertController = UIAlertController(title: "Name your affirmation", message: nil, preferredStyle: .alert)
+        alertController.addTextField(configurationHandler: nil)
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let renameAction = UIAlertAction(title: "Save", style: .default) { _ in
+            guard let newName = alertController.textFields?.first?.text else { return }
+            let newURL = url.deletingLastPathComponent().appendingPathComponent(newName)
+            do {
+                try FileManager.default.moveItem(at: url, to: newURL)
+                print("File renamed to \(newName)")
+            } catch {
+                print("Error renaming file: \(error.localizedDescription)")
+            }
+        }
+
+        alertController.addAction(cancelAction)
+        alertController.addAction(renameAction)
+
+        present(alertController, animated: true)
+    }
+
+    
     @IBAction func reverbChanged(_ sender: UISlider) {
         audioPlayer.reverb?.wetDryMix = sender.value
     }
     
     
     @IBAction func compressonChanged(_ sender: UISlider) {
-        audioPlayer.compressionNode.wetDryMix = sender.value
+        //audioPlayer.compressionNode.wetDryMix = sender.value
     }
     
     @IBAction func saveButtonPressed(_ sender: Any) {
