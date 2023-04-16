@@ -11,6 +11,7 @@ class AffirmationsView: UIViewController, UICollectionViewDelegate {
     @IBOutlet weak var affirmationCV: UICollectionView!
     
     var dataSource: UICollectionViewDiffableDataSource<Section, AffirmationModel>!//SOURCE1
+    var initialSnapshot = NSDiffableDataSourceSnapshot<Section, AffirmationModel>()
     var noAffirmation = "No affirmation selected..."
     var category: CategoryModel?
 
@@ -73,7 +74,7 @@ class AffirmationsView: UIViewController, UICollectionViewDelegate {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AffirmationCell.reuseidentifier, for: indexPath) as! AffirmationCell
             
             cell.affirmation = item
-            
+
             cell.setLiked()
             
             if cell.affirmation.liked {
@@ -89,16 +90,43 @@ class AffirmationsView: UIViewController, UICollectionViewDelegate {
             cell.selectedButton.layer.cornerRadius = CornerRadiusModifiers.small.size
             cell.affirmationLabel.text = item.affirmation //showAfffirmation is an optional array built from affirmations Dict. Then Item bulds cells from string sentences.
             
-            //cell.userData = self?.userData
-            //print("USER HERE: \(self?.userData)")
+            cell.delegate = self
             return cell
         })
-        
-        var initialSnapshot = NSDiffableDataSourceSnapshot<Section, AffirmationModel>()//SOURCE3
         
         initialSnapshot.appendSections([.main])
         initialSnapshot.appendItems(category!.affirmations)
 
         dataSource.apply(initialSnapshot, animatingDifferences: false)
     }
+    
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
+//        guard let cell = collectionView.cellForItem(at: indexPath) as? AffirmationCell else {
+//               return
+//           }
+//    }
+    
+}
+
+extension AffirmationsView: AffirmationCellDelegate {
+    func updateAffirmations(affirmationId: String, liked: Bool) {
+        for (index, affirmation) in category!.affirmations.enumerated() {
+            if affirmation.id == affirmationId {
+                category!.affirmations[index].liked = liked
+            }
+        }
+        
+        var updatedSnapshot: NSDiffableDataSourceSnapshot<Section, AffirmationModel> {
+            var snapshot = NSDiffableDataSourceSnapshot<Section, AffirmationModel>()
+
+            snapshot.appendSections([.main])
+            let sorted = category!.affirmations.sorted(by: { $0.liked && !$1.liked })
+            snapshot.appendItems(sorted)
+            return snapshot
+        }
+        dataSource.apply(updatedSnapshot, animatingDifferences: true)
+    }
+    
+    
 }

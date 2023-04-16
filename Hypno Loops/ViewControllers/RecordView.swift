@@ -72,6 +72,7 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
             let stopImage = UIImage(systemName: "stop.fill")
             recordButton.setTitle("Stop", for: .normal)
             recordButton.setImage(stopImage, for: .normal)
+            micImageView.tintColor = .red
         } else {
             isRecording.toggle()
             url = audioRecorder.getAudioURL()
@@ -81,6 +82,7 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
             let recordImage = UIImage(systemName: "record.circle")
             recordButton.setTitle("Record", for: .normal)
             recordButton.setImage(recordImage, for: .normal)
+            micImageView.tintColor = UIColor(named: Color.hlIndigo.rawValue)
         }
     }
     
@@ -134,7 +136,7 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
     
     
     @IBAction func compressonChanged(_ sender: UISlider) {
-        audioPlayer.compressionNode.wetDryMix = sender.value
+        //audioPlayer.compressionNode.wetDryMix = sender.value
     }
     
     @IBAction func saveButtonPressed(_ sender: Any) {

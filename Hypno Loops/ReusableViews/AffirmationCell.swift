@@ -8,7 +8,13 @@
 import UIKit
 import Firebase
 
+protocol AffirmationCellDelegate {
+    func updateAffirmations(affirmationId: String, liked: Bool)
+}
+
 class AffirmationCell: UICollectionViewCell {
+    var delegate: AffirmationCellDelegate?
+    
     var affirmation: AffirmationModel!
     static let reuseidentifier = String(describing: AffirmationCell.self)
     
@@ -16,10 +22,10 @@ class AffirmationCell: UICollectionViewCell {
     @IBOutlet weak var selectedButton: UIButton!
     @IBOutlet weak var likeButton: UIButton!
     
-    
-    
     @IBAction func likeButtonPressed(_ sender: UIButton) {
         affirmation.toggleLiked()
+        
+        delegate?.updateAffirmations(affirmationId: affirmation.id, liked: affirmation.liked)
         
         if affirmation.liked {
             let image = UIImage(systemName: "heart.fill")
@@ -35,5 +41,4 @@ class AffirmationCell: UICollectionViewCell {
             affirmation.liked = true
         }
     }
-    
 }
