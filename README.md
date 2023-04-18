@@ -2,16 +2,16 @@
 <br />
 <div align="center">
   <a href="https://github.com/josemv3/HypnoLoops">
-    <img src="Hypno\ Loops/Assets.xcassets/AppIcon 1.appiconset/256.png" alt="Logo" width="80" height="80">
+    <img src="Hypno Loops/Assets.xcassets/AppIcon 1.appiconset/256.png" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">Carpooly App</h3>
+<h3 align="center">Hypno Loops</h3>
 
   <p align="center">
     <br />
-    <a href="https://github.com/kensonjohnson/carpooly/issues">Report Bug</a>
+    <a href="https://github.com/josemv3/HypnoLoops/issues">Report Bug</a>
     ·
-    <a href="https://github.com/kensonjohnson/carpooly/issues">Request Feature</a>
+    <a href="https://github.com/josemv3/HypnoLoops/issues">Request Feature</a>
   </p>
 </div>
 
