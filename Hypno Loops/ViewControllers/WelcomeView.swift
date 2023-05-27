@@ -22,10 +22,10 @@ class WelcomeView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         NetworkManager.shared.getCurrentUserData()
-        configureProfileImageView()
-        userLoginImage.layer.borderWidth = BorderSize.small.size
-        userLoginImage.layer.cornerRadius = CornerRadiusModifiers.normal.size
-        userLoginImage.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
+//        configureProfileImageView()
+//        userLoginImage.layer.borderWidth = BorderSize.small.size
+//        userLoginImage.layer.cornerRadius = CornerRadiusModifiers.normal.size
+//        userLoginImage.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
     }
     
     func configureProfileImageView() {
