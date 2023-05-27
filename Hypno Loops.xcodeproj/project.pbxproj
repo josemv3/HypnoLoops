@@ -50,6 +50,7 @@
 		E0F2A9B529766B7B0066263F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0F2A9B329766B7B0066263F /* Main.storyboard */; };
 		E0F2A9B729766B7D0066263F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E0F2A9B629766B7D0066263F /* Assets.xcassets */; };
 		E0F2A9BA29766B7D0066263F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0F2A9B829766B7D0066263F /* LaunchScreen.storyboard */; };
+		E8041A502A2162A90077E414 /* AuthenticationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8041A4F2A2162A90077E414 /* AuthenticationVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,6 +93,7 @@
 		E0F2A9B629766B7D0066263F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E0F2A9B929766B7D0066263F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E0F2A9BB29766B7D0066263F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E8041A4F2A2162A90077E414 /* AuthenticationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +172,7 @@
 		E0E5A72D2979BCFD00B7B29D /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				E8041A4F2A2162A90077E414 /* AuthenticationVC.swift */,
 				E0E5A72E2979BE9800B7B29D /* WelcomeView.swift */,
 				E0F2A9B129766B7B0066263F /* LogInView.swift */,
 				E0E5A72A2979BCBE00B7B29D /* UserProfileView.swift */,
@@ -335,6 +338,7 @@
 				E0F2A9AE29766B7B0066263F /* AppDelegate.swift in Sources */,
 				4CA5428B29CCFC4B00C9753A /* NetworkManager.swift in Sources */,
 				E0408A7A29AAA6EE00228E8A /* Color.swift in Sources */,
+				E8041A502A2162A90077E414 /* AuthenticationVC.swift in Sources */,
 				E0E5A72B2979BCBE00B7B29D /* UserProfileView.swift in Sources */,
 				E00E46352990F701006F6562 /* ErrorMessages.swift in Sources */,
 				E0AE525F299C01B70012C068 /* CategoryItem.swift in Sources */,
