@@ -11,11 +11,8 @@ import FirebaseAuth
 class AuthenticationVC: UIViewController {
     
     @IBOutlet weak var emailTextField: UITextField!
-    
     @IBOutlet weak var passwordTextField: UITextField!
-    
     @IBOutlet weak var loginButton: UIButton!
-    
     @IBOutlet weak var createAccountButton: UIButton!
     
     private var email = ""
@@ -24,6 +21,7 @@ class AuthenticationVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        validateUser()
         configureTextFields()
         
         // Do any additional setup after loading the view.
@@ -96,17 +94,16 @@ class AuthenticationVC: UIViewController {
     
     
     @IBAction func didTapCreateAccountButton(_ sender: Any) {
+        self.performSegue(withIdentifier: "goToRegister", sender: self)
     }
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
+    func validateUser() {
+        if Auth.auth().currentUser != nil {
+            let welcomeVC = WelcomeView()
+            welcomeVC.modalPresentationStyle = .fullScreen
+            self.present(welcomeVC, animated: false)
+        }
+    }
 }
 
 extension AuthenticationVC : UITextFieldDelegate {

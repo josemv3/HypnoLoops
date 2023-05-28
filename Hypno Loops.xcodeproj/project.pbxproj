@@ -51,6 +51,7 @@
 		E0F2A9B729766B7D0066263F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E0F2A9B629766B7D0066263F /* Assets.xcassets */; };
 		E0F2A9BA29766B7D0066263F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0F2A9B829766B7D0066263F /* LaunchScreen.storyboard */; };
 		E8041A522A2193670077E414 /* AuthenticationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8041A512A2193670077E414 /* AuthenticationVC.swift */; };
+		E8041A542A22B3020077E414 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8041A532A22B3020077E414 /* RegisterVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -94,6 +95,7 @@
 		E0F2A9B929766B7D0066263F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E0F2A9BB29766B7D0066263F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E8041A512A2193670077E414 /* AuthenticationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationVC.swift; sourceTree = "<group>"; };
+		E8041A532A22B3020077E414 /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +182,7 @@
 				E0408A7B29AAAC7300228E8A /* AffirmationsView.swift */,
 				E0E5A732297B130E00B7B29D /* RecordView.swift */,
 				E0E5A734297B142100B7B29D /* PlayView.swift */,
+				E8041A532A22B3020077E414 /* RegisterVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -340,6 +343,7 @@
 				E0408A7A29AAA6EE00228E8A /* Color.swift in Sources */,
 				E8041A522A2193670077E414 /* AuthenticationVC.swift in Sources */,
 				E0E5A72B2979BCBE00B7B29D /* UserProfileView.swift in Sources */,
+				E8041A542A22B3020077E414 /* RegisterVC.swift in Sources */,
 				E00E46352990F701006F6562 /* ErrorMessages.swift in Sources */,
 				E0AE525F299C01B70012C068 /* CategoryItem.swift in Sources */,
 				E093C6C129D5EDCD00722196 /* AffirmationModel.swift in Sources */,
