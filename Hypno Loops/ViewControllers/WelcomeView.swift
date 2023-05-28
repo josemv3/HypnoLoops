@@ -21,11 +21,12 @@ class WelcomeView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NetworkManager.shared.getCurrentUserData()
-        configureProfileImageView()
-        userLoginImage.layer.borderWidth = BorderSize.small.size
-        userLoginImage.layer.cornerRadius = CornerRadiusModifiers.normal.size
-        userLoginImage.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
+        view.backgroundColor = .red
+//        NetworkManager.shared.getCurrentUserData()
+//        configureProfileImageView()
+//        userLoginImage.layer.borderWidth = BorderSize.small.size
+//        userLoginImage.layer.cornerRadius = CornerRadiusModifiers.normal.size
+//        userLoginImage.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
     }
     
     func configureProfileImageView() {
@@ -53,10 +54,6 @@ class WelcomeView: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //        if segue.identifier == SegueID.welcomeToLoginView.rawValue {
-        //            let destinationVC = segue.destination as! LogInView
-        //        }
-        
         switch segue.identifier {
         case SegueID.welcomeToLoginView.rawValue:
             let logInView = segue.destination as! LogInView
@@ -74,9 +71,3 @@ class WelcomeView: UIViewController {
         }
     }
 }
-
-//user logged in, userLogInButton = logOut
-//then go to loginView
-
-//
-

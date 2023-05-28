@@ -15,7 +15,6 @@ class LogInView: UIViewController {
     
     @IBOutlet weak var profileView: UIImageView!
     @IBOutlet weak var profileButton: UIButton!
-    @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
@@ -40,23 +39,15 @@ class LogInView: UIViewController {
         resetForm()
         passwordTextField.isSecureTextEntry = true
         profileView.layer.masksToBounds = true
-        profileView.layer.borderWidth = BorderSize.small.size
-        profileView.layer.cornerRadius = CornerRadiusModifiers.normal.size
-        profileView.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
         profileButton.tintColor = UIColor(named: Color.hlBlue.rawValue)
     }
     
     func resetForm() {
-        
-        usernameErrorLabel.text = requiredText.Required.rawValue
         emailErrorLabel.text = requiredText.Required.rawValue
         passwordErrorLabel.text = requiredText.Required.rawValue
-        
-        usernameTextField.text = ""
+
         emailTextField.text = ""
         passwordTextField.text = ""
-        
-        submitButtton.isEnabled = false
     }
     
     @IBAction func profileButtonPushed(_ sender: UIButton) {
@@ -123,7 +114,6 @@ func showCreateAccount(email: String, password: String) {
                 if let user = auth.currentUser {
                     let changeRequest = user.createProfileChangeRequest()
                     changeRequest.photoURL = URL(string: storageReference.fullPath)
-                    changeRequest.displayName = strongSelf.usernameTextField.text
                     changeRequest.commitChanges { error in
                         if error != nil {
                             print(error)
@@ -152,16 +142,7 @@ func showCreateAccount(email: String, password: String) {
     //MARK: - Check Username
     
     @IBAction func usernameChanged(_ sender: UITextField) {
-        if let username =  usernameTextField.text {
-            //userNameAdded = username
-            if let errorMessage = invalidUsername(username) {
-                usernameErrorLabel.text = errorMessage
-                usernameErrorLabel.isHidden = false
-            } else {
-                usernameErrorLabel.isHidden = true
-            }
-        }
-        checkForValidForm()
+       
     }
     
     func invalidUsername(_ value: String) -> String? {
