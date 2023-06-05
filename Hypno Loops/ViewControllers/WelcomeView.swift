@@ -12,7 +12,6 @@ import FirebaseStorage
 class WelcomeView: UIViewController {
     
     @IBOutlet weak var TopLogoView: UIImageView!
-    @IBOutlet weak var userLoginButton: UIButton!
     @IBOutlet weak var userLoginImage: UIImageView!
     @IBOutlet weak var categoryViewButton: UIButton!
     @IBOutlet weak var recordingViewButton: UIButton!
@@ -21,7 +20,7 @@ class WelcomeView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
+        navigationController?.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "logout", style: .done, target: self, action: #selector(logout))
 //        NetworkManager.shared.getCurrentUserData()
 //        configureProfileImageView()
 //        userLoginImage.layer.borderWidth = BorderSize.small.size
@@ -29,17 +28,19 @@ class WelcomeView: UIViewController {
 //        userLoginImage.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
     }
     
+    @objc func logout() {
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            
+        }
+    }
+    
     func configureProfileImageView() {
         if let _ = Auth.auth().currentUser {
             NetworkManager.shared.fetchUserProfileImageURL(imageView: userLoginImage)
         }
         
-    }
-    
-    
-    
-    @IBAction func userLoginButtonPushed(_ sender: UIButton) {
-        performSegue(withIdentifier: SegueID.welcomeToLoginView.rawValue, sender: self)
     }
     
     @IBAction func categoryViewButtonPush(_ sender: UIButton) {

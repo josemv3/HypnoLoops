@@ -66,14 +66,9 @@ class LogInView: UIViewController {
         //Alert continue = create account
         
         Auth.auth().signIn(withEmail: email, password: password, completion: { [weak self] result, error in
-            guard let strongSelf = self else {
-                //strongSelf used in error to call func.show
-                return
-            }
+            guard let strongSelf = self else { return }
+            
             guard error == nil else {
-                //Create user alert when guard error fails with .show
-                //This means the info doesnt match an existing user so it cant sign in.
-                //Instead, we create a user
                 strongSelf.showCreateAccount(email: email, password: password)
                 return
             }

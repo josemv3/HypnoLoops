@@ -70,6 +70,10 @@ class RegisterVC: UIViewController {
             
             changeRequest?.displayName = username
             changeRequest?.commitChanges()
+            
+            let vc = WelcomeView()
+            vc.modalPresentationStyle = .fullScreen
+            self.present(vc, animated: true)
         }
         
         

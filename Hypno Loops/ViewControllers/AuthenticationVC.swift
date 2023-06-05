@@ -23,7 +23,7 @@ class AuthenticationVC: UIViewController {
         super.viewDidLoad()
         validateUser()
         configureTextFields()
-        
+        styleButtons()
         // Do any additional setup after loading the view.
     }
     
@@ -78,10 +78,10 @@ class AuthenticationVC: UIViewController {
                 case .some(_):
                     self.showAlert(with: "Login Error", message: error.localizedDescription)
                 }
+                
             } else {
-                let welcomVC = WelcomeView()
-                welcomVC.modalPresentationStyle = .fullScreen
-                self.present(welcomVC, animated: true)
+                
+                self.performSegue(withIdentifier: "presentWelcomeVC", sender: self)
             }
         }
     }
@@ -99,10 +99,16 @@ class AuthenticationVC: UIViewController {
     
     func validateUser() {
         if Auth.auth().currentUser != nil {
-            let welcomeVC = WelcomeView()
-            welcomeVC.modalPresentationStyle = .fullScreen
-            self.present(welcomeVC, animated: false)
+//            let welcomeVC = WelcomeView()
+//            welcomeVC.modalPresentationStyle = .fullScreen
+//            self.present(welcomeVC, animated: false)
+            self.performSegue(withIdentifier: "displayWelcomeVC", sender: self)
         }
+    }
+    
+    func styleButtons() {
+        loginButton.layer.cornerRadius = 6
+        loginButton.layer.masksToBounds = true
     }
 }
 
