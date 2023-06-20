@@ -53,30 +53,33 @@ class RegisterVC: UIViewController {
     }
     
     @IBAction func didTapSignupButton(_ sender: Any) {
-        username = usernameTextField.text!
-        email = emailTextField.text!
-        password = passwordTextField.text!
-        
-        let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
-        
+        guard let username = usernameTextField.text,
+              let email = emailTextField.text,
+              let password = passwordTextField.text else { return }
+
         Auth.auth().createUser(withEmail: email, password: password) { [weak self] authResult, error in
             guard let self = self else { return }
-            print(self.email, self.password)
             
-            if error != nil {
-                print(error!.localizedDescription)
+            if let error = error {
+                print(error.localizedDescription)
                 return
             }
             
-            changeRequest?.displayName = username
-            changeRequest?.commitChanges()
-            
-            let vc = WelcomeView()
-            vc.modalPresentationStyle = .fullScreen
-            self.present(vc, animated: true)
+            // User creation successful, now set display name
+            if let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest() {
+                changeRequest.displayName = username
+                changeRequest.commitChanges { error in
+                    if let error = error {
+                        print(error.localizedDescription)
+                    } else {
+                        print("Display name updated successfully!")
+                        
+                        self.performSegue(withIdentifier: "presentWelcomeView", sender: self)
+                    }
+                }
+            }
         }
-        
-        
     }
+
     
 }

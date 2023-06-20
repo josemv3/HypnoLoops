@@ -16,24 +16,13 @@ class WelcomeView: UIViewController {
     @IBOutlet weak var categoryViewButton: UIButton!
     @IBOutlet weak var recordingViewButton: UIButton!
     @IBOutlet weak var playViewButton: UIButton!
-    
+    @IBOutlet weak var logoutButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "logout", style: .done, target: self, action: #selector(logout))
+        print("HERE --->>>", Auth.auth().currentUser?.displayName)
 //        NetworkManager.shared.getCurrentUserData()
 //        configureProfileImageView()
-//        userLoginImage.layer.borderWidth = BorderSize.small.size
-//        userLoginImage.layer.cornerRadius = CornerRadiusModifiers.normal.size
-//        userLoginImage.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
-    }
-    
-    @objc func logout() {
-        do {
-            try Auth.auth().signOut()
-        } catch {
-            
-        }
     }
     
     func configureProfileImageView() {
@@ -52,6 +41,15 @@ class WelcomeView: UIViewController {
     }
     
     @IBAction func playViewPushed(_ sender: UIButton) {
+    }
+    
+    @IBAction func didTapLogoutButton(_ sender: Any) {
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            
+        }
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
