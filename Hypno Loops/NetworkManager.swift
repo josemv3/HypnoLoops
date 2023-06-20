@@ -63,7 +63,7 @@ class NetworkManager {
             userRef.getData { error, snapshot in
                 let likedAffirmationIds = snapshot?.value as? [String] ?? []
                 //completion(.success(UserData(username: user.displayName!, likedAffirmationIds: likedAffirmationIds)))
-                NetworkManager.userData = UserData(username: user.displayName!, likedAffirmationIds: likedAffirmationIds)
+                 NetworkManager.userData = UserData(username: user.displayName!, likedAffirmationIds: likedAffirmationIds)
             }
         }
     }
