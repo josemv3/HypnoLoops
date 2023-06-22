@@ -100,12 +100,15 @@ class AffirmationsView: UIViewController, UICollectionViewDelegate {
         dataSource.apply(initialSnapshot, animatingDifferences: false)
     }
     
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
-//        guard let cell = collectionView.cellForItem(at: indexPath) as? AffirmationCell else {
-//               return
-//           }
-//    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let item = dataSource.itemIdentifier(for: indexPath) else { return }
+        guard let cell = collectionView.cellForItem(at: indexPath) as? AffirmationCell else {
+               return
+           }
+        
+        print("****ITEM", item)
+        // Get rid of button? or use select to grab affimation info and use in recorded view. 
+    }
     
 }
 
@@ -128,5 +131,5 @@ extension AffirmationsView: AffirmationCellDelegate {
         dataSource.apply(updatedSnapshot, animatingDifferences: true)
     }
     
-    
+
 }

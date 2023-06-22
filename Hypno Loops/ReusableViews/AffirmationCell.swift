@@ -41,4 +41,6 @@ class AffirmationCell: UICollectionViewCell {
             affirmation.liked = true
         }
     }
+    
+    //select button to push info to record view. 
 }

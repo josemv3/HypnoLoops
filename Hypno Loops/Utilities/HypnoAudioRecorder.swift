@@ -58,7 +58,7 @@ class AudioPlayer: NSObject {
 
             audioEngine = AVAudioEngine()
             reverb = AVAudioUnitReverb()
-            reverb?.wetDryMix = 50
+            reverb?.wetDryMix = 80
             setReverbPreset(.largeRoom)
             
 //            compressor = AVAudioUnitCompressor()
@@ -80,6 +80,7 @@ class AudioPlayer: NSObject {
             audioPlayerNode?.scheduleFile(audioFile!, at: nil)
 
             try audioEngine?.start()
+            audioPlayerNode?.volume = 70.0
             audioPlayerNode?.play()
         } catch {
             print("Error playing audio: \(error.localizedDescription)")
