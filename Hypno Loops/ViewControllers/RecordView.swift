@@ -26,8 +26,7 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
     @IBOutlet weak var reverbSlider: UISlider!
     @IBOutlet weak var compressionSlider: UISlider!
     @IBOutlet weak var saveButtton: UIButton!
-    
-//    var audioRecorder = HypnoAudioRecorder()
+
     var audioRecorder: AVAudioRecorder!
     var audioSession: AVAudioSession!
     var audioPlayer = AudioPlayer()
@@ -64,48 +63,17 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
         affirmationView.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
     }
     
-//    MARK: - Record
+    //    MARK: - Record
     
     @IBAction func recordButtonPressed(_ sender: UIButton) {
-        if !isRecording {
-            isRecording = true
-            startRecording()
-            playButton.isEnabled = false
-            let stopImage = UIImage(systemName: "stop.fill")
-            recordButton.setTitle("Stop", for: .normal)
-            recordButton.setImage(stopImage, for: .normal)
-            micImageView.tintColor = .red
+        if getRecordingPermissions() {
+            updateRecordButtonUI()
         } else {
-            isRecording = false
-            audioRecorder.stop()
-            playButton.isEnabled = true
-            let recordImage = UIImage(systemName: "record.circle")
-            recordButton.setTitle("Record", for: .normal)
-            recordButton.setImage(recordImage, for: .normal)
-            micImageView.tintColor = UIColor(named: Color.hlIndigo.rawValue)
+            return
         }
-//        if !isRecording {
-//            isRecording.toggle()
-//            playButton.isEnabled = false
-//            audioRecorder.startRecording()
-//            let stopImage = UIImage(systemName: "stop.fill")
-//            recordButton.setTitle("Stop", for: .normal)
-//            recordButton.setImage(stopImage, for: .normal)
-//            micImageView.tintColor = .red
-//        } else {
-//            isRecording.toggle()
-//            url = audioRecorder.getAudioURL()
-//            playButton.isEnabled = true
-//            audioRecorder.stopRecording()
-//            promptFileName()
-//            let recordImage = UIImage(systemName: "record.circle")
-//            recordButton.setTitle("Record", for: .normal)
-//            recordButton.setImage(recordImage, for: .normal)
-//            micImageView.tintColor = UIColor(named: Color.hlIndigo.rawValue)
-//        }
     }
     
-//    MARK: - Audio Functionality
+    //    MARK: - Audio Functionality
     
     @IBAction func playButtonPressed(_ sender: UIButton) {
         if !isPlaying {
@@ -140,33 +108,33 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
             try audioSession.setCategory(.playAndRecord, mode: .default)
             try audioSession.setActive(true)
             audioRecorder = try AVAudioRecorder(url: audioFileName, settings: settings)
-            audioSession.requestRecordPermission { [weak self] granted in
-                guard let self = self else { return }
-                if granted {
-                    
-                    
-                    audioRecorder.record()
-                    
-                } else {
-                    let alertController = UIAlertController(title: "Permission Denied",
-                                                            message: "Please grant permission to record audio in your device settings.",
-                                                            preferredStyle: .alert)
-                    let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) in
-                        guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else { return }
-                        UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
-                    }
-                    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-                    alertController.addAction(settingsAction)
-                    alertController.addAction(cancelAction)
-                    self.present(alertController, animated: true, completion: nil)
-                    self.recordButton.isEnabled = false
+        } catch {
+//            HANLE ERROR
+        }
+    }
+    
+    func getRecordingPermissions() -> Bool {
+        var hasPermission = false
+        audioSession.requestRecordPermission { [weak self] granted in
+            guard let self = self else { return }
+            if !granted {
+                
+                let alertController = UIAlertController(title: "Permission Denied", message: "Please grant permission to record audio in your device settings.", preferredStyle: .alert)
+                
+                let settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) in
+                    guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else { return }
+                    UIApplication.shared.open(settingsURL, options: [:], completionHandler: nil)
                 }
                 
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                alertController.addAction(settingsAction)
+                alertController.addAction(cancelAction)
+                self.present(alertController, animated: true, completion: nil)
+                self.recordButton.isEnabled = false
             }
-        } catch {
-            
+            hasPermission = granted
         }
-        
+        return hasPermission
     }
     
     func getDocumentsDirectory() -> URL {
@@ -174,30 +142,50 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
         print("PATH IS HERE --->", path)
         return path
     }
-    
-//    func promptFileName() {
-//        let url = audioRecorder.getAudioURL()
-//        let alertController = UIAlertController(title: "Name your affirmation", message: nil, preferredStyle: .alert)
-//        alertController.addTextField(configurationHandler: nil)
-//
-//        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-//        let renameAction = UIAlertAction(title: "Save", style: .default) { _ in
-//            guard let newName = alertController.textFields?.first?.text else { return }
-//            let newURL = url.deletingLastPathComponent().appendingPathComponent(newName)
-//            do {
-//                try FileManager.default.moveItem(at: url, to: newURL)
-//                print("File renamed to \(newName)")
-//            } catch {
-//                print("Error renaming file: \(error.localizedDescription)")
-//            }
-//        }
-//
-//        alertController.addAction(cancelAction)
-//        alertController.addAction(renameAction)
-//
-//        present(alertController, animated: true)
-//    }
 
+    func updateRecordButtonUI() {
+        if !isRecording {
+            isRecording = true
+            startRecording()
+            playButton.isEnabled = false
+            let stopImage = UIImage(systemName: "stop.fill")
+            recordButton.setTitle("Stop", for: .normal)
+            recordButton.setImage(stopImage, for: .normal)
+            micImageView.tintColor = .red
+        } else {
+            isRecording = false
+            audioRecorder.stop()
+            playButton.isEnabled = true
+            let recordImage = UIImage(systemName: "record.circle")
+            recordButton.setTitle("Record", for: .normal)
+            recordButton.setImage(recordImage, for: .normal)
+            micImageView.tintColor = UIColor(named: Color.hlIndigo.rawValue)
+        }
+    }
+    
+    //    func promptFileName() {
+    //        let url = audioRecorder.getAudioURL()
+    //        let alertController = UIAlertController(title: "Name your affirmation", message: nil, preferredStyle: .alert)
+    //        alertController.addTextField(configurationHandler: nil)
+    //
+    //        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+    //        let renameAction = UIAlertAction(title: "Save", style: .default) { _ in
+    //            guard let newName = alertController.textFields?.first?.text else { return }
+    //            let newURL = url.deletingLastPathComponent().appendingPathComponent(newName)
+    //            do {
+    //                try FileManager.default.moveItem(at: url, to: newURL)
+    //                print("File renamed to \(newName)")
+    //            } catch {
+    //                print("Error renaming file: \(error.localizedDescription)")
+    //            }
+    //        }
+    //
+    //        alertController.addAction(cancelAction)
+    //        alertController.addAction(renameAction)
+    //
+    //        present(alertController, animated: true)
+    //    }
+    
     
     @IBAction func reverbChanged(_ sender: UISlider) {
         audioPlayer.reverb?.wetDryMix = sender.value
