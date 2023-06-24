@@ -44,7 +44,7 @@ class HypnoAudioRecorder: NSObject, AVAudioRecorderDelegate {
     }
 }
 
-class AudioPlayer: NSObject {
+class HypnoAudioPlayer: NSObject {
     var audioPlayerNode: AVAudioPlayerNode?
     var audioFile: AVAudioFile?
     var audioEngine: AVAudioEngine?
