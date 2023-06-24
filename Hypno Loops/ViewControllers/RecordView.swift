@@ -29,8 +29,7 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
     
     var audioRecorder: AVAudioRecorder!
     var audioSession: AVAudioSession!
-    var audioPlayer: AVAudioPlayer?
-//    var url = URL(string: "")
+    var audioPlayer = HypnoAudioPlayer()
     var currentAudioFileName: URL?
     var isRecording = false
     var isPlaying   = false
@@ -66,7 +65,11 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
     //    MARK: - Record
     
     @IBAction func recordButtonPressed(_ sender: UIButton) {
-       startRecording()
+        if !isRecording {
+            startRecording()
+        } else {
+            stopRecording()
+        }
     }
     
     //    MARK: - Audio Functionality
@@ -74,14 +77,14 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
     @IBAction func playButtonPressed(_ sender: UIButton) {
         if !isPlaying {
             isPlaying = true
-            startPlaying()
+            audioPlayer.playAudio(audioURL: currentAudioFileName!)
             recordButton.isEnabled = false
             let stopImage = UIImage(systemName: "stop.fill")
             playButton.setTitle("Stop", for: .normal)
             playButton.setImage(stopImage, for: .normal)
         } else {
             isPlaying = false
-            stopPlaying()
+            audioPlayer.stopAudio()
             recordButton.isEnabled = true
             let playImage = UIImage(systemName: "play.fill")
             playButton.setTitle("Play", for: .normal)
@@ -89,36 +92,38 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
         }
     }
     
-        func startRecording() {
-            currentAudioFileName = createAudioFileURL()
-            guard let url = currentAudioFileName else { return }
-                    
-            let settings = [
-                AVFormatIDKey: Int(kAudioFormatLinearPCM),
-                AVSampleRateKey: 44100,
-                AVNumberOfChannelsKey: 2,
-                AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
-            ]
-    
-            do {
-                audioSession = AVAudioSession.sharedInstance()
-                try audioSession.setCategory(.playAndRecord, mode: .default)
-                try audioSession.setActive(true)
-                audioRecorder = try AVAudioRecorder(url: url, settings: settings)
-                if(getRecordingPermissions() && !isRecording){
-                    isRecording = true
-                    audioRecorder.record()
-                    updateRecordButtonUI()
-                } else {
-                    isRecording = false
-                    audioRecorder.stop()
-                    updateRecordButtonUI()
-                    
-                }
-            } catch {
-    //            HANLE ERROR
+    func startRecording() {
+        createAudioFileURL()
+
+        let settings: [String: Any] = [
+            AVFormatIDKey: kAudioFormatMPEG4AAC,
+            AVSampleRateKey: 44100,
+            AVNumberOfChannelsKey: 2,
+            AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
+        ]
+
+        do {
+            audioSession = AVAudioSession.sharedInstance()
+            try audioSession.setCategory(.playAndRecord, mode: .default)
+            try audioSession.setActive(true)
+            audioRecorder = try AVAudioRecorder(url: currentAudioFileName!, settings: settings)
+            
+            if getRecordingPermissions() {
+                isRecording = true
+                audioRecorder.record()
+                updateRecordButtonUI()
             }
+        } catch {
+            print("Failed to start recording: \(error.localizedDescription)")
         }
+    }
+    
+    func stopRecording() {
+        isRecording = false
+        audioRecorder.stop()
+        audioRecorder = nil
+        updateRecordButtonUI()
+    }
     
     func getRecordingPermissions() -> Bool {
         var hasPermission = false
@@ -145,23 +150,15 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
     }
     
     func startPlaying() {
-        guard let url = currentAudioFileName else { return }
-        do {
-            print("Inside of startPlaying() and URL is: ", url)
-            audioPlayer = try AVAudioPlayer(contentsOf: url)
-            audioPlayer?.prepareToPlay()
-            audioPlayer?.play()
-        } catch {
-            print("Errors in startPlayer()")
-        }
+        audioPlayer.playAudio(audioURL: currentAudioFileName!)
     }
     
     func stopPlaying() {
-        audioPlayer?.stop()
+        audioPlayer.stopAudio()
     }
     
-    func createAudioFileURL() -> URL {
-        FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(generateUniqueName())
+    func createAudioFileURL() {
+        currentAudioFileName = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(generateUniqueName())
     }
     
     func updateRecordButtonUI() {
@@ -182,12 +179,24 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
     
     func generateUniqueName() -> String {
         let uuid = UUID().uuidString
-        let trimmedUUID = String(uuid.prefix(5))
-        let timestamp = Date().timeIntervalSince1970
-        let uniqueString = "\(trimmedUUID)_\(timestamp).m4a"
+        let uniqueString = "\(uuid).m4a"
         return uniqueString
     }
     
+    func generateRandomString(length: Int) -> String {
+        let characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        let charCount = characters.count
+        var randomString = ""
+
+        for _ in 0..<length {
+            let randomIndex = Int.random(in: 0..<charCount)
+            let randomCharacter = characters[characters.index(characters.startIndex, offsetBy: randomIndex)]
+            randomString.append(randomCharacter)
+        }
+
+        return randomString
+    }
+
     //    func promptFileName() {
     //        let url = audioRecorder.getAudioURL()
     //        let alertController = UIAlertController(title: "Name your affirmation", message: nil, preferredStyle: .alert)
@@ -213,12 +222,12 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
     
     
     @IBAction func reverbChanged(_ sender: UISlider) {
-//        audioPlayer.reverb?.wetDryMix = sender.value
+        audioPlayer.reverb?.wetDryMix = sender.value
     }
     
     
     @IBAction func compressonChanged(_ sender: UISlider) {
-        //audioPlayer.compressionNode.wetDryMix = sender.value
+//        audioPlayer.compressionNode.wetDryMix = sender.value
     }
     
     @IBAction func saveButtonPressed(_ sender: Any) {
