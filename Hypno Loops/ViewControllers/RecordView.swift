@@ -26,12 +26,12 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
     @IBOutlet weak var reverbSlider: UISlider!
     @IBOutlet weak var compressionSlider: UISlider!
     @IBOutlet weak var saveButtton: UIButton!
-
+    
     var audioRecorder: AVAudioRecorder!
     var audioSession: AVAudioSession!
-    var audioPlayer = AudioPlayer()
-    var url = URL(string: "")
-    
+    var audioPlayer: AVAudioPlayer?
+//    var url = URL(string: "")
+    var currentAudioFileName: URL?
     var isRecording = false
     var isPlaying   = false
     
@@ -66,26 +66,22 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
     //    MARK: - Record
     
     @IBAction func recordButtonPressed(_ sender: UIButton) {
-        if getRecordingPermissions() {
-            updateRecordButtonUI()
-        } else {
-            return
-        }
+       startRecording()
     }
     
     //    MARK: - Audio Functionality
     
     @IBAction func playButtonPressed(_ sender: UIButton) {
         if !isPlaying {
-            isPlaying.toggle()
+            isPlaying = true
+            startPlaying()
             recordButton.isEnabled = false
-            audioPlayer.playAudio(audioURL: getDocumentsDirectory())
             let stopImage = UIImage(systemName: "stop.fill")
             playButton.setTitle("Stop", for: .normal)
             playButton.setImage(stopImage, for: .normal)
         } else {
-            isPlaying.toggle()
-            audioPlayer.stopAudio()
+            isPlaying = false
+            stopPlaying()
             recordButton.isEnabled = true
             let playImage = UIImage(systemName: "play.fill")
             playButton.setTitle("Play", for: .normal)
@@ -93,25 +89,36 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
         }
     }
     
-    func startRecording() {
-        let audioFileName = getDocumentsDirectory()
-        
-        let settings = [
-            AVFormatIDKey: Int(kAudioFormatLinearPCM),
-            AVSampleRateKey: 44100,
-            AVNumberOfChannelsKey: 2,
-            AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
-        ]
-        
-        do {
-            audioSession = AVAudioSession.sharedInstance()
-            try audioSession.setCategory(.playAndRecord, mode: .default)
-            try audioSession.setActive(true)
-            audioRecorder = try AVAudioRecorder(url: audioFileName, settings: settings)
-        } catch {
-//            HANLE ERROR
+        func startRecording() {
+            currentAudioFileName = createAudioFileURL()
+            guard let url = currentAudioFileName else { return }
+                    
+            let settings = [
+                AVFormatIDKey: Int(kAudioFormatLinearPCM),
+                AVSampleRateKey: 44100,
+                AVNumberOfChannelsKey: 2,
+                AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
+            ]
+    
+            do {
+                audioSession = AVAudioSession.sharedInstance()
+                try audioSession.setCategory(.playAndRecord, mode: .default)
+                try audioSession.setActive(true)
+                audioRecorder = try AVAudioRecorder(url: url, settings: settings)
+                if(getRecordingPermissions() && !isRecording){
+                    isRecording = true
+                    audioRecorder.record()
+                    updateRecordButtonUI()
+                } else {
+                    isRecording = false
+                    audioRecorder.stop()
+                    updateRecordButtonUI()
+                    
+                }
+            } catch {
+    //            HANLE ERROR
+            }
         }
-    }
     
     func getRecordingPermissions() -> Bool {
         var hasPermission = false
@@ -137,30 +144,48 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
         return hasPermission
     }
     
-    func getDocumentsDirectory() -> URL {
-        let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("recording.m4a")
-        print("PATH IS HERE --->", path)
-        return path
+    func startPlaying() {
+        guard let url = currentAudioFileName else { return }
+        do {
+            print("Inside of startPlaying() and URL is: ", url)
+            audioPlayer = try AVAudioPlayer(contentsOf: url)
+            audioPlayer?.prepareToPlay()
+            audioPlayer?.play()
+        } catch {
+            print("Errors in startPlayer()")
+        }
     }
-
+    
+    func stopPlaying() {
+        audioPlayer?.stop()
+    }
+    
+    func createAudioFileURL() -> URL {
+        FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(generateUniqueName())
+    }
+    
     func updateRecordButtonUI() {
-        if !isRecording {
-            isRecording = true
-            startRecording()
+        if isRecording {
             playButton.isEnabled = false
             let stopImage = UIImage(systemName: "stop.fill")
             recordButton.setTitle("Stop", for: .normal)
             recordButton.setImage(stopImage, for: .normal)
             micImageView.tintColor = .red
         } else {
-            isRecording = false
-            audioRecorder.stop()
             playButton.isEnabled = true
             let recordImage = UIImage(systemName: "record.circle")
             recordButton.setTitle("Record", for: .normal)
             recordButton.setImage(recordImage, for: .normal)
             micImageView.tintColor = UIColor(named: Color.hlIndigo.rawValue)
         }
+    }
+    
+    func generateUniqueName() -> String {
+        let uuid = UUID().uuidString
+        let trimmedUUID = String(uuid.prefix(5))
+        let timestamp = Date().timeIntervalSince1970
+        let uniqueString = "\(trimmedUUID)_\(timestamp).m4a"
+        return uniqueString
     }
     
     //    func promptFileName() {
@@ -188,7 +213,7 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
     
     
     @IBAction func reverbChanged(_ sender: UISlider) {
-        audioPlayer.reverb?.wetDryMix = sender.value
+//        audioPlayer.reverb?.wetDryMix = sender.value
     }
     
     
@@ -199,5 +224,7 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
     @IBAction func saveButtonPressed(_ sender: Any) {
         performSegue(withIdentifier: SegueID.gotoPlay.rawValue, sender: self)
     }
+    
+    
     
 }
