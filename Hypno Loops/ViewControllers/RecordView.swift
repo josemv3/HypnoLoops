@@ -76,19 +76,9 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
     
     @IBAction func playButtonPressed(_ sender: UIButton) {
         if !isPlaying {
-            isPlaying = true
-            audioPlayer.playAudio(audioURL: currentAudioFileName!)
-            recordButton.isEnabled = false
-            let stopImage = UIImage(systemName: "stop.fill")
-            playButton.setTitle("Stop", for: .normal)
-            playButton.setImage(stopImage, for: .normal)
+            startPlaying()
         } else {
-            isPlaying = false
-            audioPlayer.stopAudio()
-            recordButton.isEnabled = true
-            let playImage = UIImage(systemName: "play.fill")
-            playButton.setTitle("Play", for: .normal)
-            playButton.setImage(playImage, for: .normal)
+            stopPlaying()
         }
     }
     
@@ -150,11 +140,15 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
     }
     
     func startPlaying() {
+        isPlaying = true
         audioPlayer.playAudio(audioURL: currentAudioFileName!)
+        updatePlayButtonUI()
     }
     
     func stopPlaying() {
+        isPlaying = false
         audioPlayer.stopAudio()
+        updatePlayButtonUI()
     }
     
     func createAudioFileURL() {
@@ -174,6 +168,20 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
             recordButton.setTitle("Record", for: .normal)
             recordButton.setImage(recordImage, for: .normal)
             micImageView.tintColor = UIColor(named: Color.hlIndigo.rawValue)
+        }
+    }
+    
+    func updatePlayButtonUI() {
+        if isPlaying {
+            recordButton.isEnabled = false
+            let stopImage = UIImage(systemName: "stop.fill")
+            playButton.setTitle("Stop", for: .normal)
+            playButton.setImage(stopImage, for: .normal)
+        } else {
+            recordButton.isEnabled = true
+            let playImage = UIImage(systemName: "play.fill")
+            playButton.setTitle("Play", for: .normal)
+            playButton.setImage(playImage, for: .normal)
         }
     }
     
@@ -233,7 +241,4 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
     @IBAction func saveButtonPressed(_ sender: Any) {
         performSegue(withIdentifier: SegueID.gotoPlay.rawValue, sender: self)
     }
-    
-    
-    
 }
