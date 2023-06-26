@@ -712,19 +712,7 @@
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AiU-Qd-ccM">
                                         <rect key="frame" x="211" y="0.0" width="156" height="140"/>
-                                        <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mic.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="D7n-u1-DWn">
-                                                <rect key="frame" x="5" y="4.6666666666666714" width="146" height="129.66666666666663"/>
-                                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </imageView>
-                                        </subviews>
                                         <color key="backgroundColor" name="Super Dark Grey"/>
-                                        <constraints>
-                                            <constraint firstItem="D7n-u1-DWn" firstAttribute="leading" secondItem="AiU-Qd-ccM" secondAttribute="leading" constant="5" id="49M-UA-dP0"/>
-                                            <constraint firstAttribute="trailing" secondItem="D7n-u1-DWn" secondAttribute="trailing" constant="5" id="9FO-Q8-G6Z"/>
-                                            <constraint firstItem="D7n-u1-DWn" firstAttribute="top" secondItem="AiU-Qd-ccM" secondAttribute="top" constant="5.0000000000000036" id="GmF-yw-lEK"/>
-                                            <constraint firstItem="D7n-u1-DWn" firstAttribute="centerY" secondItem="AiU-Qd-ccM" secondAttribute="centerY" id="w6W-lb-eWK"/>
-                                        </constraints>
                                     </view>
                                 </subviews>
                             </stackView>
@@ -886,7 +874,6 @@
                         <outlet property="categoryLabel" destination="7bL-v3-1ks" id="mAd-ZY-LaL"/>
                         <outlet property="compressionSlider" destination="yyP-pz-bwi" id="AAn-XS-GoL"/>
                         <outlet property="micBackgroundView" destination="AiU-Qd-ccM" id="EYz-xh-w2C"/>
-                        <outlet property="micImageView" destination="D7n-u1-DWn" id="dmC-md-CUA"/>
                         <outlet property="playButton" destination="Iso-Go-647" id="YdA-mb-d6L"/>
                         <outlet property="recordButton" destination="quU-1W-D7G" id="r7j-ve-b0T"/>
                         <outlet property="recordButtonView" destination="9ND-iY-BCv" id="dm8-ft-ss6"/>
@@ -1034,7 +1021,6 @@
         <image name="chevron.right" catalog="system" width="97" height="128"/>
         <image name="heart" catalog="system" width="128" height="107"/>
         <image name="loopLogo3.png" width="112.5" height="30"/>
-        <image name="mic.fill" catalog="system" width="110" height="128"/>
         <image name="mindLogo.png" width="768" height="384"/>
         <image name="person.circle.fill" catalog="system" width="128" height="123"/>
         <image name="play.fill" catalog="system" width="117" height="128"/>

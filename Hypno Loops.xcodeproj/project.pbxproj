@@ -52,6 +52,8 @@
 		E0F2A9BA29766B7D0066263F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E0F2A9B829766B7D0066263F /* LaunchScreen.storyboard */; };
 		E8041A522A2193670077E414 /* AuthenticationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8041A512A2193670077E414 /* AuthenticationVC.swift */; };
 		E8041A542A22B3020077E414 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8041A532A22B3020077E414 /* RegisterVC.swift */; };
+		E88744052A4A0536001E59C7 /* DSWaveformImage in Frameworks */ = {isa = PBXBuildFile; productRef = E88744042A4A0536001E59C7 /* DSWaveformImage */; };
+		E88744072A4A0536001E59C7 /* DSWaveformImageViews in Frameworks */ = {isa = PBXBuildFile; productRef = E88744062A4A0536001E59C7 /* DSWaveformImageViews */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -103,8 +105,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E88744052A4A0536001E59C7 /* DSWaveformImage in Frameworks */,
 				E0A4133C299578E900077302 /* FirebaseDatabaseSwift in Frameworks */,
 				E0259D40298A1E730018DB30 /* FirebaseAnalyticsSwift in Frameworks */,
+				E88744072A4A0536001E59C7 /* DSWaveformImageViews in Frameworks */,
 				E0259D42298A1E730018DB30 /* FirebaseAuth in Frameworks */,
 				E0A4133A299578E900077302 /* FirebaseDatabase in Frameworks */,
 				E0259D3E298A1E730018DB30 /* FirebaseAnalytics in Frameworks */,
@@ -257,6 +261,8 @@
 				E0A41339299578E900077302 /* FirebaseDatabase */,
 				E0A4133B299578E900077302 /* FirebaseDatabaseSwift */,
 				4C6D162029CA5AF300B248D1 /* FirebaseStorage */,
+				E88744042A4A0536001E59C7 /* DSWaveformImage */,
+				E88744062A4A0536001E59C7 /* DSWaveformImageViews */,
 			);
 			productName = "Hypno Loops";
 			productReference = E0F2A9AA29766B7A0066263F /* Hypno Loops.app */;
@@ -288,6 +294,7 @@
 			mainGroup = E0F2A9A129766B7A0066263F;
 			packageReferences = (
 				E0259D3C298A1E730018DB30 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				E88744032A4A0536001E59C7 /* XCRemoteSwiftPackageReference "DSWaveformImage" */,
 			);
 			productRefGroup = E0F2A9AB29766B7A0066263F /* Products */;
 			projectDirPath = "";
@@ -585,6 +592,14 @@
 				minimumVersion = 9.0.0;
 			};
 		};
+		E88744032A4A0536001E59C7 /* XCRemoteSwiftPackageReference "DSWaveformImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dmrschmidt/DSWaveformImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 13.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -617,6 +632,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E0259D3C298A1E730018DB30 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseDatabaseSwift;
+		};
+		E88744042A4A0536001E59C7 /* DSWaveformImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E88744032A4A0536001E59C7 /* XCRemoteSwiftPackageReference "DSWaveformImage" */;
+			productName = DSWaveformImage;
+		};
+		E88744062A4A0536001E59C7 /* DSWaveformImageViews */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E88744032A4A0536001E59C7 /* XCRemoteSwiftPackageReference "DSWaveformImage" */;
+			productName = DSWaveformImageViews;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

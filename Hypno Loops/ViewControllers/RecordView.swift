@@ -7,13 +7,13 @@
 
 import UIKit
 import AVFoundation
+import DSWaveformImageViews
 
 class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
     
     @IBOutlet weak var categoryLabel: UILabel!
     @IBOutlet weak var sectionLabel: UILabel!
     @IBOutlet weak var micBackgroundView: UIView!
-    @IBOutlet weak var micImageView: UIImageView!
     
     @IBOutlet weak var affirmationView: UIView!
     @IBOutlet weak var affirmationLabel: UILabel!
@@ -27,6 +27,9 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
     @IBOutlet weak var compressionSlider: UISlider!
     @IBOutlet weak var saveButtton: UIButton!
     
+    let waveFormView = WaveformLiveView()
+    var timer: Timer?
+    
     var audioRecorder: AVAudioRecorder!
     var audioSession: AVAudioSession!
     var audioPlayer = HypnoAudioPlayer()
@@ -37,6 +40,7 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        setupWaveform()
     }
     
     func setupViews() {
@@ -62,6 +66,14 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
         affirmationView.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
     }
     
+    func setupWaveform() {
+        micBackgroundView.addSubview(waveFormView)
+        waveFormView.frame = micBackgroundView.bounds
+        waveFormView.shouldDrawSilencePadding = true
+        waveFormView.configuration = waveFormView.configuration.with(style: .striped(.init(color: .blue)))
+//        waveformLiveView.backgroundColor = .red
+    }
+    
     //    MARK: - Record
     
     @IBAction func recordButtonPressed(_ sender: UIButton) {
@@ -84,6 +96,7 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
     
     func startRecording() {
         createAudioFileURL()
+        waveFormView.reset()
 
         let settings: [String: Any] = [
             AVFormatIDKey: kAudioFormatMPEG4AAC,
@@ -97,10 +110,12 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
             try audioSession.setCategory(.playAndRecord, mode: .default)
             try audioSession.setActive(true)
             audioRecorder = try AVAudioRecorder(url: currentAudioFileName!, settings: settings)
+            audioRecorder.isMeteringEnabled = true
             
             if getRecordingPermissions() {
                 isRecording = true
                 audioRecorder.record()
+                timer = Timer.scheduledTimer(timeInterval: 0.02, target: self, selector: #selector(updateMeters), userInfo: nil, repeats: true)
                 updateRecordButtonUI()
             }
         } catch {
@@ -108,7 +123,17 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
         }
     }
     
+    @objc func updateMeters() {
+        audioRecorder.updateMeters()
+        let currentAmplitude = 1 - pow(10, audioRecorder.averagePower(forChannel: 0) / 160)
+//        waveformLiveView.add(sample: 1)
+        print("AMP: ",currentAmplitude)
+        waveFormView.add(sample: currentAmplitude)
+    }
+    
     func stopRecording() {
+        timer?.invalidate()
+        timer = nil
         isRecording = false
         audioRecorder.stop()
         audioRecorder = nil
@@ -161,13 +186,11 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
             let stopImage = UIImage(systemName: "stop.fill")
             recordButton.setTitle("Stop", for: .normal)
             recordButton.setImage(stopImage, for: .normal)
-            micImageView.tintColor = .red
         } else {
             playButton.isEnabled = true
             let recordImage = UIImage(systemName: "record.circle")
             recordButton.setTitle("Record", for: .normal)
             recordButton.setImage(recordImage, for: .normal)
-            micImageView.tintColor = UIColor(named: Color.hlIndigo.rawValue)
         }
     }
     
