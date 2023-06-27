@@ -70,7 +70,7 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
         micBackgroundView.addSubview(waveFormView)
         waveFormView.frame = micBackgroundView.bounds
         waveFormView.shouldDrawSilencePadding = true
-        waveFormView.configuration = waveFormView.configuration.with(style: .striped(.init(color: .blue)))
+        waveFormView.configuration = waveFormView.configuration.with(style: .striped(.init(color: .blue)), damping: .none)
 //        waveformLiveView.backgroundColor = .red
     }
     
@@ -115,7 +115,8 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
             if getRecordingPermissions() {
                 isRecording = true
                 audioRecorder.record()
-                timer = Timer.scheduledTimer(timeInterval: 0.02, target: self, selector: #selector(updateMeters), userInfo: nil, repeats: true)
+                timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(updateMeters), userInfo: nil, repeats: true)
+                updateMeters()
                 updateRecordButtonUI()
             }
         } catch {
@@ -125,7 +126,7 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
     
     @objc func updateMeters() {
         audioRecorder.updateMeters()
-        let currentAmplitude = 1 - pow(10, audioRecorder.averagePower(forChannel: 0) / 160)
+        let currentAmplitude = 1 - pow(10, audioRecorder.averagePower(forChannel: 0) / 20)
 //        waveformLiveView.add(sample: 1)
         print("AMP: ",currentAmplitude)
         waveFormView.add(sample: currentAmplitude)
