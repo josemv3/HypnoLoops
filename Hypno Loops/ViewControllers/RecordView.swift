@@ -7,7 +7,6 @@
 
 import UIKit
 import AVFoundation
-import DSWaveformImageViews
 
 class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelegate {
     
@@ -26,8 +25,8 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
     @IBOutlet weak var reverbSlider: UISlider!
     @IBOutlet weak var compressionSlider: UISlider!
     @IBOutlet weak var saveButtton: UIButton!
+    @IBOutlet weak var visualizerView: PulsatingCircleView!
     
-    let waveFormView = WaveformLiveView()
     var timer: Timer?
     
     var audioRecorder: AVAudioRecorder!
@@ -40,38 +39,30 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        setupWaveform()
+        print("MC BOUNDS: ", micBackgroundView.bounds)
     }
     
     func setupViews() {
         micBackgroundView.layer.cornerRadius = CornerRadiusModifiers.normal.size
-        micBackgroundView.layer.borderWidth = BorderSize.small.size
-        micBackgroundView.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
-        
+//        micBackgroundView.layer.borderWidth = BorderSize.small.size
+//        micBackgroundView.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
+//        
         recordButtonView.layer.cornerRadius = CornerRadiusModifiers.normal.size
-        recordButtonView.layer.borderWidth = BorderSize.small.size
-        recordButtonView.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
-        
+//        recordButtonView.layer.borderWidth = BorderSize.small.size
+//        recordButtonView.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
+//        
         reverbButtonView.layer.cornerRadius = CornerRadiusModifiers.normal.size
-        reverbButtonView.layer.borderWidth = BorderSize.small.size
-        reverbButtonView.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
-        
+//        reverbButtonView.layer.borderWidth = BorderSize.small.size
+//        reverbButtonView.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
+//        
         saveButtton.tintColor = UIColor(named: Color.hlBlue.rawValue)
         
         //categoryLabel.layer.borderWidth = BorderSize.small.size
         //categoryLabel.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
         
         affirmationView.layer.cornerRadius = CornerRadiusModifiers.normal.size
-        affirmationView.layer.borderWidth = BorderSize.small.size
-        affirmationView.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
-    }
-    
-    func setupWaveform() {
-        micBackgroundView.addSubview(waveFormView)
-        waveFormView.frame = micBackgroundView.bounds
-        waveFormView.shouldDrawSilencePadding = true
-        waveFormView.configuration = waveFormView.configuration.with(style: .striped(.init(color: .blue)), damping: .none)
-//        waveformLiveView.backgroundColor = .red
+//        affirmationView.layer.borderWidth = BorderSize.small.size
+//        affirmationView.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
     }
     
     //    MARK: - Record
@@ -96,7 +87,6 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
     
     func startRecording() {
         createAudioFileURL()
-        waveFormView.reset()
 
         let settings: [String: Any] = [
             AVFormatIDKey: kAudioFormatMPEG4AAC,
@@ -115,30 +105,24 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
             if getRecordingPermissions() {
                 isRecording = true
                 audioRecorder.record()
-                timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(updateMeters), userInfo: nil, repeats: true)
-                updateMeters()
                 updateRecordButtonUI()
+                
+                startAudioLevelMonitoring()
             }
         } catch {
             print("Failed to start recording: \(error.localizedDescription)")
         }
     }
     
-    @objc func updateMeters() {
-        audioRecorder.updateMeters()
-        let currentAmplitude = 1 - pow(10, audioRecorder.averagePower(forChannel: 0) / 20)
-//        waveformLiveView.add(sample: 1)
-        print("AMP: ",currentAmplitude)
-        waveFormView.add(sample: currentAmplitude)
-    }
-    
     func stopRecording() {
-        timer?.invalidate()
-        timer = nil
         isRecording = false
         audioRecorder.stop()
         audioRecorder = nil
         updateRecordButtonUI()
+
+        visualizerView.updatePulse(with: 0)
+        timer?.invalidate()
+        timer = nil
     }
     
     func getRecordingPermissions() -> Bool {
@@ -209,6 +193,22 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
         }
     }
     
+    func startAudioLevelMonitoring() {
+        guard let audioRecorder = audioRecorder else { return }
+        
+        audioRecorder.isMeteringEnabled = true
+        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateMeters), userInfo: nil, repeats: true)
+    }
+    
+    @objc func updateMeters() {
+        audioRecorder.updateMeters()
+        
+        let averagePower = audioRecorder.averagePower(forChannel: 0)
+        let normalizedPower = (averagePower + 80) / 120
+        self.visualizerView.updatePulse(with: normalizedPower)
+    }
+
+    
     func generateUniqueName() -> String {
         let uuid = UUID().uuidString
         let uniqueString = "\(uuid).m4a"
@@ -264,5 +264,55 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
     
     @IBAction func saveButtonPressed(_ sender: Any) {
         performSegue(withIdentifier: SegueID.gotoPlay.rawValue, sender: self)
+    }
+}
+
+class PulsatingCircleView: UIView {
+    private var pulseLayer: CALayer!
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+        let radius = min(bounds.width, bounds.height) / 2
+        let center = CGPoint(x: bounds.midX, y: bounds.midY)
+        print("CIRCLE BOUNDS: ", bounds)
+
+        pulseLayer = CALayer()
+        pulseLayer.bounds = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height)
+        pulseLayer.position = center
+        pulseLayer.cornerRadius = radius
+        pulseLayer.opacity = 0
+        
+        let gradient = CAGradientLayer()
+        gradient.frame = bounds
+        gradient.colors = [UIColor.blue.cgColor, UIColor.green.cgColor]
+        
+        let shape = CAShapeLayer()
+        shape.lineWidth = 2
+        shape.path = UIBezierPath(ovalIn: CGRect(x: bounds.midX / 2, y: bounds.midY / 2, width: radius, height: radius)).cgPath
+        shape.strokeColor = UIColor.black.cgColor
+        shape.fillColor = UIColor.clear.cgColor
+        gradient.mask = shape
+        
+        pulseLayer.addSublayer(gradient)
+        
+        layer.addSublayer(pulseLayer)
+    }
+    
+    func updatePulse(with audioLevel: Float) {
+        let scale = 1 + CGFloat(audioLevel) * 0.9
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        pulseLayer.transform = CATransform3DMakeScale(scale, scale, 1)
+        pulseLayer.opacity = Float(audioLevel)
+        CATransaction.commit()
     }
 }

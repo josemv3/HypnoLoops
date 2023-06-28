@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Hsz-mq-fg1">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22113.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Hsz-mq-fg1">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22089.1"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -690,29 +690,41 @@
                                 <rect key="frame" x="16" y="86" width="367" height="140"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="BkD-RU-UwZ">
-                                        <rect key="frame" x="0.0" y="0.0" width="171" height="140"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="187" height="140"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Healing and Health" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t3A-HL-sP7">
-                                                <rect key="frame" x="0.0" y="0.0" width="171" height="70"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="187" height="70"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <color key="textColor" name="hlBlue"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wealth Attraction" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7bL-v3-1ks">
-                                                <rect key="frame" x="0.0" y="70" width="171" height="70"/>
+                                                <rect key="frame" x="0.0" y="70" width="187" height="70"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <color key="textColor" name="hlBlue"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="171" id="R3N-iE-EJI"/>
-                                            <constraint firstAttribute="height" constant="140" id="ktR-bk-DYS"/>
-                                        </constraints>
                                     </stackView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AiU-Qd-ccM">
-                                        <rect key="frame" x="211" y="0.0" width="156" height="140"/>
-                                        <color key="backgroundColor" name="Super Dark Grey"/>
+                                        <rect key="frame" x="227" y="0.0" width="140" height="140"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w9i-Sf-A0I" customClass="PulsatingCircleView" customModule="Hypno_Loops" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="140" height="140"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="140" id="bCn-RN-StF"/>
+                                                    <constraint firstAttribute="width" constant="140" id="yBU-8a-yVS"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="w9i-Sf-A0I" firstAttribute="centerY" secondItem="AiU-Qd-ccM" secondAttribute="centerY" id="A0I-uW-nbO"/>
+                                            <constraint firstItem="w9i-Sf-A0I" firstAttribute="centerX" secondItem="AiU-Qd-ccM" secondAttribute="centerX" id="Mct-GL-V6B"/>
+                                            <constraint firstAttribute="height" constant="140" id="tU2-4J-xGE"/>
+                                            <constraint firstAttribute="width" constant="140" id="w3l-00-Ij5"/>
+                                        </constraints>
                                     </view>
                                 </subviews>
                             </stackView>
@@ -881,12 +893,13 @@
                         <outlet property="reverbSlider" destination="aH7-N6-XOw" id="71M-lQ-6p8"/>
                         <outlet property="saveButtton" destination="gdt-vK-4H8" id="8yG-xt-Upb"/>
                         <outlet property="sectionLabel" destination="t3A-HL-sP7" id="Rrw-j2-BX0"/>
+                        <outlet property="visualizerView" destination="w9i-Sf-A0I" id="oeh-TO-aTw"/>
                         <segue destination="1Q0-i3-Q8k" kind="show" identifier="gotoPlay" id="0JU-B5-xMo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VgZ-f8-mg2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2955" y="217"/>
+            <point key="canvasLocation" x="2954.9618320610684" y="216.90140845070422"/>
         </scene>
         <!--Play View-->
         <scene sceneID="hZL-77-0AY">
@@ -910,19 +923,19 @@
                                 <buttonConfiguration key="configuration" style="plain" image="slider.horizontal.3" catalog="system"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7:21" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wOg-mi-GsL">
-                                <rect key="frame" x="226" y="344.66666666666669" width="31.333333333333314" height="21"/>
+                                <rect key="frame" x="226" y="344" width="31.333333333333314" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" name="hlPalePurple"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="/" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xRy-rT-JVc">
-                                <rect key="frame" x="265.66666666666669" y="344.66666666666669" width="5" height="21"/>
+                                <rect key="frame" x="265.66666666666669" y="344" width="5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" name="hlBlue"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="21:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zNy-2l-Wvl">
-                                <rect key="frame" x="278.66666666666669" y="344.66666666666669" width="42.666666666666686" height="21"/>
+                                <rect key="frame" x="278.66666666666669" y="344" width="42.666666666666686" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" name="hlBlue"/>
                                 <nil key="highlightedColor"/>
@@ -937,10 +950,10 @@
                                 <buttonConfiguration key="configuration" style="plain" image="repeat" catalog="system"/>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gVq-Ce-Bbc">
-                                <rect key="frame" x="127" y="396.66666666666669" width="139" height="119.33333333333331"/>
+                                <rect key="frame" x="127" y="396" width="139" height="120"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xwh-Fo-sR8">
-                                        <rect key="frame" x="19.666666666666657" y="9.6666666666666288" width="100" height="100"/>
+                                        <rect key="frame" x="19.666666666666657" y="10" width="100" height="100"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="0md-0H-1Oc"/>
@@ -1050,7 +1063,7 @@
             <color red="0.51800000667572021" green="0.22699999809265137" blue="0.43500000238418579" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
