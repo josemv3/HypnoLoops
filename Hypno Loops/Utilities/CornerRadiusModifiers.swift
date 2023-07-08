@@ -13,9 +13,9 @@ enum CornerRadiusModifiers: CGFloat {
     var size: CGFloat {
         switch(self) {
         case .small:
-            return 5
+            return 2
         case .normal:
-            return 10
+            return 5
         case .large:
             return 15
         }

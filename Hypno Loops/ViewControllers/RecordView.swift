@@ -13,7 +13,6 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
     @IBOutlet weak var categoryLabel: UILabel!
     @IBOutlet weak var sectionLabel: UILabel!
     @IBOutlet weak var micBackgroundView: UIView!
-    @IBOutlet weak var micImageView: UIImageView!
     
     @IBOutlet weak var affirmationView: UIView!
     @IBOutlet weak var affirmationLabel: UILabel!
@@ -26,6 +25,9 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
     @IBOutlet weak var reverbSlider: UISlider!
     @IBOutlet weak var compressionSlider: UISlider!
     @IBOutlet weak var saveButtton: UIButton!
+    @IBOutlet weak var visualizerView: PulsatingCircleView!
+    
+    var timer: Timer?
     
     var audioRecorder: AVAudioRecorder!
     var audioSession: AVAudioSession!
@@ -37,29 +39,30 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        print("MC BOUNDS: ", micBackgroundView.bounds)
     }
     
     func setupViews() {
         micBackgroundView.layer.cornerRadius = CornerRadiusModifiers.normal.size
-        micBackgroundView.layer.borderWidth = BorderSize.small.size
-        micBackgroundView.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
-        
+//        micBackgroundView.layer.borderWidth = BorderSize.small.size
+//        micBackgroundView.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
+//        
         recordButtonView.layer.cornerRadius = CornerRadiusModifiers.normal.size
-        recordButtonView.layer.borderWidth = BorderSize.small.size
-        recordButtonView.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
-        
+//        recordButtonView.layer.borderWidth = BorderSize.small.size
+//        recordButtonView.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
+//        
         reverbButtonView.layer.cornerRadius = CornerRadiusModifiers.normal.size
-        reverbButtonView.layer.borderWidth = BorderSize.small.size
-        reverbButtonView.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
-        
+//        reverbButtonView.layer.borderWidth = BorderSize.small.size
+//        reverbButtonView.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
+//        
         saveButtton.tintColor = UIColor(named: Color.hlBlue.rawValue)
         
         //categoryLabel.layer.borderWidth = BorderSize.small.size
         //categoryLabel.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
         
         affirmationView.layer.cornerRadius = CornerRadiusModifiers.normal.size
-        affirmationView.layer.borderWidth = BorderSize.small.size
-        affirmationView.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
+//        affirmationView.layer.borderWidth = BorderSize.small.size
+//        affirmationView.layer.borderColor = UIColor(named: Color.hlBlue.rawValue)?.cgColor
     }
     
     //    MARK: - Record
@@ -76,19 +79,9 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
     
     @IBAction func playButtonPressed(_ sender: UIButton) {
         if !isPlaying {
-            isPlaying = true
-            audioPlayer.playAudio(audioURL: currentAudioFileName!)
-            recordButton.isEnabled = false
-            let stopImage = UIImage(systemName: "stop.fill")
-            playButton.setTitle("Stop", for: .normal)
-            playButton.setImage(stopImage, for: .normal)
+            startPlaying()
         } else {
-            isPlaying = false
-            audioPlayer.stopAudio()
-            recordButton.isEnabled = true
-            let playImage = UIImage(systemName: "play.fill")
-            playButton.setTitle("Play", for: .normal)
-            playButton.setImage(playImage, for: .normal)
+            stopPlaying()
         }
     }
     
@@ -107,11 +100,14 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
             try audioSession.setCategory(.playAndRecord, mode: .default)
             try audioSession.setActive(true)
             audioRecorder = try AVAudioRecorder(url: currentAudioFileName!, settings: settings)
+            audioRecorder.isMeteringEnabled = true
             
             if getRecordingPermissions() {
                 isRecording = true
                 audioRecorder.record()
                 updateRecordButtonUI()
+                
+                startAudioLevelMonitoring()
             }
         } catch {
             print("Failed to start recording: \(error.localizedDescription)")
@@ -123,6 +119,10 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
         audioRecorder.stop()
         audioRecorder = nil
         updateRecordButtonUI()
+
+        visualizerView.updatePulse(with: 0)
+        timer?.invalidate()
+        timer = nil
     }
     
     func getRecordingPermissions() -> Bool {
@@ -150,11 +150,15 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
     }
     
     func startPlaying() {
+        isPlaying = true
         audioPlayer.playAudio(audioURL: currentAudioFileName!)
+        updatePlayButtonUI()
     }
     
     func stopPlaying() {
+        isPlaying = false
         audioPlayer.stopAudio()
+        updatePlayButtonUI()
     }
     
     func createAudioFileURL() {
@@ -167,15 +171,43 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
             let stopImage = UIImage(systemName: "stop.fill")
             recordButton.setTitle("Stop", for: .normal)
             recordButton.setImage(stopImage, for: .normal)
-            micImageView.tintColor = .red
         } else {
             playButton.isEnabled = true
             let recordImage = UIImage(systemName: "record.circle")
             recordButton.setTitle("Record", for: .normal)
             recordButton.setImage(recordImage, for: .normal)
-            micImageView.tintColor = UIColor(named: Color.hlIndigo.rawValue)
         }
     }
+    
+    func updatePlayButtonUI() {
+        if isPlaying {
+            recordButton.isEnabled = false
+            let stopImage = UIImage(systemName: "stop.fill")
+            playButton.setTitle("Stop", for: .normal)
+            playButton.setImage(stopImage, for: .normal)
+        } else {
+            recordButton.isEnabled = true
+            let playImage = UIImage(systemName: "play.fill")
+            playButton.setTitle("Play", for: .normal)
+            playButton.setImage(playImage, for: .normal)
+        }
+    }
+    
+    func startAudioLevelMonitoring() {
+        guard let audioRecorder = audioRecorder else { return }
+        
+        audioRecorder.isMeteringEnabled = true
+        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateMeters), userInfo: nil, repeats: true)
+    }
+    
+    @objc func updateMeters() {
+        audioRecorder.updateMeters()
+        
+        let averagePower = audioRecorder.averagePower(forChannel: 0)
+        let normalizedPower = (averagePower + 80) / 120
+        self.visualizerView.updatePulse(with: normalizedPower)
+    }
+
     
     func generateUniqueName() -> String {
         let uuid = UUID().uuidString
@@ -233,7 +265,54 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
     @IBAction func saveButtonPressed(_ sender: Any) {
         performSegue(withIdentifier: SegueID.gotoPlay.rawValue, sender: self)
     }
+}
+
+class PulsatingCircleView: UIView {
+    private var pulseLayer: CALayer!
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
     
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
     
+    private func setup() {
+        let radius = min(bounds.width, bounds.height) / 2
+        let center = CGPoint(x: bounds.midX, y: bounds.midY)
+        print("CIRCLE BOUNDS: ", bounds)
+
+        pulseLayer = CALayer()
+        pulseLayer.bounds = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height)
+        pulseLayer.position = center
+        pulseLayer.cornerRadius = radius
+        pulseLayer.opacity = 0
+        
+        let gradient = CAGradientLayer()
+        gradient.frame = bounds
+        gradient.colors = [UIColor.blue.cgColor, UIColor.green.cgColor]
+        
+        let shape = CAShapeLayer()
+        shape.lineWidth = 2
+        shape.path = UIBezierPath(ovalIn: CGRect(x: bounds.midX / 2, y: bounds.midY / 2, width: radius, height: radius)).cgPath
+        shape.strokeColor = UIColor.black.cgColor
+        shape.fillColor = UIColor.clear.cgColor
+        gradient.mask = shape
+        
+        pulseLayer.addSublayer(gradient)
+        
+        layer.addSublayer(pulseLayer)
+    }
+    
+    func updatePulse(with audioLevel: Float) {
+        let scale = 1 + CGFloat(audioLevel) * 0.9
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        pulseLayer.transform = CATransform3DMakeScale(scale, scale, 1)
+        pulseLayer.opacity = Float(audioLevel)
+        CATransaction.commit()
+    }
 }
