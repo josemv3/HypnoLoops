@@ -39,6 +39,7 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        currentAudioFileName = createAudioFileURL()
         print("MC BOUNDS: ", micBackgroundView.bounds)
     }
     
@@ -86,7 +87,6 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
     }
     
     func startRecording() {
-        createAudioFileURL()
 
         let settings: [String: Any] = [
             AVFormatIDKey: kAudioFormatMPEG4AAC,
@@ -161,8 +161,66 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
         updatePlayButtonUI()
     }
     
-    func createAudioFileURL() {
-        currentAudioFileName = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(generateUniqueName())
+//    func changeAudioFileName() -> URL {
+//        let alertController = UIAlertController(title: "Name Your Soundscape", message: nil, preferredStyle: .alert)
+//        alertController.addTextField { textField in
+//            textField.placeholder = "Soundscape Name"
+//        }
+//
+//        let okAction = UIAlertAction(title: "OK", style: .default)
+//        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+//
+//        [okAction, cancelAction].forEach { alertController.addAction($0) }
+//        self.present(alertController, animated: true)
+//
+//        guard let textField = alertController.textFields?.first else { return URL(fileURLWithPath: "") }
+//
+//        let newFileName = textField.text
+//
+//
+//        return URL(fileURLWithPath: "")
+//    }
+
+//    func promptForTextInput(completion: @escaping (String?) -> Void) {
+//        let alertController = UIAlertController(title: "Enter Text", message: nil, preferredStyle: .alert)
+//        alertController.addTextField { textField in
+//            textField.placeholder = "Text"
+//        }
+//
+//        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
+//            guard let textField = alertController.textFields?.first else {
+//                completion(nil)
+//                return
+//            }
+//            completion(textField.text)
+//        }
+//        alertController.addAction(okAction)
+//
+//        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+//            completion(nil)
+//        }
+//        alertController.addAction(cancelAction)
+//
+//        guard let topViewController = UIApplication.shared.keyWindow?.rootViewController else {
+//            completion(nil)
+//            return
+//        }
+//
+//        topViewController.present(alertController, animated: true, completion: nil)
+//    }
+
+    // Usage Example
+//    promptForTextInput { userInput in
+//        if let text = userInput {
+//            print("User entered: \(text)")
+//        } else {
+//            print("User canceled text input.")
+//        }
+//    }
+
+    
+    func createAudioFileURL() -> URL {
+        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(generateUniqueName())
     }
     
     func updateRecordButtonUI() {
@@ -210,47 +268,40 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
 
     
     func generateUniqueName() -> String {
-        let uuid = UUID().uuidString
+        let uuid = UUID().uuidString.prefix(8)
         let uniqueString = "\(uuid).m4a"
         return uniqueString
     }
+
+        func promptFileName() {
+            guard let url = currentAudioFileName else { return }
+            let alertController = UIAlertController(title: "Name your soundscape", message: nil, preferredStyle: .alert)
+            alertController.addTextField { textField in
+                textField.placeholder = "\(url.lastPathComponent)"
+            }
     
-    func generateRandomString(length: Int) -> String {
-        let characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-        let charCount = characters.count
-        var randomString = ""
-
-        for _ in 0..<length {
-            let randomIndex = Int.random(in: 0..<charCount)
-            let randomCharacter = characters[characters.index(characters.startIndex, offsetBy: randomIndex)]
-            randomString.append(randomCharacter)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            let renameAction = UIAlertAction(title: "Save", style: .default) { [weak self] _ in
+                guard let self else { return }
+                guard let newName = alertController.textFields?.first?.text else { return }
+                if newName.isEmpty {
+                    self.currentAudioFileName = self.createAudioFileURL()
+                    return
+                }
+                print("NAME: --->", newName)
+                let newURL = url.deletingLastPathComponent().appendingPathComponent(newName)
+                do {
+                    try FileManager.default.moveItem(at: url, to: newURL)
+                    print("File renamed to \(newName)")
+                } catch {
+                    print("Error renaming file: \(error.localizedDescription)")
+                }
+            }
+            
+            [cancelAction, renameAction].forEach { alertController.addAction($0) }
+    
+            present(alertController, animated: true)
         }
-
-        return randomString
-    }
-
-    //    func promptFileName() {
-    //        let url = audioRecorder.getAudioURL()
-    //        let alertController = UIAlertController(title: "Name your affirmation", message: nil, preferredStyle: .alert)
-    //        alertController.addTextField(configurationHandler: nil)
-    //
-    //        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-    //        let renameAction = UIAlertAction(title: "Save", style: .default) { _ in
-    //            guard let newName = alertController.textFields?.first?.text else { return }
-    //            let newURL = url.deletingLastPathComponent().appendingPathComponent(newName)
-    //            do {
-    //                try FileManager.default.moveItem(at: url, to: newURL)
-    //                print("File renamed to \(newName)")
-    //            } catch {
-    //                print("Error renaming file: \(error.localizedDescription)")
-    //            }
-    //        }
-    //
-    //        alertController.addAction(cancelAction)
-    //        alertController.addAction(renameAction)
-    //
-    //        present(alertController, animated: true)
-    //    }
     
     
     @IBAction func reverbChanged(_ sender: UISlider) {
@@ -263,7 +314,8 @@ class RecordView: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelega
     }
     
     @IBAction func saveButtonPressed(_ sender: Any) {
-        performSegue(withIdentifier: SegueID.gotoPlay.rawValue, sender: self)
+//        performSegue(withIdentifier: SegueID.gotoPlay.rawValue, sender: self)
+        promptFileName()
     }
 }
 
