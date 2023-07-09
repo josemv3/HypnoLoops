@@ -484,7 +484,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Phe-5S-PR7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2065" y="-496"/>
+            <point key="canvasLocation" x="3134" y="-656"/>
         </scene>
         <!--Category View-->
         <scene sceneID="ky6-3o-2Ib">
@@ -495,7 +495,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ImU-NG-dlf">
-                                <rect key="frame" x="0.0" y="216" width="393" height="660"/>
+                                <rect key="frame" x="0.0" y="160" width="393" height="716"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="UxM-y4-uZC">
                                     <size key="itemSize" width="65" height="55"/>
@@ -553,7 +553,7 @@
                                 </connections>
                             </collectionView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="nLD-AJ-TCQ">
-                                <rect key="frame" x="115" y="56.999999999999986" width="168" height="148.66666666666669"/>
+                                <rect key="frame" x="115" y="1" width="168" height="148.66666666666666"/>
                                 <color key="tintColor" name="hlBlue"/>
                             </imageView>
                         </subviews>
@@ -591,7 +591,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jmk-NC-rQm">
-                                <rect key="frame" x="0.0" y="171" width="393" height="671"/>
+                                <rect key="frame" x="0.0" y="115" width="393" height="727"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="mV0-Y7-Kh2">
                                     <size key="itemSize" width="375" height="128"/>
@@ -677,7 +677,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1I3-6O-8kV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2954.9618320610684" y="-655.63380281690149"/>
+            <point key="canvasLocation" x="4115" y="-598"/>
         </scene>
         <!--Record View-->
         <scene sceneID="EeB-EB-3cd">
@@ -966,7 +966,7 @@
                                         </buttonConfiguration>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" name="hlDarkGrey"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="Xwh-Fo-sR8" firstAttribute="centerX" secondItem="gVq-Ce-Bbc" secondAttribute="centerX" id="H0W-2G-yWQ"/>
                                     <constraint firstItem="Xwh-Fo-sR8" firstAttribute="centerY" secondItem="gVq-Ce-Bbc" secondAttribute="centerY" id="cLr-92-BZd"/>
@@ -988,6 +988,9 @@
                                 <buttonConfiguration key="configuration" style="filled" imagePlacement="trailing" title="Sound Scape" imagePadding="5">
                                     <imageReference key="image" image="chevron.right" catalog="system" symbolScale="small"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="soundscapesButtonPressed:" destination="1Q0-i3-Q8k" eventType="touchUpInside" id="MIz-91-FwJ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Kcy-CQ-z8P"/>
@@ -1019,6 +1022,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="qWP-hj-clh"/>
+                    <connections>
+                        <outlet property="soundscapesButton" destination="Ae8-Ae-mfi" id="tjN-OV-Jre"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ECN-VX-179" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1106,12 +1112,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="84f-bp-qFg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4060" y="671"/>
+            <point key="canvasLocation" x="1663" y="-496"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="xSS-9A-hjI"/>
-        <segue reference="7rI-M3-pwm"/>
+        <segue reference="wA0-XR-ddo"/>
         <segue reference="LS6-dV-QCV"/>
     </inferredMetricsTieBreakers>
     <resources>
@@ -1131,9 +1137,6 @@
         </namedColor>
         <namedColor name="hlBlue">
             <color red="0.27058823529411763" green="0.68235294117647061" blue="0.8901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
-        <namedColor name="hlDarkGrey">
-            <color red="0.14509803921568629" green="0.15686274509803921" blue="0.15294117647058825" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="hlIndigo">
             <color red="0.054999999701976776" green="0.075000002980232239" blue="0.15700000524520874" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

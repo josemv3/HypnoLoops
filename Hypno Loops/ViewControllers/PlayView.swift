@@ -13,6 +13,7 @@ class PlayView: UIViewController {
     let audioEngine = AVAudioEngine()
     let playerNode = AVAudioPlayerNode()
 
+    @IBOutlet weak var soundscapesButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,7 +31,31 @@ class PlayView: UIViewController {
             
         }
     }
+    
+    func presentModal() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        if let audioView = storyboard.instantiateViewController(withIdentifier: "AudioView") as? AudioView {
+            
+            let nav = UINavigationController(rootViewController: audioView)
+            nav.modalPresentationStyle = .pageSheet
+            
+            if let sheet = nav.sheetPresentationController {
+                sheet.detents = [.medium(), .large()]
+                sheet.largestUndimmedDetentIdentifier = .large
+                //allows scrolling in AudioView
+                sheet.prefersScrollingExpandsWhenScrolledToEdge = false
+                sheet.prefersEdgeAttachedInCompactHeight = true
+                sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true
+                sheet.prefersGrabberVisible = true
+            }
+            present(nav, animated: true, completion: nil)
+        }
+    }
 
+    @IBAction func soundscapesButtonPressed(_ sender: Any) {
+        presentModal()
+    }
 }
 
 

@@ -54,6 +54,7 @@
 		E8041A542A22B3020077E414 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8041A532A22B3020077E414 /* RegisterVC.swift */; };
 		E88744052A4A0536001E59C7 /* DSWaveformImage in Frameworks */ = {isa = PBXBuildFile; productRef = E88744042A4A0536001E59C7 /* DSWaveformImage */; };
 		E88744072A4A0536001E59C7 /* DSWaveformImageViews in Frameworks */ = {isa = PBXBuildFile; productRef = E88744062A4A0536001E59C7 /* DSWaveformImageViews */; };
+		E8E0DCD82A5B6847005AD3CA /* AudioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E0DCD72A5B6847005AD3CA /* AudioView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,6 +99,7 @@
 		E0F2A9BB29766B7D0066263F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E8041A512A2193670077E414 /* AuthenticationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationVC.swift; sourceTree = "<group>"; };
 		E8041A532A22B3020077E414 /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
+		E8E0DCD72A5B6847005AD3CA /* AudioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +189,7 @@
 				E0E5A732297B130E00B7B29D /* RecordView.swift */,
 				E0E5A734297B142100B7B29D /* PlayView.swift */,
 				E8041A532A22B3020077E414 /* RegisterVC.swift */,
+				E8E0DCD72A5B6847005AD3CA /* AudioView.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -355,6 +358,7 @@
 				E0AE525F299C01B70012C068 /* CategoryItem.swift in Sources */,
 				E093C6C129D5EDCD00722196 /* AffirmationModel.swift in Sources */,
 				E0E5A735297B142100B7B29D /* PlayView.swift in Sources */,
+				E8E0DCD82A5B6847005AD3CA /* AudioView.swift in Sources */,
 				E0AE5257299850D90012C068 /* BorderSize.swift in Sources */,
 				E0F2A9B029766B7B0066263F /* SceneDelegate.swift in Sources */,
 				E0408A8029AAF87200228E8A /* SectionHeaderData.swift in Sources */,
