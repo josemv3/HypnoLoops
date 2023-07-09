@@ -40,7 +40,8 @@ class WelcomeView: UIViewController {
         performSegue(withIdentifier: SegueID.welcomToRecord.rawValue, sender: self)
     }
     
-    @IBAction func playViewPushed(_ sender: UIButton) {
+    @IBAction func playViewButtonPressed(_ sender: Any) {
+        performSegue(withIdentifier: SegueID.gotoPlay.rawValue, sender: self)
     }
     
     @IBAction func didTapLogoutButton(_ sender: Any) {
@@ -51,22 +52,22 @@ class WelcomeView: UIViewController {
         }
         
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier {
-        case SegueID.welcomeToLoginView.rawValue:
-            let logInView = segue.destination as! LogInView
-            //logInView.emailErrorLabel
-            //use loginView.?? to access any property or function in LogInView
-        case SegueID.gotoProfile.rawValue:
-            let userProfileView =  segue.destination as! UserProfileView
-        case SegueID.gotoCategoryView.rawValue:
-            let categoryView = segue.destination as! CategoryView
-            //categoryView.userData = NetworkManager.userData
-        case SegueID.welcomToRecord.rawValue:
-            let recordView = segue.destination as! RecordView
-        default:
-            print("Error in WelcomView segue")
-        }
-    }
+
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        switch segue.identifier {
+//        case SegueID.welcomeToLoginView.rawValue:
+//            let logInView = segue.destination as! LogInView
+//        case SegueID.gotoProfile.rawValue:
+//            let userProfileView =  segue.destination as! UserProfileView
+//        case SegueID.gotoCategoryView.rawValue:
+//            let categoryView = segue.destination as! CategoryView
+//            //categoryView.userData = NetworkManager.userData
+//        case SegueID.welcomToRecord.rawValue:
+//            let recordView = segue.destination as! RecordView
+////        case SegueID.gotoPlay.rawValue:
+////            let playView = segue.destination as! PlayView
+//        default:
+//            print("Error in WelcomView segue")
+//        }
+//    }
 }

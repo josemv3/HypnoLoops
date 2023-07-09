@@ -83,7 +83,7 @@
                                             <color key="baseBackgroundColor" name="hlBlue"/>
                                         </buttonConfiguration>
                                         <connections>
-                                            <action selector="playViewPushed:" destination="Ghj-Mt-hRD" eventType="touchUpInside" id="fT2-qM-SzX"/>
+                                            <action selector="playViewButtonPressed:" destination="Ghj-Mt-hRD" eventType="touchUpInside" id="su0-pP-5n3"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RSJ-up-hqV">
@@ -124,11 +124,12 @@
                         <outlet property="userLoginImage" destination="Wld-Jd-OTZ" id="BdR-Ni-gjG"/>
                         <segue destination="V7n-Qs-3PC" kind="show" identifier="gotoCategoryView" id="7rI-M3-pwm"/>
                         <segue destination="jUd-8a-r3l" kind="show" identifier="welcomToRecord" id="xSS-9A-hjI"/>
+                        <segue destination="1Q0-i3-Q8k" kind="show" identifier="gotoPlay" id="P83-mA-cjb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vby-y3-rJL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-437" y="265"/>
+            <point key="canvasLocation" x="-13" y="336"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="o4T-Rv-U4n">
@@ -894,12 +895,11 @@
                         <outlet property="saveButtton" destination="gdt-vK-4H8" id="8yG-xt-Upb"/>
                         <outlet property="sectionLabel" destination="t3A-HL-sP7" id="Rrw-j2-BX0"/>
                         <outlet property="visualizerView" destination="w9i-Sf-A0I" id="oeh-TO-aTw"/>
-                        <segue destination="1Q0-i3-Q8k" kind="show" identifier="gotoPlay" id="0JU-B5-xMo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VgZ-f8-mg2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2954.9618320610684" y="216.90140845070422"/>
+            <point key="canvasLocation" x="3135" y="118"/>
         </scene>
         <!--Play View-->
         <scene sceneID="hZL-77-0AY">
@@ -1022,7 +1022,91 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ECN-VX-179" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3781" y="3"/>
+            <point key="canvasLocation" x="900" y="-496"/>
+        </scene>
+        <!--Audio View-->
+        <scene sceneID="hmC-Y7-Hd2">
+            <objects>
+                <viewController storyboardIdentifier="AudioView" id="rdK-F1-oSz" customClass="AudioView" customModule="Hypno_Loops" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fQ1-58-MnB">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="rvP-7n-Eit">
+                                <rect key="frame" x="16" y="59" width="361" height="34.333333333333343"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Cr-SN-DAa">
+                                        <rect key="frame" x="0.0" y="0.0" width="104.33333333333333" height="34.333333333333336"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" imagePlacement="trailing" title="Delete" imagePadding="6">
+                                            <imageReference key="image" image="trash" catalog="system" symbolScale="medium"/>
+                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <color key="baseBackgroundColor" name="hlIndigo"/>
+                                        </buttonConfiguration>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Words" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2aj-wx-Glg">
+                                        <rect key="frame" x="154.33333333333334" y="0.0" width="52" height="34.333333333333336"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hFX-00-Dck">
+                                        <rect key="frame" x="256.33333333333331" y="0.0" width="104.66666666666669" height="34.333333333333336"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="filled" imagePlacement="trailing" title="Select" imagePadding="6">
+                                            <imageReference key="image" image="play.fill" catalog="system" symbolScale="medium"/>
+                                            <color key="baseBackgroundColor" name="hlBlue"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="testButtonPushed:" destination="rdK-F1-oSz" eventType="touchUpInside" id="bqJ-VG-TfP"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="eTh-JX-nm1">
+                                <rect key="frame" x="0.0" y="101" width="377" height="717"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="wqH-Xi-aac">
+                                        <rect key="frame" x="0.0" y="50" width="377" height="43.666667938232422"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wqH-Xi-aac" id="43V-nw-sRF">
+                                            <rect key="frame" x="0.0" y="0.0" width="377" height="43.666667938232422"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="rdK-F1-oSz" id="Igl-lk-pVS"/>
+                                    <outlet property="delegate" destination="rdK-F1-oSz" id="dCT-Ni-2Wa"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="UEX-jk-LfS"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="UEX-jk-LfS" firstAttribute="trailing" secondItem="eTh-JX-nm1" secondAttribute="trailing" constant="16" id="IeW-U5-Alh"/>
+                            <constraint firstItem="rvP-7n-Eit" firstAttribute="leading" secondItem="UEX-jk-LfS" secondAttribute="leading" constant="16" id="JZv-V2-xRG"/>
+                            <constraint firstItem="eTh-JX-nm1" firstAttribute="top" secondItem="rvP-7n-Eit" secondAttribute="bottom" constant="7.6699999999999999" id="cdd-E0-Ko3"/>
+                            <constraint firstItem="eTh-JX-nm1" firstAttribute="leading" secondItem="UEX-jk-LfS" secondAttribute="leading" id="cma-lU-RXQ"/>
+                            <constraint firstItem="UEX-jk-LfS" firstAttribute="trailing" secondItem="rvP-7n-Eit" secondAttribute="trailing" constant="16" id="iSL-9S-zGC"/>
+                            <constraint firstItem="rvP-7n-Eit" firstAttribute="top" secondItem="UEX-jk-LfS" secondAttribute="top" id="nx5-Yq-U4d"/>
+                            <constraint firstItem="eTh-JX-nm1" firstAttribute="bottom" secondItem="UEX-jk-LfS" secondAttribute="bottom" id="pwY-7X-jM0"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="aLZ-HM-uwI"/>
+                    <connections>
+                        <outlet property="audioTable" destination="eTh-JX-nm1" id="6u9-Ak-Xfa"/>
+                        <outlet property="testButton" destination="hFX-00-Dck" id="OHw-Pe-Ano"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="84f-bp-qFg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4060" y="671"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
@@ -1040,6 +1124,7 @@
         <image name="record.circle" catalog="system" width="128" height="123"/>
         <image name="repeat" catalog="system" width="128" height="98"/>
         <image name="slider.horizontal.3" catalog="system" width="128" height="99"/>
+        <image name="trash" catalog="system" width="117" height="128"/>
         <image name="waveform" catalog="system" width="125" height="128"/>
         <namedColor name="New Blue">
             <color red="0.27099999785423279" green="0.68599998950958252" blue="0.89399999380111694" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1059,6 +1144,9 @@
         <namedColor name="hlPurple">
             <color red="0.51800000667572021" green="0.22699999809265137" blue="0.43500000238418579" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
